@@ -17,6 +17,13 @@
       <li>В терминале написать 'npm run dev', нажать enter, перейти по ссылке</li>
     </ol>
     <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/main.ts">
+      // Не сработает если указана ссылка на файл
+      alert('hello')
+    </script>
+    <script>
+      "use strict";
+      // Здесь можно писать обычный JS
+    </script>
   </body>
 </html>
