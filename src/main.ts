@@ -1174,13 +1174,13 @@ randomInteger(0, 5)
 
 // ******  Циклы ******
 
-let n1 = 5
-let i = 1
 // ?while - цикл с предусловием; Сначала проверяем условие, потом идём в тело цикла
 // while (условие) { Тело цикла выполняется пока условие истинно, иначе управление переходит на следующую строку после цикла (цикл заканчивается)
 //   Тело цикла
 // }
 
+let i = 1
+let n1 = 5
 console.log('Цикл while')
 while (i <= n1) {
   console.log(i)
@@ -1204,14 +1204,18 @@ while (i <= n1) {
 // → ...
 
 console.log('Цикл for')
-for (let i = 1; i < n1; i++) {
+for (let i = 1; i <= n1; i++) {
   console.log(i)
 }
 
 // Бесконечный цикл с условием выхода
+i=0
 while (true) {
   if (i > 500) break
-  i++
+  // if(i%100==0) continue
+  i+=50
+  if(i%100==0) continue
+  console.log(i)
 }
 
 // ?do while - цикл с постусловием; Сначала выполняем тело цикла, потом проверяем условие
@@ -1420,4 +1424,87 @@ for (let letter of 'word') {
 //       break
 //   }
 //   answer = confirm(`Результат ${res}. Посчитать что-нибудь ещё?`)
+// }
+
+// Запросить у пользователя число и на сколько цифр его
+// сдвинуть.Сдвинуть цифры числа и вывести результат(если
+// число 123456 сдвинуть на 2 цифры, то получится 345612).
+
+let numStr = '123456'
+let shift = 3
+
+let newNumStr = ''
+for (let i = shift; i < numStr.length; i++) {
+  newNumStr += numStr[i]
+  console.log(i, numStr[i], newNumStr)
+}
+for (let i = 0; i < shift; i++) {
+  newNumStr += numStr[i]
+  console.log(i, numStr[i], newNumStr)
+}
+console.log(newNumStr)
+
+// Запросить 2 числа и найти только наибольший общий делитель.
+
+// let intNumb1 = Math.abs(parseFloat(prompt('Введите первое число, для нахождения общего делителя', '18') as string))
+// let intNumb2 = Math.abs(parseFloat(prompt('Введите второе число, для нахождения общего делителя', '99') as string))
+
+// // Меньее на большее ровно поделиться не может
+// // Найдём, какое из чисел меньше
+
+// let min = intNumb1 > intNumb2 ? intNumb2 : intNumb1
+
+// if (intNumb1 > intNumb2) {
+//   min = intNumb2
+// } else {
+//   min = intNumb1
+// }
+
+// // Нашли минимальное. Теперь посмотрим, на какие числа до минимального делятся оба без остатка
+// // Все общие делители
+// console.log('Все общие делители')
+// for (let i = 1; i <= min; i++) {
+//   if (intNumb1%i==0 && intNumb2%i==0) {
+//     console.log(i)
+//   }
+// }
+// console.log('Наибольший общий делитель')
+// for (let i = min; i > 0; i--) {
+//   if (intNumb1%i==0 && intNumb2%i==0) {
+//     console.log(i)
+//     break
+//   }
+// }
+
+// let day = true;
+// let nextDay = prompt('Напишите сегодняшний день, чтобы увидеть следующий', 'Пятница') as string;
+// while (day) {
+
+//   switch (nextDay) {
+//     case 'Понедельник':
+//       nextDay = 'Вторник'
+//       break
+//     case 'Вторник':
+//       nextDay = 'Среда'
+//       break
+//     case 'Среда':
+//       nextDay = 'Четверг'
+//       break
+//     case 'Четверг':
+//       nextDay = 'Пятница'
+//       break
+//     case 'Пятница':
+//       nextDay = 'Суббота'
+//       break
+//     case 'Суббота':
+//       nextDay = 'Воскресенье'
+//       break
+//     case 'Воскресенье':
+//       nextDay = 'Понедельник'
+//       break
+//     default:
+//       nextDay = 'Понедельник'
+// }
+
+//   day = confirm(`Cледующий день ${nextDay}, хотите узнать следующий день?`);
 // }
