@@ -1626,3 +1626,53 @@ function checkAge3(age:number) {
   return (age >= 18) ? true : confirm('А родители разрешили?')
 }
 
+// Написать функцию, которая принимает 2 числа и знак (+ - * /), считает пример и возвращает результат.
+function calc(n1=5, n2=8, sign='*') {
+  switch (sign) {
+    case '-':
+      return n1-n2
+    case '+':
+      return n1+n2
+    case '*':
+      return n1*n2
+    case '/':
+      return n1/n2
+  }
+}
+
+console.log("calc()", calc())
+console.log("calc(2,6,'-')", calc(2,6,'-'))
+
+// Написать функцию, которая принимает от 1 до 5 чисел и возвращает их сумму.
+function getSum(n1:number,n2=0,n3=0,n4=0,n5=0) {
+  return n1 + n2 + n3 + n4 + n5
+}
+getSum(1,2,5)
+
+// TS-style Функция, которая может принять неограниченное количество переменных
+function getNSum(n1:number,...args:any) {
+  let sum = n1
+  for (let i=0;i<args.length;i++) {
+    sum+=args[i]
+  }
+  return sum
+}
+
+console.log(getNSum(1,5,8,9,4,7,65,4,5,8,46,698,46,65))
+
+console.log(getNSum2(1))
+
+// JS-style Функция, которая может принять неограниченное количество переменных
+function getNSum2(n1: number, ...args: any) {
+  console.log(arguments) // массив всех значений, которые пришли в функцию
+  console.log(args)      // args - общепринятое именование для дополнительных параметров функции
+  // тоже является массивом, но в него попадут только те аргументы, которые переданы сверх именованных
+  
+  let sum = 0
+  for (let i = 0; i < arguments.length; i++) {
+    sum += arguments[i]
+  }
+  return sum
+}
+
+console.log(getNSum2(1, 5,6))
