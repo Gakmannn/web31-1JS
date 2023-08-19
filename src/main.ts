@@ -1580,8 +1580,8 @@ console.log('j', j)
 function showMessage(from:any, text='Многозначительно молчит...') { // параметры: from, text
   from = '*' + from + '*'; // немного украсим "from"
   console.log('local from', from);
-  return
-  console.log(from + ': ' + text);
+  // return
+  // console.log(from + ': ' + text);
 }
 
 showMessage('Аня', 'Привет!'); // *Аня*: Привет! (*)
@@ -1676,3 +1676,28 @@ function getNSum2(n1: number, ...args: any) {
 }
 
 console.log(getNSum2(1, 5,6))
+
+function pow(x: number, n: number) {
+  console.log(n)
+  return (n == 1) ? x : (x * pow(x, n - 1));
+}
+
+function factorial(n:number) {
+  if (n==1) return n
+  return n * factorial(n-1)
+  return 5 * 4* 3* 2* 1
+  return 5 * stack * 1
+  return 5 * stack * 2 * 1
+  return 5 * stack * 3 * 2
+  return 5 * 4 * 6
+}
+
+console.log(factorial(5))
+
+function strSum(s:string) {
+  let n = +s
+  if (n==1) return n
+  return s + strSum((n-1).toString())
+}
+
+console.log(strSum('5'))
