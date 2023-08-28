@@ -1682,7 +1682,7 @@ function pow(x: number, n: number) {
   return (n == 1) ? x : (x * pow(x, n - 1));
 }
 
-function factorial(n:number) {
+function factorial(n:number):number {
   if (n==1) return n
   return n * factorial(n-1)
   return 5 * 4* 3* 2* 1
@@ -1790,3 +1790,41 @@ sum = null
 
 let xz: any = 5
 xz = "Вася"
+
+let uName = ''
+let toDos = [] as string[]
+
+const appDiv = document.getElementById('app')
+// if (appDiv) appDiv.innerHTML += `<p>Добро пожаловать на сайт</p>`
+function render() {
+  let isLogin = Boolean(uName)
+  if (appDiv) appDiv.innerHTML = ''
+  const pElelement = document.createElement('p')
+  pElelement.textContent = uName ? `${uName}, добро пожаловать на сайт` : `Добро пожаловать на сайт`
+  if (appDiv) appDiv.appendChild(pElelement) 
+  
+  const button = document.createElement('button')
+  button.textContent = isLogin ? 'LogOut' : 'Login'
+  button.addEventListener('click', ()=>{
+    uName = isLogin ? '' : 'Niko'
+    toDos = !isLogin ? ['проснуться', 'позавтракать', 'умыться', 'работать', 'лечь спать'] : []
+    render()
+  })
+  if (appDiv) appDiv.appendChild(button) 
+  if (isLogin) {
+    const olElement = document.createElement('ol')
+    // for (let i=0;i<toDos.length;i++) {
+    //   const listElement = document.createElement('li')
+    //   listElement.textContent = toDos[i]
+    //   olElement.appendChild(listElement)
+    // }
+    for (let el of toDos) {
+      const listElement = document.createElement('li')
+      listElement.textContent = el
+      olElement.appendChild(listElement)
+    }
+    if (appDiv) appDiv.appendChild(olElement)
+  }
+}
+
+render()
