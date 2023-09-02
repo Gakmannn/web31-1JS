@@ -1675,7 +1675,7 @@ function getNSum2(n1: number, ...args: any) {
   return sum
 }
 
-console.log(getNSum2(1, 5,6))
+console.log(getNSum2(1,0,2,6,5))
 
 function pow(x: number, n: number) {
   console.log(n)
@@ -1828,3 +1828,102 @@ function render() {
 }
 
 render()
+
+const userO = {               // объект
+  name: "John",             // под ключом "name" хранится значение "John"
+  age: 30,                  // под ключом "age" хранится значение 30
+  "likes birds": true,      // имя свойства из нескольких слов должно быть в кавычках
+  'backgound-color': 'red',
+  0: 10,
+} as Record<string,any>
+
+console.log(userO)
+console.log({...userO})
+console.log(userO.name)
+console.log(userO[0])
+console.log(userO['backgound-color'])
+
+
+const key = 'backgound-color'
+console.log(userO[key])
+
+userO.isAdmin = true
+console.log({...userO})
+
+delete userO[0]
+delete userO.isLogin
+delete userO['backgound-color']
+console.log({...userO})
+
+function makeUser(name:string='', age:number=0) {
+  return {
+    // вместо такой записи, где мы отдельно прописываем имя свойства, а значение берём из одноимённой переменной
+    // name:name,
+    // age:age,
+    // мы можем просто указать имена переменных
+    // В таком случае имя переменной станет именем свойства, а её значение,- значением свойства
+    name, // тоже самое, что и name:name
+    age,  // тоже самое, что и age:age
+    admin:false,
+    key: 20,
+    noValue: undefined,
+  } as any
+}
+
+const usr1 = makeUser('Niko', 35)
+console.log(usr1)
+
+// При обращении к свойству, которого нет, возвращается undefined.Это позволяет просто проверить существование свойства:
+// Для чего вообще нужен оператор in? Разве недостаточно сравнения с undefined ?
+
+// В большинстве случаев прекрасно сработает сравнение с undefined.Но есть особый случай, когда оно не подходит и нужно использовать "in".
+
+
+console.log('"age" in usr1', "age" in usr1)    // true, usr1.age существует
+console.log('"blabla" in usr1', "blabla" in usr1) // false, usr1.blabla не существует
+console.log('usr1.blabla === undefined', usr1.blabla === undefined) // true, usr1.blabla не существует
+// Это когда свойство существует, но содержит значение undefined
+console.log('"noValue" in usr1', "noValue" in usr1) // true, usr1.noValue существует
+console.log('usr1.noValue === undefined', usr1.noValue === undefined) // true, usr1.noValue существует, но его значение = undefined
+console.log('usr1.noValue === undefined', usr1['noValue'] === undefined) // true, usr1.noValue существует, но его значение = undefined
+
+// Подобные ситуации случаются очень редко, так как undefined обычно явно не присваивается.Для «неизвестных» или «пустых» свойств мы используем значение null
+
+// !Цикл "for..in"
+// На каждой итерации цикла в переменную key попадают имена свойств объекта (строкой)
+for (let key in usr1) {
+  console.log('key', key, 'value', usr1[key])
+}
+
+// Получить все ключи объекта массивом
+const keys = Object.keys(usr1)
+console.log(keys)
+console.log(Object.values(usr1))
+console.log(Object.entries(usr1)[2])
+
+
+// Итого
+// Объекты – это ассоциативные массивы с рядом дополнительных возможностей.
+
+// Они хранят свойства(пары ключ - значение), где:
+
+// Ключи свойств должны быть строками или символами(обычно строками).
+// Значения могут быть любого типа.
+// Чтобы получить доступ к свойству, мы можем использовать:
+
+// Запись через точку: obj.property.
+// Квадратные скобки obj["property"].Квадратные скобки позволяют взять ключ из переменной, например, obj[varWithKey].
+// Дополнительные операторы:
+
+// Удаление свойства: delete obj.prop.
+// Проверка существования свойства: "key" in obj.
+// Перебор свойств объекта: цикл for for (let key in obj).
+// То, что мы изучали в этой главе, называется «простым объектом» («plain object») или просто Object.
+
+// В JavaScript есть много других типов объектов:
+
+// Array для хранения упорядоченных коллекций данных,
+// Date для хранения информации о дате и времени,
+// Error для хранения информации об ошибке.
+// … и так далее.
+// У них есть свои особенности, которые мы изучим позже.Иногда люди говорят что - то вроде «тип данных Array» или «тип данных Date», но формально они не являются отдельными типами, а относятся к типу данных Object.Они лишь расширяют его различными способами.
