@@ -1948,6 +1948,35 @@ const rect:Rect = {
 }
 
 const rectDiv = document.getElementById('rect')
+
+const moveLeftTopButton = document.getElementById('moveLeftTop')
+moveLeftTopButton?.addEventListener('click', () => { changeRectPosition(rect, -10, -10) })
+const moveTopButton = document.getElementById('moveTop')
+moveTopButton?.addEventListener('click', () => { changeRectPositionY(rect, -10) })
+const moveRightTopButton = document.getElementById('moveRightTop')
+moveRightTopButton?.addEventListener('click', () => { changeRectPosition(rect, 10, -10) })
+const moveLeftButton = document.getElementById('moveLeft')
+moveLeftButton?.addEventListener('click', () => { changeRectPositionX(rect, -10) })
+const moveRightButton = document.getElementById('moveRight')
+moveRightButton?.addEventListener('click', () => { changeRectPositionX(rect, 10) })
+const moveLeftBottomButton = document.getElementById('moveLeftBottom')
+moveLeftBottomButton?.addEventListener('click', () => { changeRectPosition(rect, -10, 10) })
+const moveBottomButton = document.getElementById('moveBottom')
+moveBottomButton?.addEventListener('click', () => { changeRectPositionY(rect, 10) })
+const moveRightBottomButton = document.getElementById('moveRightBottom')
+moveRightBottomButton?.addEventListener('click', () => { changeRectPosition(rect, 10, 10) })
+
+const squeezeX = document.getElementById('squeezeX')
+squeezeX?.addEventListener('click', () => { changeRectWidth(rect, -10) })
+const expandX = document.getElementById('expandX')
+expandX?.addEventListener('click', () => { changeRectWidth(rect, 10) })
+const squeezeY = document.getElementById('squeezeY')
+squeezeY?.addEventListener('click', () => { changeRectHeight(rect, -10) })
+const expandY = document.getElementById('expandY')
+expandY?.addEventListener('click', () => { changeRectHeight(rect, 10) })
+
+
+console.log(rectDiv)
 function renderRect(rect:Rect) {
   if (rectDiv) {
     rectDiv.style.top = rect.y0 + 'px'
@@ -1983,32 +2012,76 @@ function getRectHeight(rect: Rect) {
 // 4 Функция принимает объект - прямоугольник и возвращает
 // его площадь.
 
+function getRectArea(rect: Rect) {
+  return getRectWidth(rect) * getRectHeight(rect)
+}
+console.log(`площадь прямоугольника ${getRectArea(rect)}px`)
+
 // 5 Функция принимает объект - прямоугольник и возвращает
 // его периметр.
+
+function getRectPerimetr(rect: Rect) {
+  return getRectWidth(rect) * 2 + getRectHeight(rect) * 2 
+}
+console.log(`периметр прямоугольника ${getRectPerimetr(rect)}px`)
 
 // 6 Функция изменения ширины прямоугольника.Она прини -
 // мает объект - прямоугольник и на сколько единиц изменить
 // ширину.
 
+function changeRectWidth(rect: Rect, n:number) {
+  rect.x1 += n
+  renderRect(rect)
+}
+
 // 7 Функция изменения высоты прямоугольника.Она прини -
 // мает объект - прямоугольник и на сколько единиц изменить
 // высоту.
+
+function changeRectHeight(rect: Rect, n: number) {
+  rect.y1 += n
+  renderRect(rect)
+}
 
 // 8 Функция изменения ширины и высоты прямоугольника.
 // Она принимает объект - прямоугольник и два значения –
 // для изменения ширины и высоты.
 
+function changeRectWidthAndHeight(rect: Rect, x: number, y:number) {
+  changeRectWidth(rect, x)
+  changeRectHeight(rect, y)
+  renderRect(rect)
+}
+
 // 9 Функция смещения прямоугольника по оси X.Она при -
 // нимает объект - прямоугольник и на сколько единиц его
 // сдвинуть.
+
+function changeRectPositionX(rect: Rect, n: number) {
+  rect.x0 += n
+  rect.x1 += n
+  renderRect(rect)
+}
 
 // 10 Функция смещения прямоугольника по оси Y.Она при -
 // нимает объект - прямоугольник и на сколько единиц его
 // сдвинуть.
 
+function changeRectPositionY(rect: Rect, n: number) {
+  rect.y0 += n
+  rect.y1 += n
+  renderRect(rect)
+}
+
 // 11 Функция смещения прямоугольника и по оси X и по
 // оси Y.Она принимает объект - прямоугольник и два значе -
 // ния: сдвиг по оси X и сдвиг по оси Y.
+
+function changeRectPosition(rect: Rect, x: number, y: number) {
+  changeRectPositionX(rect, x)
+  changeRectPositionY(rect, y)
+  renderRect(rect)
+}
 
 // 12 Функция для проверки, находится ли точка внутри пря -
 // моугольника.Она принимает объект - прямоугольник и

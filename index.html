@@ -22,7 +22,31 @@
       <div id="canvas" style="position: relative;">
         <div id="rect" style="background-color: blueviolet; position: absolute;"></div>
       </div>
-      <div id="controls"></div>
+      <div id="controls">
+        <div>
+          <button id="moveLeftTop"><span style="display:block; transform: rotate(-45deg);">▲</span></button>
+          <button id="moveTop">▲</button>
+          <button id="moveRightTop"><span style="display:block; transform: rotate(45deg);">▲</span></button>
+        </div>
+        <div>
+          <button id="moveLeft"><span style="display:block; transform: rotate(-90deg);">▲</span></button>
+          <span style="display:inline-block;width: 54px;"></span>
+          <button id="moveRight"><span style="display:block; transform: rotate(90deg);">▲</span></button>
+        </div>
+        <div>
+          <button id="moveLeftBottom"><span style="display:block; transform: rotate(-135deg);">▲</span></button>
+          <button id="moveBottom">▼</button>
+          <button id="moveRightBottom"><span style="display:block; transform: rotate(135deg);">▲</span></button>
+        </div>
+        <div>
+          <button id="squeezeX">&gt;=&lt;</button>
+          <button id="expandX">&lt;=&gt;</button>
+        </div>
+        <div>
+          <button id="squeezeY"><span style="display:block; transform: rotate(90deg);">&gt;=&lt;</span></button>
+          <button id="expandY"><span style="display:block; transform: rotate(90deg);">&lt;=&gt;</span></button>
+        </div>
+      </div>
     </div>
     <script type="module" src="/src/main.ts">
       // Не сработает если указана ссылка на файл
