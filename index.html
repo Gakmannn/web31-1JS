@@ -18,6 +18,12 @@
       <li>В терминале написать 'npm run dev', нажать enter, перейти по ссылке</li>
     </ol>
     <div id="app"></div>
+    <div style="display: grid; grid-template-columns: 2fr 1fr; height: 500px;">
+      <div id="canvas" style="position: relative;">
+        <div id="rect" style="background-color: blueviolet; position: absolute;"></div>
+      </div>
+      <div id="controls"></div>
+    </div>
     <script type="module" src="/src/main.ts">
       // Не сработает если указана ссылка на файл
       alert('hello')
