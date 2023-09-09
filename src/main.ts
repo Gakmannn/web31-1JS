@@ -2288,3 +2288,39 @@ const calculator = {
 // calculator.read()
 // console.log(calculator.sum())
 // console.log(calculator.mul())
+
+
+const carInfo: any = {
+  car0: {
+    manufacturer: 'Ferrari',
+    model: 'Spyder',
+    yearOfRelease: 1999,
+    averageSpeed: 150,
+  },
+  car1: {
+    manufacturer: 'Toyota',
+    model: 'Camry',
+    yearOfRelease: 2020,
+    averageSpeed: 60,
+  },
+  car2: {
+    manufacturer: 'Honda',
+    model: 'Civic',
+    yearOfRelease: 2019,
+    averageSpeed: 55,
+  },
+}
+//   Функция для подсчета необходимого времени для пре-
+//   одоления переданного расстояния со средней скоростью.
+//   Учтите, что через каждые 4 часа дороги водителю необхо-
+//   димо делать перерыв на 1 час.
+function caclOvercomingTheDistance(distance: number, carInfo: any) {
+  for (let carKey in carInfo) {
+    const car = carInfo[carKey]
+    const timeWithoutStops = distance / car.averageSpeed
+    const timeWithStops = timeWithoutStops + Math.floor(timeWithoutStops/4)
+    console.log(`На автомобиле ${car.manufacturer} ${car.model} ${car.yearOfRelease} года выпуска, для преодоления дистанции в ${distance} км. с олтдыхом каждые 4 часа пути, потребуется ${timeWithStops.toFixed(2)} ч.`)
+    console.log(`Без остановок эту дистанцию можно преодолеть за ${timeWithoutStops.toFixed(2)} ч.`)
+  }  
+}
+caclOvercomingTheDistance(800, carInfo)
