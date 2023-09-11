@@ -2324,3 +2324,144 @@ function caclOvercomingTheDistance(distance: number, carInfo: any) {
   }  
 }
 caclOvercomingTheDistance(800, carInfo)
+
+// !Каждый примитив имеет свой собственный «объект - обёртку», которые называются: String, Number, Boolean, Symbol и BigInt.Таким образом, они имеют разный набор методов.
+
+// Примитивы остаются примитивами
+// Язык позволяет осуществлять доступ к методам и свойствам строк, чисел, булевых значений и символов
+// Чтобы это работало, при таком доступе создаётся специальный «объект - обёртка», который предоставляет нужную функциональность, а после удаляется
+
+// К примеру, существует метод str.toUpperCase(), который возвращает строку в верхнем регистре.
+
+str = "Привет"
+
+console.log(str.toUpperCase()) // ПРИВЕТ
+
+// Очень просто, не правда ли ? Вот, что на самом деле происходит в str.toUpperCase():
+
+// ?Строка str – примитив.В момент обращения к его свойству, создаётся специальный объект, который знает значение строки и имеет такие полезные методы, как toUpperCase().
+// ?Этот метод запускается и возвращает новую строку(показывается в alert).
+// ?Специальный объект удаляется, оставляя только примитив str.
+// !Получается, что примитивы могут предоставлять методы, и в то же время оставаться «лёгкими».
+
+// !Движок JavaScript сильно оптимизирует этот процесс.Он даже может пропустить создание специального объекта.Однако, он всё же должен придерживаться спецификаций и работать так, как будто он его создаёт.
+
+// !null / undefined не имеют методов
+// ?Особенные примитивы null и undefined являются исключениями.У них нет соответствующих «объектов - обёрток», и они не имеют никаких методов.В некотором смысле, они «самые примитивные».
+
+const carObjArr: any = {
+  0: {
+    manufacturer: 'Ferrari',
+    model: 'Spyder',
+    yearOfRelease: 1999,
+    averageSpeed: 150,
+  },
+  1: {
+    manufacturer: 'Toyota',
+    model: 'Camry',
+    yearOfRelease: 2020,
+    averageSpeed: 60,
+  },
+  2: {
+    manufacturer: 'Honda',
+    model: 'Civic',
+    yearOfRelease: 2019,
+    averageSpeed: 55,
+  },
+  str: 'dsa',
+  obj: {},
+  num: 198
+}
+// Получить доступ к объекту
+console.log('carObjArr', carObjArr)
+// Получаем все ключи объекта через цикл
+for (let carKey in carObjArr) {
+  const car = carObjArr[carKey] // доступ к объекту
+  if (typeof carObjArr[carKey] == 'object') {
+    console.log('carKey', carKey)
+    console.log('carObjArr['+carKey+']', carObjArr[carKey])
+  }
+}
+
+console.log('Object keys',Object.keys(carObjArr))
+console.log('Object values', Object.values(carObjArr))
+console.log('Object entries', Object.entries(carObjArr))
+
+console.log(carObjArr['str'], carObjArr.str) //carObjArr["ada"] и carObjArr.ada работают одинаково
+// Мы можем обратиться к свойству объекта через точку, либо через квадратные скобки
+
+const carArr: any = [
+  {
+    manufacturer: 'Ferrari',
+    model: 'Spyder',
+    yearOfRelease: 1999,
+    averageSpeed: 150,
+  },
+  {
+    manufacturer: 'Toyota',
+    model: 'Camry',
+    yearOfRelease: 2020,
+    averageSpeed: 60,
+  },
+  {
+    manufacturer: 'Honda',
+    model: 'Civic',
+    yearOfRelease: 2019,
+    averageSpeed: 55,
+  },
+]
+console.log('carObjArr', carObjArr)
+console.log('carArr', carArr)
+
+// Перебор объектов в массиве
+for (let car of carArr) {
+  console.log('car', car)
+}
+
+const nums = [46,654894,321,65465,32,4869,431,346598]
+console.log('nums', nums)
+
+console.log('for of')
+for (let num of nums) {
+  console.log('num', num)
+}
+console.log('classic for')
+for (let i=0;i<nums.length;i++) {
+  console.log('num', nums[i])
+}
+
+const wodrStr = 'word'
+console.log('for of')
+for (let l of wodrStr) {
+  console.log('letter', l)
+}
+console.log('classic for')
+for (let i = 0; i < wodrStr.length;i++) {
+  console.log('letter', wodrStr[i])
+}
+
+// Циклы for ... in и for ... of проходят по всем значениям
+// for ... in обходит ключи объекта и помещает их значения в переменную
+// for ... of обходит элементы массива и помещает их в переменную
+// Классический цикл for предоставляет более гибкий доступ к итерируемым данным
+
+// TS автоматически при присвоении считывает тип данных элементов
+// const numsArr: number[]
+const numsArr = [1,2,3,5,4,8]
+// const strsArr: string[]
+const strsArr = ['1','2','3','5',"4","8"]
+
+// const objArr: {
+// a: number;
+// b: number;
+// c: number;
+// }[]
+const objArr = [
+  {a:1,b:2,c:3},
+  {a:1,b:2,c:3},
+  {a:1,b:2,c:3},
+  {a:1,b:2,c:3},
+] as Record<string,number|string>[]
+// as any[]
+objArr[0].d = '140'
+
