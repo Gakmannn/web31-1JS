@@ -2559,3 +2559,59 @@ function togglePurchased(listProducts: any, productName: string | undefined) {
     }
   }
 }
+
+
+// Самый простой способ очистить массив – это arr.length = 0
+
+// Массивы могут содержать элементы, которые тоже являются массивами.Это можно использовать для создания многомерных массивов, например, для хранения матриц:
+
+let matrix = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]
+
+console.log(matrix[1][1]) // 5, центральный элемент
+console.log(matrix[2][2]) // 9
+
+// !Давайте ещё раз напомним правила:
+
+// Два объекта равны друг другу == только в том случае, если они ссылаются на один и тот же объект.
+// Если один из аргументов == является объектом, а другой – примитивом, то объект преобразуется в примитив, как описано в главе Преобразование объектов в примитивы.
+// …За исключением null и undefined, которые равны == друг другу и ничему больше.
+
+// @ts-ignore
+console.log('[1,2,3]==[1,2,3]',[1,2,3]==[1,2,3]) // false Массивы- это объекты, а объекты равны друг другу только по ссылке
+console.log('[1, 2, 3].toString() == [1, 2, 3].toString()',[1, 2, 3].toString() == [1, 2, 3].toString()) // true Подходит только для массивов с примитивами
+console.log('[{ a: 10 }, 2, 3].toString() == [{ a: 20 }, 2, 3].toString()', [{ a: 10 }, 2, 3].toString() == [{ a: 20 }, 2, 3].toString()) // true [object Object]. Не подходит для массивов с объектами
+console.log('[{ a: 10 }, 2, 3].toString()', [{ a: 10 }, 2, 3].toString())
+
+
+// Так как же сравнить массивы ?
+
+// Это просто: не используйте оператор ==.Вместо этого сравните их по элементам в цикле или используя методы итерации, описанные в следующей главе.
+
+function arrayCompare(arr1: any[], arr2: any[], strict:boolean) {
+  if (arr1.length != arr2.length) return false
+  for (let i=0;i<arr1.length;i++) {
+    if ((typeof arr1[i] == 'object' && typeof arr2[i] != 'object') || (typeof arr1[i] != 'object' && typeof arr2[i] == 'object')) return false
+    if (typeof arr1[i] == 'object') {
+      const entr1 = Object.entries(arr1[i])
+      const entr2 = Object.entries(arr2[i])
+      if (entr1.length != entr2.length) return false
+      for (let j = 0; j < entr1.length; j++) {
+        if (!arrayCompare(entr1[j], entr2[j], strict)) return false
+      }
+    }
+    else {
+      if (strict) {
+        if (arr1[i] !== arr2[i]) return false
+      } else {
+        if (arr1[i] != arr2[i]) return false
+      }
+    }
+  }
+  return true
+}
+
+console.log(arrayCompare([1, 2, 3, { a: 20, b: { c: 5 } }], [1, 2, 3, { a: 20, b: { c: 5 } }], true))
