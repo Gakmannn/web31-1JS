@@ -2465,3 +2465,97 @@ const objArr = [
 // as any[]
 objArr[0].d = '140'
 
+// Создать массив «Список покупок». Каждый элемент массива
+// является объектом, который содержит название продукта, необ-
+// ходимое количество и куплен или нет. Написать несколько функ-
+// ций для работы с таким массивом.
+const listProducts = [
+  {
+    name: 'Pasta',
+    quantity: 2,
+    purchased: true,
+  },
+  {
+    name: 'Meat',
+    quantity: 3,
+    purchased: false,
+  },
+  {
+    name: 'Sauce',
+    quantity: 1,
+    purchased: false,
+  },
+]
+
+const nameInput = document.getElementById('name') as HTMLInputElement
+const quantityInput = document.getElementById('quantity') as HTMLInputElement
+const addButton = document.getElementById('add') as HTMLElement
+const purshasesDiv = document.getElementById('purshases') as HTMLElement
+
+purshasesDiv.addEventListener('click', (event)=>{
+  const target = event.target as HTMLElement
+  if (target.tagName != 'BUTTON') return
+  togglePurchased(listProducts, target.dataset.name)
+})
+
+addButton.addEventListener('click', ()=>{
+  addPurchase(listProducts, nameInput.value, +quantityInput.value)
+  nameInput.value = ''
+  quantityInput.value = ''
+})
+
+function showProducts(listProducts: any) {
+  purshasesDiv.innerHTML = ''
+   // Вывод некупленных продуктов
+  purshasesDiv.innerHTML += '<p>Некупленные продукты:</p><ol>'
+  for (let product of listProducts) {
+    if (!product.purchased)
+      purshasesDiv.innerHTML += `<li>Название: ${product.name}, Количество: ${product.quantity} 
+    <button data-name="${product.name}">V</button></li>`
+  }
+  purshasesDiv.innerHTML += '</ol>'
+  
+  // Вывод купленных продуктов
+  purshasesDiv.innerHTML += '<p>Купленные продукты:</p><ol>'
+  for (let product of listProducts) {
+    if (product.purchased)
+      purshasesDiv.innerHTML += `<li>Название: ${product.name}, Количество: ${product.quantity}
+    <button data-name="${product.name}">X</button></li>`
+  }
+  purshasesDiv.innerHTML += '</ol>'
+}
+showProducts(listProducts)
+
+
+
+// 2
+// Добавление покупки в список. Учтите, что при добавлении
+// покупки с уже существующим в списке продуктом, необ-
+// ходимо увеличивать количество в существующей покупке,
+// а не добавлять новую.    
+function addPurchase(listProducts: any, productName: string, quantity:number) {
+  for (let product of listProducts) {
+    if (product.name == productName) {
+      product.quantity += quantity
+      showProducts(listProducts)
+      return
+    }
+  }
+  listProducts.push({
+    name: productName,
+    quantity,
+    purchased: false,
+  })
+  showProducts(listProducts)
+}
+// 3
+// Покупка продукта. Функция принимает название продукта
+// и отмечает его как купленный.
+function togglePurchased(listProducts: any, productName: string | undefined) {
+  for (let product of listProducts) {
+    if (product.name == productName) {
+      product.purchased = !product.purchased
+      showProducts(listProducts)
+    }
+  }
+}
