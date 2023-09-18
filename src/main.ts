@@ -2614,4 +2614,179 @@ function arrayCompare(arr1: any[], arr2: any[], strict:boolean) {
   return true
 }
 
-console.log(arrayCompare([1, 2, 3, { a: 20, b: { c: 5 } }], [1, 2, 3, { a: 20, b: { c: 5 } }], true))
+console.log(arrayCompare([1, 2, 3, { a: 20, b: { c: '5' } }], [1, 2, 3, { a: 20, b: { c: 5 } }], false))
+
+// !Методы массивов
+
+// !Метод arr.splice(str) – это универсальный «швейцарский нож» для работы с массивами.Умеет всё: добавлять, удалять и заменять элементы.
+// ?Splice - сращивание
+// arr.splice(start[, deleteCount, elem1, ..., elemN])
+// ?Он изменяет arr начиная с индекса start: удаляет deleteCount элементов и затем вставляет elem1, ..., elemN на их место.Возвращает массив из удалённых элементов.
+
+let tempArr = [1, 2, 3, 5, 4, 8]
+
+// !Удаление
+console.log('origin', [...tempArr]) 
+console.log('deleted tempArr.splice(1)',tempArr.splice(1)) // Если передать только индекс начала (start), удалятся все элементы, начиная с этого индекса
+console.log('result', tempArr)
+
+tempArr = [1, 2, 3, 5, 4, 8]
+console.log('deleted tempArr.splice(1,3)', tempArr.splice(1, 3)) // Удаляем количество элементов (deleteCount), начиная с индекса (start)
+console.log('result', tempArr)
+
+// !Добавление
+tempArr = [1, 2, 3, 5, 4, 8]
+console.log('deleted tempArr.splice(1,0,5,8,9)', tempArr.splice(1, 0, 5, 8, 9)) // Удаляем 0 элементов (deleteCount), начиная с индекса (start) добавлем элементы, переданные параметрами в функцию, начиная с 3его (elem1, ..., elemN)
+console.log('result', tempArr)
+
+// ?Добавление перед последним значением
+tempArr = [1, 2, 3, 5, 4, 8]
+console.log('deleted tempArr.splice(-1,0,7)', tempArr.splice(-1, 0, 7)) // Удаляем 0 элементов (deleteCount), начиная с индекса (start) (-1 это последний индекс) добавлем элементы, переданные параметрами в функцию, начиная с 3его (elem1, ..., elemN)
+console.log('result', tempArr)
+
+// !Добавление и удаление
+tempArr = [1, 2, 3, 5, 4, 8]
+console.log('deleted tempArr.splice(1,4,5,8,9)', tempArr.splice(1, 4, 5, 8, 9)) // Удаляем 4 элемента (deleteCount), начиная с индекса (start) добавлем элементы, переданные параметрами в функцию, начиная с 3его (elem1, ..., elemN)
+console.log('result', tempArr)
+
+tempArr = [1, 2, 3, 5, 4, 8]
+console.log('deleted tempArr.splice(0,3,"sdfdsf",{a:20})', (tempArr as any[]).splice(0, 3, "sdfdsf", { a: 20 }))
+console.log('result', tempArr)
+
+// ?Slice - срез
+// arr.slice([start], [end])
+// Он возвращает новый массив, в который копирует все элементы с индекса start до end(не включая end).start и end могут быть отрицательными, в этом случае отсчёт позиции будет вестись с конца массива.
+
+tempArr = [1, 2, 3, 5, 4, 8]
+console.log('origin', [...tempArr])
+console.log('result tempArr.slice()', tempArr.slice()) // получаем копию массива. Идентично [...tempArr]
+// Если параметр end не указан, срез идёт до конца массива
+console.log('result tempArr.slice(3)', tempArr.slice(3)) // получаем срез массива, начиная с 3го индекса
+console.log('result tempArr.slice(3,5)', tempArr.slice(3,5)) // получаем срез массива, начиная с 3го индекса до 5го, не включая его 
+
+// ?concat - объединение
+// Метод arr.concat создаёт новый массив, в который копирует данные из других массивов и дополнительные значения.
+// arr.concat(arg1, arg2...)
+
+// Он принимает любое количество аргументов, которые могут быть как массивами, так и простыми значениями.
+// В результате – новый массив, включающий в себя элементы из arr, затем arg1, arg2 и так далее.
+// Если аргумент argN – массив, то копируются все его элементы.Иначе копируется сам аргумент.
+
+let arr = [1, 2]
+
+console.log('arr', arr) // 1,2,3,4
+// создать массив из: arr и [3,4]
+console.log('arr.concat([3, 4])', arr.concat([3, 4])) // 1,2,3,4
+
+// создать массив из: arr и [3,4] и [5,6]
+console.log('arr.concat([3, 4], [5, 6])', arr.concat([3, 4], [5, 6])) // 1,2,3,4,5,6
+
+// создать массив из: arr и [3,4], потом добавить значения 5 и 6
+console.log('arr.concat([3, 4], 5, 6)', arr.concat([3, 4], 5, 6)) // 1,2,3,4,5,6
+
+// !Перебор: forEach
+// ?Метод arr.forEach позволяет запускать функцию для каждого элемента массива.
+// В функции доступен сам элемент, его индекс и весь массив
+
+// arr.forEach(function (el, i, arr) {
+arr.forEach((item, index, array) => array[index] = item**2)
+console.log(arr)
+
+// Примерная реализация метода forEach
+function forEach(arr: any[], fn:Function) {
+  for (let i = 0; i < arr.length; i++) {
+    fn(arr[i], i, arr)
+  }
+}
+
+// forEach(arr, function(item:any, index:number, array:any[]) {
+//   console.log([item, index, array])
+// })
+
+// !Поиск
+// ?indexOf / lastIndexOf и includes
+// Так же применимо к строкам
+
+// indexOf / lastIndexOf и includes
+// У методов arr.indexOf и arr.includes одинаковый синтаксис и они делают по сути то же самое, что и их строковые аналоги, но работают с элементами вместо символов:
+
+// arr.indexOf(item, from) ищет item начиная с индекса from и возвращает номер индекса, на котором был найден искомый элемент, в противном случае - 1.
+
+// arr.includes(item, from) ищет item начиная с индекса from и возвращает true, если поиск успешен.
+// Обычно эти методы используются только с одним аргументом: искомым item.По умолчанию поиск ведется с начала.
+
+arr = ['sdf', 0, 5, 0, true,5,8,2,0,56,0,58,0] as any[]
+console.log(arr)
+console.log('arr.indexOf(0)', arr.indexOf(0)) // Ищем индекс значения 0 в массиве
+console.log('arr.indexOf(0,2)', arr.indexOf(0, 2))  // Ищем индекс значения 0 в массиве, начиная с индекса 2
+console.log('arr.indexOf(false)', (arr as any[]).indexOf(false))  // Ищем индекс значения false в массиве
+console.log('arr.includes(0)', arr.includes(0))  // Есть ли в массиве занчение 0
+console.log('arr.includes(0,4)', arr.includes(0, 4))  // Есть ли в массиве занчение 0, начиная с индекса 4
+
+
+console.log('Найдём все индексы значения 0')
+i = 0
+do {
+  i = arr.indexOf(0, i)
+  if (i != -1) {
+    console.log(i) 
+    i++
+  }
+} while (i != -1)
+
+// Если мы хотим проверить наличие элемента в массиве и нет необходимости знать его индекс, предпочтительно использовать arr.includes
+
+// !Преобразование массива
+
+// !map
+// ?Метод arr.map является одним из наиболее полезных и часто используемых.
+// Он вызывает функцию для каждого элемента массива и возвращает массив результатов выполнения этой функции.
+
+let mapArr = ["Бильбо", "Гэндальф", "Назгул"]
+let mapObjArr = [
+  { name: "Бильбо", atk: 10,},
+  { name: "Гэндальф", atk: 50, },
+  { name: "Назгул", atk: 40,},
+]
+console.log(mapArr) 
+console.log(mapArr.map(el => el.toUpperCase())) 
+console.log(mapArr.map(el => el.length))
+console.log(mapObjArr.map(el => el.name))
+console.log(mapObjArr.map(el => el.atk))
+console.log(mapObjArr.map(el => 'Сила ' + el.name +' равна '+el.atk))
+
+// !sort(fn)
+// ?Вызов arr.sort() сортирует массив на месте, меняя в нём порядок элементов.
+// ?Он также возвращает отсортированный массив, но обычно возвращаемое значение игнорируется, так как изменяется сам arr.
+
+// Функция сравнения может вернуть любое число
+// На самом деле от функции сравнения требуется любое положительное число, чтобы сказать «больше», и отрицательное число, чтобы сказать «меньше».
+
+arr = [1, 2, 15,657,2,435,756,23,3]
+
+arr.sort((a, b) => a - b) // от порядка значений зависит порядок сортировки
+console.log(arr)
+// Метод reverse разворачивает массив
+console.log(arr.reverse())
+const strMapArr = mapArr.slice()
+strMapArr.push('гэндальф')
+console.log(strMapArr.sort((a, b) => a.localeCompare(b)))
+
+let names = 'Вася, Петя, Маша'
+
+// !Метод str.split(delim) именно это и делает.Он разбивает строку на массив по заданному разделителю delim
+
+console.log(names.split(', '))
+
+// !Вызов arr.join(glue) делает в точности противоположное split.Он создаёт строку из элементов arr, вставляя glue между ними
+
+console.log(names.split(', ').join('; '))
+
+
+function anyCountParams(...args:any[]) {
+  let sum = 0
+  args.forEach(el=>sum+=el)
+  return sum
+}
+
+console.log(anyCountParams(1,2,4,6,7,89,45,532,5254,43234,))
