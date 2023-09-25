@@ -2723,6 +2723,13 @@ console.log('arr.indexOf(false)', (arr as any[]).indexOf(false))  // Ищем и
 console.log('arr.includes(0)', arr.includes(0))  // Есть ли в массиве занчение 0
 console.log('arr.includes(0,4)', arr.includes(0, 4))  // Есть ли в массиве занчение 0, начиная с индекса 4
 
+function indexOf(arr:any[],val:any) {
+  for (let i=0;i<arr.length;i++) {
+    if (arr[i]==val) return i
+  }
+  return -1
+}
+
 
 console.log('Найдём все индексы значения 0')
 i = 0
@@ -2890,11 +2897,22 @@ console.log(reduceSum)
 const reduceObjSum = objArr.reduce((a, el:any) => a += el.c, 0)
 console.log(reduceObjSum)
 
-const reduceObj = objArr.reduce((a, el:any, i) => {
+function reduceObjFunc(a:any, el: any, i:number) {
   a[i] = el
+  // a[el.id] = el
   return a
-} , {})
+}
+
+const reduceObj = objArr.reduce(reduceObjFunc, {})
 console.log(reduceObj)
+
+const newObj = {} as any
+for (let el of objArr) {
+  newObj[el.a] = el
+}
+for (let i=0;i<objArr.length;i++) {
+  newObj[objArr[i].a] = objArr[i]
+}
 
 // Array.isArray
 // Массивы не образуют отдельный тип языка.Они основаны на объектах.
@@ -2974,3 +2992,45 @@ console.log('Array.isArray([])', Array.isArray([])) // true
 // Внимательно изучите шпаргалку, представленную выше, а затем, чтобы попрактиковаться, решите задачи, предложенные в данной главе.Так вы получите необходимый опыт в правильном использовании методов массива.
 
 // Всякий раз, когда вам будет необходимо что - то сделать с массивом, а вы не знаете, как это сделать – приходите сюда, смотрите на таблицу и ищите правильный метод.Примеры помогут вам всё сделать правильно, и вскоре вы быстро запомните методы без особых усилий.
+
+
+// Напишите функцию shuffle(array), которая перемешивает(переупорядочивает случайным образом) элементы массива.
+// Многократные прогоны через shuffle могут привести к разным последовательностям элементов.Например:
+arr = [1, 2, 3]
+function shuffle(arr:any[]) {
+  const newArr = [] as any[]
+  const indexArray = [] as number[]
+  let i = 0
+  do {
+    const randInt = randomInteger(0, arr.length - 1)
+    i++
+    if (!indexArray.includes(randInt)) {
+      indexArray.push(randInt)
+      newArr.push(arr[randInt])
+    }
+  } while (indexArray.length != arr.length)
+  console.log(i)
+  return newArr
+}
+
+shuffle(arr)
+
+// let count = {
+//   '123': 0,
+//   '132': 0,
+//   '213': 0,
+//   '231': 0,
+//   '321': 0,
+//   '312': 0
+// } as any
+
+// for (let i = 0; i < 1000000; i++) {
+//   let array = [1, 2, 3]
+//   const newArr = shuffle(array)
+//   count[newArr.join('')]++
+// }
+
+// // показать количество всех возможных вариантов
+// for (let key in count) {
+//   console.log(`${key}: ${count[key]}`);
+// }
