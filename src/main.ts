@@ -3034,3 +3034,175 @@ shuffle(arr)
 // for (let key in count) {
 //   console.log(`${key}: ${count[key]}`);
 // }
+
+
+//  Агрегирование данных: У вас есть массив объектов с числовыми значениями (например, продажами товаров за месяц). 
+let arrayOfGoods = [
+  {
+    name: 'vans knew school',
+    quantity: 1,
+    price: 15600
+  },
+  {
+    name: 'adidas campus',
+    quantity: 1,
+    price: 17400
+  },
+  {
+    name: 'nike air trainer',
+    quantity: 1,
+    price: 22300
+  },
+] as any
+// Найдите сумму, среднее и максимальное значение этих числовых данных.
+function averagePrice(arrayOfGoods: any) {
+  const agregate = {
+    sum:0,
+    average:0,
+    max:0
+  }
+  agregate.sum = arrayOfGoods.reduce((sum:number, el:any) => sum += el.quantity * el.price,0)
+  agregate.average = agregate.sum/arrayOfGoods.length
+  agregate.max = Math.max(...arrayOfGoods.map((el:any)=>el.quantity*el.price))
+  return agregate
+}
+console.log(averagePrice(arrayOfGoods))
+
+console.log('Object.keys(arrayOfGoods[0])')
+for (let el of Object.keys(arrayOfGoods[0])) {
+  console.log(el, arrayOfGoods[0][el])
+}
+console.log('Object.values(arrayOfGoods[0])')
+for (let el of Object.values(arrayOfGoods[0])) {
+  console.log(el)
+}
+console.log('Object.entries(arrayOfGoods[0])', Object.entries(arrayOfGoods[0]))
+for (let el of Object.entries(arrayOfGoods[0])) {
+  console.log(el, el[0], el[1])
+}
+
+// Трансформации объекта
+// У объектов нет множества методов, которые есть в массивах, например map, filter и других.
+
+// Если мы хотели бы их применить, то можно использовать Object.entries с последующим вызовом Object.fromEntries:
+
+// Вызов Object.entries(obj) возвращает массив пар ключ / значение для obj.
+// На нём вызываем методы массива, например, map.
+// Используем Object.fromEntries(array) на результате, чтобы преобразовать его обратно в объект.
+// Например, у нас есть объект с ценами, и мы хотели бы их удвоить:
+
+let prices = {
+  banana: 1,
+  orange: 2,
+  meat: 4,
+};
+
+let doublePrices = Object.fromEntries(
+  // преобразовать в массив, затем map, затем fromEntries обратно объект
+  Object.entries(prices).map(([key, value]) => [key, value * 2])
+);
+
+console.log(doublePrices.meat); // 8
+
+// Деструктуризация массива
+// Вот пример деструктуризации массива на переменные:
+
+// у нас есть массив с именем и фамилией
+arr = ["Ilya", "Kantor", "Kantor", "Kantor5", "Kantor"] as any
+
+// деструктурирующее присваивание
+// записывает firstName = arr[0]
+// и surname = arr[1]
+let [,,, surname1] = arr
+
+console.log(surname1) // Kantor5
+
+// Теперь мы можем использовать переменные вместо элементов массива.
+// Отлично смотрится в сочетании со split или другими методами, возвращающими массив:
+
+// !Если мы хотим не просто получить первые значения, но и собрать все остальные, то мы можем добавить ещё один параметр, который получает остальные значения, используя оператор «остаточные параметры» – троеточие("..."):
+let [firstName2, surname2, ...rest] = "Ilya Kantor gdfgdeg sdfsd f".split(' ')
+console.log(firstName2) // Ilya
+console.log(surname2)  // Kantor
+console.log(rest)  //остальные
+
+// !Переменная rest является массивом из оставшихся элементов.
+
+// !Вместо rest можно использовать любое другое название переменной, просто убедитесь, что перед переменной есть три точки и она стоит на последнем месте в деструктурирующем присваивании.
+
+// Присваивайте чему угодно с левой стороны
+// Мы можем использовать что угодно «присваивающее» с левой стороны.
+
+// Например, можно присвоить свойству объекта:
+
+user = {} as any
+[user.name, user.surname] = "Ilya Kantor".split(' ');
+
+console.log(user.name); // Ilya
+console.log(user.surname); // Kantor
+
+// !цикл по ключам и значениям с деструктуризацией
+for (let [key, value] of Object.entries(user)) {
+  console.log(`${key}:${value}`)
+}
+
+// Трюк обмена переменных
+// Существует хорошо известный трюк для обмена значений двух переменных с использованием деструктурирующего присваивания:
+
+let guest = "Jane"
+let admin = "Pete"
+
+// Давайте поменяем местами значения: сделаем guest = "Pete", а admin = "Jane"
+;[guest, admin] = [admin, guest]
+
+console.log(`${guest} ${admin}`) // Pete Jane (успешно заменено!)
+// Здесь мы создаём временный массив из двух переменных и немедленно деструктурируем его в порядке замены.
+// Таким образом, мы можем поменять местами даже более двух переменных.
+
+// !Если мы хотим, чтобы значение «по умолчанию» заменило отсутствующее, мы можем указать его с помощью =:
+
+// значения по умолчанию
+let [name1 = "Guest", surname = "Anonymous"] = ["Julius"];
+
+console.log(name1);    // Julius (из массива)
+console.log(surname); // Anonymous (значение по умолчанию)
+// !Значения по умолчанию могут быть гораздо более сложными выражениями или даже функциями.Они выполняются, только если значения отсутствую
+
+
+
+
+
+// !Итого
+// ?Деструктуризация позволяет разбивать объект или массив на переменные при присвоении.
+
+// ?Полный синтаксис для объекта:
+
+// let { prop: varName = default, ...rest } = object
+
+// Cвойство prop объекта object здесь должно быть присвоено переменной varName.Если в объекте отсутствует такое свойство, переменной varName присваивается значение по умолчанию.
+
+// Свойства, которые не были упомянуты, копируются в объект rest.
+
+// ?Полный синтаксис для массива:
+
+// let [item1 = default , item2, ...rest] = array
+// Первый элемент отправляется в item1; второй отправляется в item2, все остальные элементы попадают в массив rest.
+
+// Можно извлекать данные из вложенных объектов и массивов, для этого левая сторона должна иметь ту же структуру, что и правая.
+
+
+// !Написать функцию, которая проверяет, является ли пере-
+// данная строка палиндромом.
+
+function polindom(str:string) {
+  const i = Math.floor(str.length/2)
+  if (str.length%2) {
+    return str.slice(0, i) == str.slice(i + 1).split('').reverse().join('')
+  } 
+  return str.slice(0, i) == str.slice(i).split('').reverse().join('')
+}
+
+console.log(polindom('1234321'))
+console.log(polindom('1234320'))
+console.log(polindom('123321'))
+console.log(polindom('123320'))
