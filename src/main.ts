@@ -3333,3 +3333,176 @@ console.log(operand4(-2))
 console.log(operand4(2))
 console.log(operand4(12))
 
+// Функция - конструктор
+// Функции - конструкторы технически являются обычными функциями.Но есть два соглашения:
+
+// Имя функции - конструктора должно начинаться с большой буквы.
+// Функция - конструктор должна выполняться только с помощью оператора "new".
+
+// this это {} (пустой объект)
+const User = (function (this:Record<string,any>, name:string) {
+  // во время создания нового объекта при помощи оператора new, в this присваивается пустой объект
+  // this = {};  (неявно)
+
+  // выполняется тело функции.Обычно оно модифицирует this, добавляя туда новые свойства
+  // добавляет свойства к this
+  this.name = name  
+  this.isAdmin = false
+  this.isLogin = function () {
+    return false
+  }
+  // неявно возвращается this
+  // return this (неявно)
+}) as any
+
+class NewUser {
+  name
+  isAdmin
+  constructor(name:string) {
+    this.name = name
+    this.isAdmin = false
+  }
+  isLogin() {
+    return false
+  }
+}
+
+// Таким образом, let user = new User("Jack") возвращает тот же результат, что и:
+
+// let user = {
+//   name: "Jack",
+//   isAdmin: false
+// }
+
+console.log({ name: 'noJack1', admin: true, isLogin() {return false} })
+console.log(new User('Jack'))
+console.log(new NewUser('Pirat'))
+
+
+// Используя специальное свойство new.target внутри функции, мы можем проверить, вызвана ли функция при помощи оператора new или без него.
+
+// В случае обычного вызова функции new.target будет undefined.Если же она была вызвана при помощи new, new.target будет равен самой функции.
+const User1 = (function (this:any, name:string) {
+  console.log(new.target)
+  if (!new.target) { // в случае, если вы вызвали меня без оператора new
+    return new User1(name) // ...я добавлю new за вас
+  }
+
+  this.name = name
+}) as any
+
+let john = User1("John") // переадресовывает вызов на new User
+let john1 = new User1("John") // переадресовывает вызов на new User
+console.log(john.name) // John
+
+// !Возврат значения из конструктора, return
+// Обычно конструкторы не имеют оператора return.Их задача – записать все необходимое в this, и это автоматически становится результатом.
+
+// Но если return всё же есть, то применяется простое правило:
+
+// При вызове return с объектом, вместо this вернётся объект.
+// При вызове return с примитивным значением, оно проигнорируется.
+// Другими словами, return с объектом возвращает этот объект, во всех остальных случаях возвращается this.
+
+// Функции-конструкторы или просто конструкторы, являются обычными функциями, но существует общепринятое соглашение именовать их с заглавной буквы.
+// Функции-конструкторы следует вызывать только с помощью new. Такой вызов подразумевает создание пустого this в начале и возврат заполненного в конце.
+// Мы можем использовать конструкторы для создания множества похожих объектов.
+
+console.log(new Date()) 
+
+// Геттеры (получатели) и сеттеры (устанавливатели) - методы объекта, ведущие себя как свойства
+
+const car = {
+  name: 'tio',
+  _fuel: 10,
+  getFuel() {
+    return this._fuel
+  },
+  // геттер всегда что-то возвращает
+  get fuel() {
+    return this._fuel
+  },
+  setFuel(val:number) {
+    this._fuel+=val
+  },
+  // сеттер всегда что-то устанавливает
+  set refuel(val:number) {
+    this._fuel+=val
+  },
+  get refuel() {
+    return this._fuel
+  }
+}
+
+console.log(car.getFuel())
+car.setFuel(10)
+console.log(car.fuel) // сработал геттер
+car.refuel = 20 // сработал сеттер
+console.log(car.fuel)
+
+const student = {
+  name: 'Asd',
+  surname: 'Daf',
+  get fullname() {
+    return `${this.name} ${this.surname}`
+  },
+  set fullname(fio:string) {
+    ;[this.name, this.surname] = fio.split(' ')
+  },
+  toString() {
+    return `I'm student ${this.fullname}`
+  }
+}
+
+console.log(student)
+console.log(student.fullname)
+student.fullname = 'fsda sgflkj ывфвв'
+console.log(student.fullname)
+console.log(student)
+console.log(student.toString())
+
+// В объектно-ориентированном программировании класс – это расширяемый шаблон кода для создания объектов, который устанавливает в них начальные значения (свойства) и реализацию поведения (методы).
+
+// В JavaScript класс – это разновидность функции.
+
+//   Взгляните:
+
+// class User {
+//   constructor(name) { this.name = name; }
+//   sayHi() { alert(this.name); }
+// }
+
+// доказательство: User - это функция
+// alert(typeof User); // function
+// Вот что на самом деле делает конструкция class User {... }:
+
+// Создаёт функцию с именем User, которая становится результатом объявления класса.Код функции берётся из метода constructor(она будет пустой, если такого метода нет).
+// Сохраняет все методы, такие как sayHi, в User.prototype.
+// При вызове метода объекта new User он будет взят из прототипа, как описано в главе F.prototype.Таким образом, объекты new User имеют доступ к методам класса.
+
+// класс - это функция
+console.log(typeof NewUser); // function
+
+// ...или, если точнее, это метод constructor
+console.log(NewUser === NewUser.prototype.constructor); // true
+
+// Методы находятся в User.prototype, например:
+console.log(NewUser.prototype.isLogin); // sayHi() { alert(this.name); }
+
+// в прототипе ровно 2 метода
+console.log(Object.getOwnPropertyNames(NewUser.prototype)); // constructor, sayHi
+
+// Базовый синтаксис для классов выглядит так:
+
+// class MyClass {
+//   prop = value; // свойство
+//   constructor(...) { // конструктор
+//     // ...
+//   }
+//   method(...) { } // метод
+//   get something(...) { } // геттер
+//   set something(...) { } // сеттер
+//   [Symbol.iterator]() { } // метод с вычисляемым именем (здесь - символом)
+//   // ...
+// }
+// MyClass технически является функцией(той, которую мы определяем как constructor), в то время как методы, геттеры и сеттеры записываются в MyClass.prototype.
