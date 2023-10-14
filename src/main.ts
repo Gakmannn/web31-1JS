@@ -3617,5 +3617,23 @@ innerDiv.append(img)
 innerDiv.append(p)
 wrapper.append(innerDiv)
 wrapper.append(innerDiv)
-document.body.insertAdjacentHTML('beforeend',wrapper.getHtml())
+const iframe = document.querySelector('iframe')
+
+// <script src="https://rawgit.com/Microsoft/TypeScript/master/lib/typescriptServices.js"></script>
+// <script src="https://rawgit.com/basarat/typescript-script/master/transpiler.js"></script>
+// <script type="text/typescript">
+// const target = e.target as HTMLElement
+const script = `
+<script>
+document.addEventListener('click', (e)=>{
+  if (e.target.tagName == 'A') {
+    alert('Попытка перехода на другой сайт')
+    e.target.target = '_self'
+  }
+  return
+})
+</script>
+`
+// https://habr.com/ru/articles/488516/
+if (iframe) iframe.srcdoc = '<!DOCTYPE><html><body>' + wrapper.getHtml() + script + '</body></html>'
 
