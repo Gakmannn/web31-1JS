@@ -3355,10 +3355,36 @@ const User = (function (this:Record<string,any>, name:string) {
   // return this (неявно)
 }) as any
 
+// Функция-конструктор, создающая объект с переданным именеи и ложью в свойстве isAdmin
+const SimpleUser = (function (this:Record<string,any>, name:string) {
+  this.name = name  
+  this.isAdmin = false
+  this.isLogin = function () {
+    return false
+  }
+}) as any
+
+const simpleUser = function (name:string) {
+  return {
+    name,
+    isAdmin:false,
+    isLogin() {
+      return false
+    }
+  }
+}
+
+console.log(new SimpleUser('Student'))
+console.log((new SimpleUser('Student')).isLogin == (new SimpleUser('Student1')).isLogin)
+console.log(simpleUser('Student'))
+console.log(simpleUser('Student').isLogin == simpleUser('Student1').isLogin)
+
 class NewUser {
   name
   isAdmin
   constructor(name:string) {
+    // во время создания нового объекта при помощи оператора new, в this присваивается пустой объект
+    // this = {};  (неявно)
     this.name = name
     this.isAdmin = false
   }
@@ -3375,8 +3401,15 @@ class NewUser {
 // }
 
 console.log({ name: 'noJack1', admin: true, isLogin() {return false} })
-console.log(new User('Jack'))
+console.log((new User('Jack')))
+console.log((new User('Jack')).constructor.name)
 console.log(new NewUser('Pirat'))
+console.log(new NewUser('Pirat').constructor.name)
+console.log((new NewUser('Pirat')).isAdmin == (new NewUser('Pirat2')).isAdmin)
+console.log(new NewUser('Pirat2'))
+console.log(Object.keys(simpleUser('Jack0')))
+console.log(Object.keys(new User('Jack')))
+console.log(Object.keys(new NewUser('Pirat')))
 
 
 // Используя специальное свойство new.target внутри функции, мы можем проверить, вызвана ли функция при помощи оператора new или без него.
@@ -3387,7 +3420,6 @@ const User1 = (function (this:any, name:string) {
   if (!new.target) { // в случае, если вы вызвали меня без оператора new
     return new User1(name) // ...я добавлю new за вас
   }
-
   this.name = name
 }) as any
 
@@ -3465,7 +3497,7 @@ console.log(student.toString())
 
 // В JavaScript класс – это разновидность функции.
 
-//   Взгляните:
+//  Взгляните:
 
 // class User {
 //   constructor(name) { this.name = name; }
@@ -3506,3 +3538,84 @@ console.log(Object.getOwnPropertyNames(NewUser.prototype)); // constructor, sayH
 //   // ...
 // }
 // MyClass технически является функцией(той, которую мы определяем как constructor), в то время как методы, геттеры и сеттеры записываются в MyClass.prototype.
+
+// Реализовать класс, описывающий html элемент.
+// Класс HtmlElement должен содержать внутри себя:
+// ■ название тега;
+// ■ самозакрывающийся тег или нет;
+// ■ текстовое содержимое;
+// ■ массив атрибутов;
+// ■ массив стилей;
+// ■ массив вложенных таких же тегов;
+// метод для установки атрибута;
+// ■ метод для установки стиля;
+// ■ метод для добавления вложенного элемента в конец текущего элемента;
+// ■ метод для добавления вложенного элемента в начало текущего элемента;
+// ■ метод getHtml(), который возвращает html код в виде
+// строки, включая html код вложенных элементов.
+// С помощью написанного класса реализовать следующий блок
+// и добавить его на страницу с помощью document.write().
+
+class HtmlElement {
+  tag:string
+  paired:boolean
+  text:string
+  attrs:string[] = []
+  styles:string[] = []
+  htmlElements: HtmlElement[] = []
+  constructor(tag:string, paired:boolean, text:string) {
+    this.tag = tag
+    this.paired = paired
+    this.text = text
+  }
+  setAttr(name:string, value:string) {
+    this.attrs.push(`${name}="${value}"`)
+  }
+  setStyle(name:string, value:string) {
+    this.styles.push(`${name}:${value}`)
+  }
+  append(element:HtmlElement) {
+    this.htmlElements.push(element)
+  }
+  prepend(element:HtmlElement) {
+    this.htmlElements.unshift(element)
+  }
+  getHtml():string {
+    if (this.styles.length) {
+      this.setAttr('style', this.styles.join(';'))
+    }
+    if (this.paired) {
+      return `<${this.tag} ${this.attrs.join(' ')}>${this.text}
+${this.htmlElements.map(el => el.getHtml()).join('')} 
+</${this.tag}>`
+    } else {
+      return `<${this.tag} ${this.attrs.join(' ')}>`
+    }
+  }
+}
+
+const wrapper = new HtmlElement('div', true, '')
+wrapper.setAttr('id', 'wrapper')
+wrapper.setStyle('display', 'flex')
+const innerDiv = new HtmlElement('div', true, '')
+innerDiv.setStyle('width', '300px')
+innerDiv.setStyle('margin', '10px')
+const h3 = new HtmlElement('h3', true, 'What is Lorem Ipsum?')
+const img = new HtmlElement('img', false, '')
+img.setAttr('src', 'https://img.goodfon.com/original/1280x1024/7/9a/cvety-cvetok-buket-priroda.jpg')
+img.setAttr('alt', 'Lorem Ipsum')
+img.setStyle('width', '100%')
+const p = new HtmlElement('p', true, 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias harum fuga magni quasi ex pariatur reprehenderit laudantium esse. Veritatis maiores qui fugiat nostrum, quo nihil sit recusandae aspernatur incidunt dolore.')
+p.setStyle('text-align', 'justify')
+const href = new HtmlElement('a', true, 'More...')
+href.setAttr('href', 'https://www.lipsum.com/')
+href.setAttr('target', '_blank')
+
+p.append(href)
+innerDiv.append(h3)
+innerDiv.append(img)
+innerDiv.append(p)
+wrapper.append(innerDiv)
+wrapper.append(innerDiv)
+document.body.insertAdjacentHTML('beforeend',wrapper.getHtml())
+
