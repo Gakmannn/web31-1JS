@@ -3652,3 +3652,241 @@ console.log('Текуее время',new Date())
 console.log('Создание времени из метки', new Date(Date.now()))
 console.log('Создание времени из строки', new Date('2023-10-16'))
 console.log('Создание времени из строки', new Date('2023-10-16T19:47:00'))
+
+// Прототипное наследование
+
+
+let animal = {
+  eats: true,
+  walk() {
+    console.log("Animal walk");
+  }
+} as any
+
+let rabbit = {
+  jumps: true
+} as any
+rabbit.__proto__ = animal
+
+rabbit.walk = function () {
+  console.log("Rabbit! Bounce-bounce!")
+}
+
+let longEar = {
+  earLength: 10,
+  __proto__: rabbit
+} as any
+
+// animal.__proto__ = longEar
+
+// walk взят из цепочки прототипов
+longEar.walk() // Animal walk
+console.log(longEar.jumps) // true (из rabbit)
+// Object.keys возвращает только собственные ключи
+console.log(Object.keys(longEar)) // earLength
+
+
+console.log(longEar.__proto__) //rabbit
+console.log(longEar.__proto__.__proto__) //animal
+console.log(longEar.__proto__.__proto__.__proto__) //Object
+console.log(longEar.__proto__.__proto__.__proto__.__proto__) //null (undefined)
+
+
+
+// for..in проходит и по своим, и по унаследованным ключам
+for (let prop in longEar) {
+  let isOwn = longEar.hasOwnProperty(prop);
+
+  if (isOwn) {
+    console.log(`Our: ${prop}`); // Our: jumps
+  } else {
+    console.log(`Inherited: ${prop}`); // Inherited: eats
+  }
+}
+
+console.log(rabbit)
+console.log('rabbit.eats', rabbit.eats)
+rabbit.walk()
+
+let user3 = {
+  name: "John",
+  surname: "Smith",
+
+  set fullName(value) {
+    [this.name, this.surname] = value.split(" ");
+  },
+
+  get fullName() {
+    return `${this.name} ${this.surname}`;
+  }
+};
+
+let admin3 = {
+  __proto__: user3,
+  isAdmin: true
+} as any
+
+console.log(admin3)
+console.log(admin3.fullName); // John Smith (*)
+
+// Значение «this»
+// Прототипы никак не влияют на this.
+// Неважно, где находится метод: в объекте или его прототипе. При вызове метода this — всегда объект перед точкой.
+
+// срабатывает сеттер!
+admin3.fullName = "Alice Cooper"; // (**)
+console.log(admin3.name); // Alice
+console.log(admin3.surname); // Cooper
+console.log(admin3)
+
+// В JavaScript все объекты имеют скрытое свойство[[Prototype]], которое является либо другим объектом, либо null.
+// Мы можем использовать obj.__proto__ для доступа к нему(исторически обусловленный геттер / сеттер, есть другие способы, которые скоро будут рассмотрены).
+// Объект, на который ссылается[[Prototype]], называется «прототипом».
+// Если мы хотим прочитать свойство obj или вызвать метод, которого не существует у obj, тогда JavaScript попытается найти его в прототипе.
+// Операции записи / удаления работают непосредственно с объектом, они не используют прототип(если это обычное свойство, а не сеттер).
+// Если мы вызываем obj.method(), а метод при этом взят из прототипа, то this всё равно ссылается на obj.Таким образом, методы всегда работают с текущим объектом, даже если они наследуются.
+// Цикл for..in перебирает как свои, так и унаследованные свойства.Остальные методы получения ключей / значений работают только с собственными свойствами объекта.
+
+{
+  let animal = {
+    eats: true
+  }
+  let superAnimal = {
+    eats: false,
+  }
+
+  const Rabbit = (function(this:any, name:string) {
+    this.name = name
+  }) as any
+
+  console.log(Rabbit.prototype.constructor == Rabbit)
+  /* прототип по умолчанию
+  Rabbit.prototype = { constructor: Rabbit };
+  */
+
+  // Rabbit.prototype = animal
+  Rabbit.prototype = { ...animal, constructor: Rabbit }
+  let rabbit = new Rabbit("White Rabbit") //  rabbit.__proto__ == animal
+  console.log(rabbit)
+  console.log(new rabbit.constructor('Yellow Rabbit'))
+
+  
+  Rabbit.prototype = superAnimal
+  let rabbit2 = new Rabbit("Black Rabbit") //  rabbit.__proto__ == superAnimal
+  console.log(rabbit2)
+
+  // В этой главе мы кратко описали способ задания [[Prototype]] для объектов, создаваемых с помощью функции-конструктора. Позже мы рассмотрим, как можно использовать эту возможность.
+
+  // Всё достаточно просто. Выделим основные моменты:
+
+  // Свойство F.prototype (не путать с [[Prototype]]) устанавливает[[Prototype]] для новых объектов при вызове new F().
+  // Значение F.prototype должно быть либо объектом, либо null. Другие значения не будут работать.
+  // Свойство "prototype" является особым, только когда оно назначено функции-конструктору, которая вызывается оператором new.
+  // В обычных объектах prototype не является чем-то особенным:
+
+  // let user = {
+  //   name: "John",
+  //   prototype: "Bla-bla" // никакой магии нет - обычное свойство
+  // };
+  // По умолчанию все функции имеют F.prototype = { constructor: F }, поэтому мы можем получить конструктор объекта через свойство "constructor".
+
+}
+
+
+{
+  // Встроенные прототипы
+  // console.log(Object.prototype.__proto__) // null
+
+  let arr = [1, 2, 3] as any
+
+  // наследует ли от Array.prototype?
+  console.log(arr.__proto__ === Array.prototype); // true
+
+  // затем наследует ли от Object.prototype?
+  console.log(arr.__proto__.__proto__ === Object.prototype); // true
+
+  // и null на вершине иерархии
+  console.log(arr.__proto__.__proto__.__proto__); // null
+  console.dir(arr)
+
+  // String.prototype.show = function () {
+  //   console.log(this, this, this)
+  // }
+
+  // "BOOM!".show(); // BOOM! BOOM! BOOM!
+
+  let obj = {
+    0: "Hello",
+    1: "world!",
+    length: 2,
+  } as any
+
+  obj.__proto__ = Array.prototype
+  obj.push(`I'm like Array`)
+  console.log(obj) 
+  console.log(obj.join(',')) // Hello,world!
+}
+
+{
+  let animal = {
+    eats: true
+  };
+
+  // создаём новый объект с прототипом animal
+  let rabbit = Object.create(animal)
+
+  let rabbit2 = {
+    name: 'bunny',
+    jumps: true
+  } as any
+  Object.setPrototypeOf(rabbit2, animal)
+
+  console.log(rabbit.eats) // true
+  console.log(rabbit2.eats) // true
+
+  console.log(Object.getPrototypeOf(rabbit) === animal) // получаем прототип объекта rabbit
+
+  Object.setPrototypeOf(rabbit, {}) // заменяем прототип объекта rabbit на {}
+
+  let rabbit3 = Object.create(animal, {
+    jumps: {
+      writable: true, // определяет, можно ли изменять значение свойства
+      enumerable: true, // определяет, будет ли свойство выводиться в циклах и Object.keys, values, entries
+      configurable: true, // определяет, можно ли менять все эти свойства 
+      value: true
+    }
+  });
+
+  console.log(rabbit3.jumps) // true
+  // rabbit3.jumps = false
+  // console.log(rabbit3.jumps)
+
+  for (let prop in rabbit3) {
+    console.log(prop)
+  }
+
+  // Современные способы установки и прямого доступа к прототипу это:
+
+  // Object.create(proto[, descriptors]) – создаёт пустой объект со свойством [[Prototype]], указанным как proto (может быть null), и необязательными дескрипторами свойств.
+  // Object.getPrototypeOf(obj) – возвращает свойство [[Prototype]] объекта obj (то же самое, что и геттер __proto__).
+  // Object.setPrototypeOf(obj, proto) – устанавливает свойство [[Prototype]] объекта obj как proto (то же самое, что и сеттер __proto__).
+  // Встроенный геттер/сеттер __proto__ не безопасен, если мы хотим использовать созданные пользователями ключи в объекте. Как минимум потому, что пользователь может ввести "__proto__" как ключ, от чего может возникнуть ошибка. Если повезёт – последствия будут лёгкими, но, вообще говоря, они непредсказуемы.
+
+  // Так что мы можем использовать либо Object.create(null) для создания «простейшего» объекта, либо использовать коллекцию Map.
+
+  // Кроме этого, Object.create даёт нам лёгкий способ создать поверхностную копию объекта со всеми дескрипторами:
+
+  // let clone = Object.create(Object.getPrototypeOf(obj), Object.getOwnPropertyDescriptors(obj));
+  // Мы также ясно увидели, что __proto__ – это геттер/сеттер для свойства [[Prototype]], и находится он в Object.prototype, как и другие методы.
+
+  // Мы можем создавать объекты без прототипов с помощью Object.create(null). Такие объекты можно использовать как «чистые словари», у них нет проблем с использованием строки "__proto__" в качестве ключа.
+
+  // Ещё методы:
+
+  // Object.keys(obj) / Object.values(obj) / Object.entries(obj) – возвращают массив всех перечисляемых собственных строковых ключей/значений/пар ключ-значение.
+  // Object.getOwnPropertySymbols(obj) – возвращает массив всех собственных символьных ключей.
+  // Object.getOwnPropertyNames(obj) – возвращает массив всех собственных строковых ключей.
+  // Reflect.ownKeys(obj) – возвращает массив всех собственных ключей.
+  // obj.hasOwnProperty(key): возвращает true, если у obj есть собственное (не унаследованное) свойство с именем key.
+  // Все методы, которые возвращают свойства объектов (такие как Object.keys и другие), возвращают «собственные» свойства. Если мы хотим получить и унаследованные, можно воспользоваться циклом for..in.
+}
