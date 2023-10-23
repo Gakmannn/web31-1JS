@@ -24,7 +24,7 @@ let m = 1
 // объявили несколько переменных через запятую
 // let user = 'John', age = 25, message = 'Hello'
 // Но лучше определять переменные на новой строке
-let user:any = 'John'
+let user: any = 'John'
 let age = 25
 let message = 'Hello'
 console.log('значение переменной user', user)
@@ -1209,12 +1209,12 @@ for (let i = 1; i <= n1; i++) {
 }
 
 // Бесконечный цикл с условием выхода
-i=0
+i = 0
 while (true) {
   if (i > 500) break
   // if(i%100==0) continue
-  i+=50
-  if(i%100==0) continue
+  i += 50
+  if (i % 100 == 0) continue
   console.log(i)
 }
 
@@ -1519,7 +1519,7 @@ console.log(+newNumStr)
 // Функция, объявленная церез ключевое слово function как бы всплывает в самый верх кода. Поэтому её можно вызвать в любом месте
 showMessage1(1520) // Вызов функции
 
-function showMessage1(stringNumber:number) {
+function showMessage1(stringNumber: number) {
   console.log('Всем привет из функции! Функция вызвана из строки', stringNumber)
   // функции имеют доступ к глобальным переменным
   console.log('global i', i)
@@ -1540,27 +1540,27 @@ console.log(showMessage1(1530)) // undefined
 
 // ? Локальная область видимости - это код, внутри любых фигурных скобок
 // Переменные, объявленные в локальной области видимости доступны в рамках фигурных скобок, в которых они объявлены, и во всех нижестоящих локальных уровнях
-console.log('global i',i)
+console.log('global i', i)
 // здесь j объявляется в локальной области видимости цикла for
-for (let j=0; j<2; j++) {
+for (let j = 0; j < 2; j++) {
   console.log('j', j) // 0,1
-  if (j==0) {
+  if (j == 0) {
     console.log('j==0', j) // 0,1
     const z = 0
-    console.log('z', z) 
-    let i =0
+    console.log('z', z)
+    let i = 0
     i++
-    console.log('local i',i)
+    console.log('local i', i)
   }
   //console.log('z', z) //z is not defined
 }
-console.log('global i',i)
+console.log('global i', i)
 
 // перепишем for в while
 // Обернул в if, который всегда сработает, чтобы создать локальную область видимости
 if (true) {
   let j = 0
-  while(j<2) {
+  while (j < 2) {
     console.log('j', j) // 0,1
     j++
   }
@@ -1577,7 +1577,7 @@ console.log('j', j)
 // ?Мы можем передать внутрь функции любую информацию, используя параметры.
 // В нижеприведённом примере функции передаются два параметра: from и text.
 
-function showMessage(from:any, text='Многозначительно молчит...') { // параметры: from, text
+function showMessage(from: any, text = 'Многозначительно молчит...') { // параметры: from, text
   from = '*' + from + '*'; // немного украсим "from"
   console.log('local from', from);
   // return
@@ -1597,7 +1597,7 @@ showMessage(from, "Привет"); // *Ваня*: Привет
 showMessage(from)
 
 // значение "from" осталось прежним, функция изменила значение локальной переменной
-console.log('global from',from) // Ваня
+console.log('global from', from) // Ваня
 
 // Значение, передаваемое в качестве параметра функции, также называется аргументом.
 
@@ -1607,7 +1607,7 @@ console.log('global from',from) // Ваня
 
 // Рассматривая приведённый выше пример, мы могли бы сказать: "функция showMessage объявляется с двумя параметрами, затем вызывается с двумя аргументами: from и "Привет"".
 
-function checkAge1(age:number) {
+function checkAge1(age: number) {
   if (age >= 18) {
     return true;
   } else {
@@ -1615,50 +1615,50 @@ function checkAge1(age:number) {
   }
 }
 // Более короткий вариант записи 1
-function checkAge2(age:number) {
+function checkAge2(age: number) {
   if (age >= 18) {
     return true;
   }
   return confirm('А родители разрешили?');
 }
 // Более короткий вариант записи 2
-function checkAge3(age:number) {
+function checkAge3(age: number) {
   return (age >= 18) ? true : confirm('А родители разрешили?')
 }
 
 // Написать функцию, которая принимает 2 числа и знак (+ - * /), считает пример и возвращает результат.
-function calc(n1=5, n2=8, sign='*') {
+function calc(n1 = 5, n2 = 8, sign = '*') {
   switch (sign) {
     case '-':
-      return n1-n2
+      return n1 - n2
     case '+':
-      return n1+n2
+      return n1 + n2
     case '*':
-      return n1*n2
+      return n1 * n2
     case '/':
-      return n1/n2
+      return n1 / n2
   }
 }
 
 console.log("calc()", calc())
-console.log("calc(2,6,'-')", calc(2,6,'-'))
+console.log("calc(2,6,'-')", calc(2, 6, '-'))
 
 // Написать функцию, которая принимает от 1 до 5 чисел и возвращает их сумму.
-function getSum(n1:number,n2=0,n3=0,n4=0,n5=0) {
+function getSum(n1: number, n2 = 0, n3 = 0, n4 = 0, n5 = 0) {
   return n1 + n2 + n3 + n4 + n5
 }
-getSum(1,2,5)
+getSum(1, 2, 5)
 
 // TS-style Функция, которая может принять неограниченное количество переменных
-function getNSum(n1:number,...args:any) {
+function getNSum(n1: number, ...args: any) {
   let sum = n1
-  for (let i=0;i<args.length;i++) {
-    sum+=args[i]
+  for (let i = 0; i < args.length; i++) {
+    sum += args[i]
   }
   return sum
 }
 
-console.log(getNSum(1,5,8,9,4,7,65,4,5,8,46,698,46,65))
+console.log(getNSum(1, 5, 8, 9, 4, 7, 65, 4, 5, 8, 46, 698, 46, 65))
 
 console.log(getNSum2(1))
 
@@ -1667,7 +1667,7 @@ function getNSum2(n1: number, ...args: any) {
   console.log(arguments) // массив всех значений, которые пришли в функцию
   console.log(args)      // args - общепринятое именование для дополнительных параметров функции
   // тоже является массивом, но в него попадут только те аргументы, которые переданы сверх именованных
-  
+
   let sum = 0
   for (let i = 0; i < arguments.length; i++) {
     sum += arguments[i]
@@ -1675,17 +1675,17 @@ function getNSum2(n1: number, ...args: any) {
   return sum
 }
 
-console.log(getNSum2(1,0,2,6,5))
+console.log(getNSum2(1, 0, 2, 6, 5))
 
 function pow(x: number, n: number) {
   console.log(n)
   return (n == 1) ? x : (x * pow(x, n - 1));
 }
 
-function factorial(n:number):number {
-  if (n==1) return n
-  return n * factorial(n-1)
-  return 5 * 4* 3* 2* 1
+function factorial(n: number): number {
+  if (n == 1) return n
+  return n * factorial(n - 1)
+  return 5 * 4 * 3 * 2 * 1
   return 5 * stack * 1
   return 5 * stack * 2 * 1
   return 5 * stack * 3 * 2
@@ -1694,10 +1694,10 @@ function factorial(n:number):number {
 
 console.log(factorial(5))
 
-function strSum(s:string) {
+function strSum(s: string) {
   let n = +s
-  if (n==1) return n
-  return s + strSum((n-1).toString())
+  if (n == 1) return n
+  return s + strSum((n - 1).toString())
 }
 
 console.log(strSum('5'))
@@ -1764,9 +1764,9 @@ function showCancel() {
 
 // ! Стрелочные функции
 
-let sum: Function | null = (a:number, b:number) => a + b
-let epression = (a:number, b:number) => { 
-  a *=2
+let sum: Function | null = (a: number, b: number) => a + b
+let epression = (a: number, b: number) => {
+  a *= 2
   return a + b
 }
 
@@ -1801,16 +1801,16 @@ function render() {
   if (appDiv) appDiv.innerHTML = ''
   const pElelement = document.createElement('p')
   pElelement.textContent = uName ? `${uName}, добро пожаловать на сайт` : `Добро пожаловать на сайт`
-  if (appDiv) appDiv.appendChild(pElelement) 
-  
+  if (appDiv) appDiv.appendChild(pElelement)
+
   const button = document.createElement('button')
   button.textContent = isLogin ? 'LogOut' : 'Login'
-  button.addEventListener('click', ()=>{
+  button.addEventListener('click', () => {
     uName = isLogin ? '' : 'Niko'
     toDos = !isLogin ? ['проснуться', 'позавтракать', 'умыться', 'работать', 'лечь спать'] : []
     render()
   })
-  if (appDiv) appDiv.appendChild(button) 
+  if (appDiv) appDiv.appendChild(button)
   if (isLogin) {
     const olElement = document.createElement('ol')
     // for (let i=0;i<toDos.length;i++) {
@@ -1835,10 +1835,10 @@ const userO = {               // объект
   "likes birds": true,      // имя свойства из нескольких слов должно быть в кавычках
   'backgound-color': 'red',
   0: 10,
-} as Record<string,any>
+} as Record<string, any>
 
 console.log(userO)
-console.log({...userO})
+console.log({ ...userO })
 console.log(userO.name)
 console.log(userO[0])
 console.log(userO['backgound-color'])
@@ -1848,14 +1848,14 @@ const key = 'backgound-color'
 console.log(userO[key])
 
 userO.isAdmin = true
-console.log({...userO})
+console.log({ ...userO })
 
 delete userO[0]
 delete userO.isLogin
 delete userO['backgound-color']
-console.log({...userO})
+console.log({ ...userO })
 
-function makeUser(name:string='', age:number=0) {
+function makeUser(name: string = '', age: number = 0) {
   return {
     // вместо такой записи, где мы отдельно прописываем имя свойства, а значение берём из одноимённой переменной
     // name:name,
@@ -1864,7 +1864,7 @@ function makeUser(name:string='', age:number=0) {
     // В таком случае имя переменной станет именем свойства, а её значение,- значением свойства
     name, // тоже самое, что и name:name
     age,  // тоже самое, что и age:age
-    admin:false,
+    admin: false,
     key: 20,
     noValue: undefined,
   } as any
@@ -1934,17 +1934,17 @@ console.log(Object.entries(usr1)[2])
 // ющие функции для работы с таким объектом.
 
 type Rect = {
-  x0:number,
-  y0:number,
-  x1:number,
-  y1:number,
+  x0: number,
+  y0: number,
+  x1: number,
+  y1: number,
 }
 
-const rect:Rect = {
-  x0:50,
-  y0:50,
-  x1:100,
-  y1:100,
+const rect: Rect = {
+  x0: 50,
+  y0: 50,
+  x1: 100,
+  y1: 100,
 }
 
 const rectDiv = document.getElementById('rect')
@@ -1977,7 +1977,7 @@ expandY?.addEventListener('click', () => { changeRectHeight(rect, 10) })
 
 
 console.log(rectDiv)
-function renderRect(rect:Rect) {
+function renderRect(rect: Rect) {
   if (rectDiv) {
     rectDiv.style.top = rect.y0 + 'px'
     rectDiv.style.left = rect.x0 + 'px'
@@ -2021,7 +2021,7 @@ console.log(`площадь прямоугольника ${getRectArea(rect)}px`
 // его периметр.
 
 function getRectPerimetr(rect: Rect) {
-  return getRectWidth(rect) * 2 + getRectHeight(rect) * 2 
+  return getRectWidth(rect) * 2 + getRectHeight(rect) * 2
 }
 console.log(`периметр прямоугольника ${getRectPerimetr(rect)}px`)
 
@@ -2029,7 +2029,7 @@ console.log(`периметр прямоугольника ${getRectPerimetr(rec
 // мает объект - прямоугольник и на сколько единиц изменить
 // ширину.
 
-function changeRectWidth(rect: Rect, n:number) {
+function changeRectWidth(rect: Rect, n: number) {
   rect.x1 += n
   renderRect(rect)
 }
@@ -2047,7 +2047,7 @@ function changeRectHeight(rect: Rect, n: number) {
 // Она принимает объект - прямоугольник и два значения –
 // для изменения ширины и высоты.
 
-function changeRectWidthAndHeight(rect: Rect, x: number, y:number) {
+function changeRectWidthAndHeight(rect: Rect, x: number, y: number) {
   changeRectWidth(rect, x)
   changeRectHeight(rect, y)
   renderRect(rect)
@@ -2094,10 +2094,10 @@ function changeRectPosition(rect: Rect, x: number, y: number) {
 user = {
   name: "John",
   age: 30,
-  drivePermission:{
-    A:true,
-    B:true,
-    C:false
+  drivePermission: {
+    A: true,
+    B: true,
+    C: false
   },
   // canDriveC() {
   //   return this.drivePermission.C
@@ -2193,20 +2193,20 @@ user = {
 
 // Функция написанная специально, чтобы использоваться как метод объекта
 // !"this" внутри функции - это объект "перед точкой"
-function sayName(this:any) {
+function sayName(this: any) {
   console.log(this)
 }
 
 const bus = [
-  {name:'sfd'},
-  {name:'sdgtrey'},
-  {name:'uytty'},
-  {name:'mvmbnmytj'},
-  {name:'jkljlyu'},
-  {bag:'20*20*30'}
+  { name: 'sfd' },
+  { name: 'sdgtrey' },
+  { name: 'uytty' },
+  { name: 'mvmbnmytj' },
+  { name: 'jkljlyu' },
+  { bag: '20*20*30' }
 ] as any
 
-for (let i=0;i<bus.length;i++) {
+for (let i = 0; i < bus.length; i++) {
   if (bus[i].name) {
     bus[i].sayName = sayName
     bus[i].sayName()
@@ -2274,8 +2274,8 @@ const calculator = {
   a: 0,
   b: 0,
   read() {
-    this.a = +(prompt('Введите первое число')as string)
-    this.b = +(prompt('Введите второе число')as string)
+    this.a = +(prompt('Введите первое число') as string)
+    this.b = +(prompt('Введите второе число') as string)
   },
   sum() {
     return this.a + this.b
@@ -2318,10 +2318,10 @@ function caclOvercomingTheDistance(distance: number, carInfo: any) {
   for (let carKey in carInfo) {
     const car = carInfo[carKey]
     const timeWithoutStops = distance / car.averageSpeed
-    const timeWithStops = timeWithoutStops + Math.floor(timeWithoutStops/4)
+    const timeWithStops = timeWithoutStops + Math.floor(timeWithoutStops / 4)
     console.log(`На автомобиле ${car.manufacturer} ${car.model} ${car.yearOfRelease} года выпуска, для преодоления дистанции в ${distance} км. с олтдыхом каждые 4 часа пути, потребуется ${timeWithStops.toFixed(2)} ч.`)
     console.log(`Без остановок эту дистанцию можно преодолеть за ${timeWithoutStops.toFixed(2)} ч.`)
-  }  
+  }
 }
 caclOvercomingTheDistance(800, carInfo)
 
@@ -2379,11 +2379,11 @@ for (let carKey in carObjArr) {
   const car = carObjArr[carKey] // доступ к объекту
   if (typeof carObjArr[carKey] == 'object') {
     console.log('carKey', carKey)
-    console.log('carObjArr['+carKey+']', carObjArr[carKey])
+    console.log('carObjArr[' + carKey + ']', carObjArr[carKey])
   }
 }
 
-console.log('Object keys',Object.keys(carObjArr))
+console.log('Object keys', Object.keys(carObjArr))
 console.log('Object values', Object.values(carObjArr))
 console.log('Object entries', Object.entries(carObjArr))
 
@@ -2418,7 +2418,7 @@ for (let car of carArr) {
   console.log('car', car)
 }
 
-const nums = [46,654894,321,65465,32,4869,431,346598]
+const nums = [46, 654894, 321, 65465, 32, 4869, 431, 346598]
 console.log('nums', nums)
 
 console.log('for of')
@@ -2426,7 +2426,7 @@ for (let num of nums) {
   console.log('num', num)
 }
 console.log('classic for')
-for (let i=0;i<nums.length;i++) {
+for (let i = 0; i < nums.length; i++) {
   console.log('num', nums[i])
 }
 
@@ -2436,7 +2436,7 @@ for (let l of wodrStr) {
   console.log('letter', l)
 }
 console.log('classic for')
-for (let i = 0; i < wodrStr.length;i++) {
+for (let i = 0; i < wodrStr.length; i++) {
   console.log('letter', wodrStr[i])
 }
 
@@ -2447,9 +2447,9 @@ for (let i = 0; i < wodrStr.length;i++) {
 
 // TS автоматически при присвоении считывает тип данных элементов
 // const numsArr: number[]
-const numsArr = [1,2,3,5,4,8]
+const numsArr = [1, 2, 3, 5, 4, 8]
 // const strsArr: string[]
-const strsArr = ['1','2','3','5',"4","8"]
+const strsArr = ['1', '2', '3', '5', "4", "8"]
 
 // const objArr: {
 // a: number;
@@ -2457,11 +2457,11 @@ const strsArr = ['1','2','3','5',"4","8"]
 // c: number;
 // }[]
 const objArr = [
-  {a:1,b:2,c:3},
-  {a:1,b:2,c:3},
-  {a:1,b:2,c:3},
-  {a:1,b:2,c:3},
-] as Record<string,number|string>[]
+  { a: 1, b: 2, c: 3 },
+  { a: 1, b: 2, c: 3 },
+  { a: 1, b: 2, c: 3 },
+  { a: 1, b: 2, c: 3 },
+] as Record<string, number | string>[]
 // as any[]
 objArr[0].d = '140'
 
@@ -2492,13 +2492,13 @@ const quantityInput = document.getElementById('quantity') as HTMLInputElement
 const addButton = document.getElementById('add') as HTMLElement
 const purshasesDiv = document.getElementById('purshases') as HTMLElement
 
-purshasesDiv.addEventListener('click', (event)=>{
+purshasesDiv.addEventListener('click', (event) => {
   const target = event.target as HTMLElement
   if (target.tagName != 'BUTTON') return
   togglePurchased(listProducts, target.dataset.name)
 })
 
-addButton.addEventListener('click', ()=>{
+addButton.addEventListener('click', () => {
   addPurchase(listProducts, nameInput.value, +quantityInput.value)
   nameInput.value = ''
   quantityInput.value = ''
@@ -2506,7 +2506,7 @@ addButton.addEventListener('click', ()=>{
 
 function showProducts(listProducts: any) {
   purshasesDiv.innerHTML = ''
-   // Вывод некупленных продуктов
+  // Вывод некупленных продуктов
   purshasesDiv.innerHTML += '<p>Некупленные продукты:</p><ol>'
   for (let product of listProducts) {
     if (!product.purchased)
@@ -2514,7 +2514,7 @@ function showProducts(listProducts: any) {
     <button data-name="${product.name}">V</button></li>`
   }
   purshasesDiv.innerHTML += '</ol>'
-  
+
   // Вывод купленных продуктов
   purshasesDiv.innerHTML += '<p>Купленные продукты:</p><ol>'
   for (let product of listProducts) {
@@ -2533,7 +2533,7 @@ showProducts(listProducts)
 // покупки с уже существующим в списке продуктом, необ-
 // ходимо увеличивать количество в существующей покупке,
 // а не добавлять новую.    
-function addPurchase(listProducts: any, productName: string, quantity:number) {
+function addPurchase(listProducts: any, productName: string, quantity: number) {
   for (let product of listProducts) {
     if (product.name == productName) {
       product.quantity += quantity
@@ -2581,8 +2581,8 @@ console.log(matrix[2][2]) // 9
 // …За исключением null и undefined, которые равны == друг другу и ничему больше.
 
 // @ts-ignore
-console.log('[1,2,3]==[1,2,3]',[1,2,3]==[1,2,3]) // false Массивы- это объекты, а объекты равны друг другу только по ссылке
-console.log('[1, 2, 3].toString() == [1, 2, 3].toString()',[1, 2, 3].toString() == [1, 2, 3].toString()) // true Подходит только для массивов с примитивами
+console.log('[1,2,3]==[1,2,3]', [1, 2, 3] == [1, 2, 3]) // false Массивы- это объекты, а объекты равны друг другу только по ссылке
+console.log('[1, 2, 3].toString() == [1, 2, 3].toString()', [1, 2, 3].toString() == [1, 2, 3].toString()) // true Подходит только для массивов с примитивами
 console.log('[{ a: 10 }, 2, 3].toString() == [{ a: 20 }, 2, 3].toString()', [{ a: 10 }, 2, 3].toString() == [{ a: 20 }, 2, 3].toString()) // true [object Object]. Не подходит для массивов с объектами
 console.log('[{ a: 10 }, 2, 3].toString()', [{ a: 10 }, 2, 3].toString())
 
@@ -2591,9 +2591,9 @@ console.log('[{ a: 10 }, 2, 3].toString()', [{ a: 10 }, 2, 3].toString())
 
 // Это просто: не используйте оператор ==.Вместо этого сравните их по элементам в цикле или используя методы итерации, описанные в следующей главе.
 
-function arrayCompare(arr1: any[], arr2: any[], strict:boolean) {
+function arrayCompare(arr1: any[], arr2: any[], strict: boolean) {
   if (arr1.length != arr2.length) return false
-  for (let i=0;i<arr1.length;i++) {
+  for (let i = 0; i < arr1.length; i++) {
     if ((typeof arr1[i] == 'object' && typeof arr2[i] != 'object') || (typeof arr1[i] != 'object' && typeof arr2[i] == 'object')) return false
     if (typeof arr1[i] == 'object') {
       const entr1 = Object.entries(arr1[i])
@@ -2626,8 +2626,8 @@ console.log(arrayCompare([1, 2, 3, { a: 20, b: { c: '5' } }], [1, 2, 3, { a: 20,
 let tempArr = [1, 2, 3, 5, 4, 8]
 
 // !Удаление
-console.log('origin', [...tempArr]) 
-console.log('deleted tempArr.splice(1)',tempArr.splice(1)) // Если передать только индекс начала (start), удалятся все элементы, начиная с этого индекса
+console.log('origin', [...tempArr])
+console.log('deleted tempArr.splice(1)', tempArr.splice(1)) // Если передать только индекс начала (start), удалятся все элементы, начиная с этого индекса
 console.log('result', tempArr)
 
 tempArr = [1, 2, 3, 5, 4, 8]
@@ -2662,7 +2662,7 @@ console.log('origin', [...tempArr])
 console.log('result tempArr.slice()', tempArr.slice()) // получаем копию массива. Идентично [...tempArr]
 // Если параметр end не указан, срез идёт до конца массива
 console.log('result tempArr.slice(3)', tempArr.slice(3)) // получаем срез массива, начиная с 3го индекса
-console.log('result tempArr.slice(3,5)', tempArr.slice(3,5)) // получаем срез массива, начиная с 3го индекса до 5го, не включая его 
+console.log('result tempArr.slice(3,5)', tempArr.slice(3, 5)) // получаем срез массива, начиная с 3го индекса до 5го, не включая его 
 
 // ?concat - объединение
 // Метод arr.concat создаёт новый массив, в который копирует данные из других массивов и дополнительные значения.
@@ -2689,11 +2689,11 @@ console.log('arr.concat([3, 4], 5, 6)', arr.concat([3, 4], 5, 6)) // 1,2,3,4,5,6
 // В функции доступен сам элемент, его индекс и весь массив
 
 // arr.forEach(function (el, i, arr) {
-arr.forEach((item, index, array) => array[index] = item**2)
+arr.forEach((item, index, array) => array[index] = item ** 2)
 console.log(arr)
 
 // Примерная реализация метода forEach
-function forEach(arr: any[], fn:Function) {
+function forEach(arr: any[], fn: Function) {
   for (let i = 0; i < arr.length; i++) {
     fn(arr[i], i, arr)
   }
@@ -2715,7 +2715,7 @@ function forEach(arr: any[], fn:Function) {
 // arr.includes(item, from) ищет item начиная с индекса from и возвращает true, если поиск успешен.
 // Обычно эти методы используются только с одним аргументом: искомым item.По умолчанию поиск ведется с начала.
 
-arr = ['sdf', 0, 5, 0, true,5,8,2,0,56,0,58,0] as any[]
+arr = ['sdf', 0, 5, 0, true, 5, 8, 2, 0, 56, 0, 58, 0] as any[]
 console.log(arr)
 console.log('arr.indexOf(0)', arr.indexOf(0)) // Ищем индекс значения 0 в массиве
 console.log('arr.indexOf(0,2)', arr.indexOf(0, 2))  // Ищем индекс значения 0 в массиве, начиная с индекса 2
@@ -2723,9 +2723,9 @@ console.log('arr.indexOf(false)', (arr as any[]).indexOf(false))  // Ищем и
 console.log('arr.includes(0)', arr.includes(0))  // Есть ли в массиве занчение 0
 console.log('arr.includes(0,4)', arr.includes(0, 4))  // Есть ли в массиве занчение 0, начиная с индекса 4
 
-function indexOf(arr:any[],val:any) {
-  for (let i=0;i<arr.length;i++) {
-    if (arr[i]==val) return i
+function indexOf(arr: any[], val: any) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] == val) return i
   }
   return -1
 }
@@ -2736,7 +2736,7 @@ i = 0
 do {
   i = arr.indexOf(0, i)
   if (i != -1) {
-    console.log(i) 
+    console.log(i)
     i++
   }
 } while (i != -1)
@@ -2751,16 +2751,16 @@ do {
 
 let mapArr = ["Бильбо", "Гэндальф", "Назгул"]
 let mapObjArr = [
-  { name: "Бильбо", atk: 10,},
+  { name: "Бильбо", atk: 10, },
   { name: "Гэндальф", atk: 50, },
-  { name: "Назгул", atk: 40,},
+  { name: "Назгул", atk: 40, },
 ]
-console.log(mapArr) 
-console.log(mapArr.map(el => el.toUpperCase())) 
+console.log(mapArr)
+console.log(mapArr.map(el => el.toUpperCase()))
 console.log(mapArr.map(el => el.length))
 console.log(mapObjArr.map(el => el.name))
 console.log(mapObjArr.map(el => el.atk))
-console.log(mapObjArr.map(el => 'Сила ' + el.name +' равна '+el.atk))
+console.log(mapObjArr.map(el => 'Сила ' + el.name + ' равна ' + el.atk))
 
 // !sort(fn)
 // ?Вызов arr.sort() сортирует массив на месте, меняя в нём порядок элементов.
@@ -2769,7 +2769,7 @@ console.log(mapObjArr.map(el => 'Сила ' + el.name +' равна '+el.atk))
 // Функция сравнения может вернуть любое число
 // На самом деле от функции сравнения требуется любое положительное число, чтобы сказать «больше», и отрицательное число, чтобы сказать «меньше».
 
-arr = [1, 2, 15,657,2,435,756,23,3]
+arr = [1, 2, 15, 657, 2, 435, 756, 23, 3]
 
 arr.sort((a, b) => a - b) // от порядка значений зависит порядок сортировки
 console.log(arr)
@@ -2790,13 +2790,13 @@ console.log(names.split(', '))
 console.log(names.split(', ').join('; '))
 
 
-function anyCountParams(...args:any[]) {
+function anyCountParams(...args: any[]) {
   let sum = 0
-  args.forEach(el=>sum+=el)
+  args.forEach(el => sum += el)
   return sum
 }
 
-console.log(anyCountParams(1,2,4,6,7,89,45,532,5254,43234,))
+console.log(anyCountParams(1, 2, 4, 6, 7, 89, 45, 532, 5254, 43234,))
 
 // let result = arr.find(function (item, index, array) {
 //   если true - возвращается текущий элемент и перебор прерывается
@@ -2810,9 +2810,9 @@ console.log(anyCountParams(1,2,4,6,7,89,45,532,5254,43234,))
 // Если функция возвращает true, поиск прерывается и возвращается item.Если ничего не найдено, возвращается undefined.
 
 let users = [
-  {id: 1, name: "Вася"},
-  {id: 2, name: "Петя"},
-  {id: 3, name: "Маша"},
+  { id: 1, name: "Вася" },
+  { id: 2, name: "Петя" },
+  { id: 3, name: "Маша" },
 ]
 
 let findUser = users.find(item => item.id == 3)
@@ -2881,10 +2881,10 @@ function filter(arr: any[], fn: Function) {
 
 arr = [1, 2, 4, 6, 7, 89, 45, 532, 5254, 43234]
 let reduceSum = 0
-arr.forEach(el=>reduceSum+=el)
+arr.forEach(el => reduceSum += el)
 console.log(reduceSum)
 
-reduceSum = arr.reduce((a, el)=> a*=el)
+reduceSum = arr.reduce((a, el) => a *= el)
 console.log(reduceSum)
 
 // objArr = [
@@ -2894,10 +2894,10 @@ console.log(reduceSum)
 //   { a: 1, b: 2, c: 3 },
 // ] as Record<string, number | string>[]
 
-const reduceObjSum = objArr.reduce((a, el:any) => a += el.c, 0)
+const reduceObjSum = objArr.reduce((a, el: any) => a += el.c, 0)
 console.log(reduceObjSum)
 
-function reduceObjFunc(a:any, el: any, i:number) {
+function reduceObjFunc(a: any, el: any, i: number) {
   a[i] = el
   // a[el.id] = el
   return a
@@ -2910,7 +2910,7 @@ const newObj = {} as any
 for (let el of objArr) {
   newObj[el.a] = el
 }
-for (let i=0;i<objArr.length;i++) {
+for (let i = 0; i < objArr.length; i++) {
   newObj[objArr[i].a] = objArr[i]
 }
 
@@ -2997,7 +2997,7 @@ console.log('Array.isArray([])', Array.isArray([])) // true
 // Напишите функцию shuffle(array), которая перемешивает(переупорядочивает случайным образом) элементы массива.
 // Многократные прогоны через shuffle могут привести к разным последовательностям элементов.Например:
 arr = [1, 2, 3]
-function shuffle(arr:any[]) {
+function shuffle(arr: any[]) {
   const newArr = [] as any[]
   const indexArray = [] as number[]
   let i = 0
@@ -3057,13 +3057,13 @@ let arrayOfGoods = [
 // Найдите сумму, среднее и максимальное значение этих числовых данных.
 function averagePrice(arrayOfGoods: any) {
   const agregate = {
-    sum:0,
-    average:0,
-    max:0
+    sum: 0,
+    average: 0,
+    max: 0
   }
-  agregate.sum = arrayOfGoods.reduce((sum:number, el:any) => sum += el.quantity * el.price,0)
-  agregate.average = agregate.sum/arrayOfGoods.length
-  agregate.max = Math.max(...arrayOfGoods.map((el:any)=>el.quantity*el.price))
+  agregate.sum = arrayOfGoods.reduce((sum: number, el: any) => sum += el.quantity * el.price, 0)
+  agregate.average = agregate.sum / arrayOfGoods.length
+  agregate.max = Math.max(...arrayOfGoods.map((el: any) => el.quantity * el.price))
   return agregate
 }
 console.log(averagePrice(arrayOfGoods))
@@ -3113,7 +3113,7 @@ arr = ["Ilya", "Kantor", "Kantor", "Kantor5", "Kantor"] as any
 // деструктурирующее присваивание
 // записывает firstName = arr[0]
 // и surname = arr[1]
-let [,,, surname1] = arr
+let [, , , surname1] = arr
 
 console.log(surname1) // Kantor5
 
@@ -3152,8 +3152,8 @@ for (let [key, value] of Object.entries(user)) {
 let guest = "Jane"
 let admin = "Pete"
 
-// Давайте поменяем местами значения: сделаем guest = "Pete", а admin = "Jane"
-;[guest, admin] = [admin, guest]
+  // Давайте поменяем местами значения: сделаем guest = "Pete", а admin = "Jane"
+  ;[guest, admin] = [admin, guest]
 
 console.log(`${guest} ${admin}`) // Pete Jane (успешно заменено!)
 // Здесь мы создаём временный массив из двух переменных и немедленно деструктурируем его в порядке замены.
@@ -3194,11 +3194,11 @@ console.log(surname); // Anonymous (значение по умолчанию)
 // !Написать функцию, которая проверяет, является ли пере-
 // данная строка палиндромом.
 
-function polindom(str:string) {
-  const i = Math.floor(str.length/2)
-  if (str.length%2) {
+function polindom(str: string) {
+  const i = Math.floor(str.length / 2)
+  if (str.length % 2) {
     return str.slice(0, i) == str.slice(i + 1).split('').reverse().join('')
-  } 
+  }
   return str.slice(0, i) == str.slice(i).split('').reverse().join('')
 }
 
@@ -3208,10 +3208,10 @@ console.log(polindom('123321'))
 console.log(polindom('123320'))
 
 function sum1(a: number, b: number, ...rest: number[]) {
-  return a + b + rest.reduce((sum,el)=>sum+el)
+  return a + b + rest.reduce((sum, el) => sum + el)
 }
 function sum2(...остальные: number[]) {
-  return остальные.reduce((sum,el)=>sum+el)
+  return остальные.reduce((sum, el) => sum + el)
 }
 
 console.log(sum1(1, 2, 3, 4, 5))
@@ -3219,15 +3219,15 @@ console.log(sum2(...[1, 2, 3, 4, 5]))
 
 const arrCopy = [...arr]
 console.log(arrCopy)
-const objCopy = {...arr}
+const objCopy = { ...arr }
 console.log(objCopy)
 
-;(function mergeArr() {
-  let arr = [3, 5, 1]
-  let arr2 = [8, 9, 15]
-  let merged = [0, ...arr, 2, ...arr2].sort((a,b)=>a-b)
-  console.log(merged)
-})()
+  ; (function mergeArr() {
+    let arr = [3, 5, 1]
+    let arr2 = [8, 9, 15]
+    let merged = [0, ...arr, 2, ...arr2].sort((a, b) => a - b)
+    console.log(merged)
+  })()
 
 // !Array.from преобразует перебираемый объект в массив
 // ?между Array.from(obj) и[...obj] есть разница:
@@ -3286,7 +3286,7 @@ if (true) {
 
 // !!!Вложенные функции
 
-function makeCounter(count:number) {
+function makeCounter(count: number) {
   const countersDiv = document.getElementById('counters')
   const button = document.createElement('button')
   button.textContent = count.toFixed()
@@ -3318,9 +3318,9 @@ makeCounter(10)
 
 // Например:
 
-function closureSum(a:number) {
-  return function(b:number) {
-    return a+b
+function closureSum(a: number) {
+  return function (b: number) {
+    return a + b
   }
 }
 
@@ -3340,13 +3340,13 @@ console.log(operand4(12))
 // Функция - конструктор должна выполняться только с помощью оператора "new".
 
 // this это {} (пустой объект)
-const User = (function (this:Record<string,any>, name:string) {
+const User = (function (this: Record<string, any>, name: string) {
   // во время создания нового объекта при помощи оператора new, в this присваивается пустой объект
   // this = {};  (неявно)
 
   // выполняется тело функции.Обычно оно модифицирует this, добавляя туда новые свойства
   // добавляет свойства к this
-  this.name = name  
+  this.name = name
   this.isAdmin = false
   this.isLogin = function () {
     return false
@@ -3356,18 +3356,18 @@ const User = (function (this:Record<string,any>, name:string) {
 }) as any
 
 // Функция-конструктор, создающая объект с переданным именеи и ложью в свойстве isAdmin
-const SimpleUser = (function (this:Record<string,any>, name:string) {
-  this.name = name  
+const SimpleUser = (function (this: Record<string, any>, name: string) {
+  this.name = name
   this.isAdmin = false
   this.isLogin = function () {
     return false
   }
 }) as any
 
-const simpleUser = function (name:string) {
+const simpleUser = function (name: string) {
   return {
     name,
-    isAdmin:false,
+    isAdmin: false,
     isLogin() {
       return false
     }
@@ -3382,7 +3382,7 @@ console.log(simpleUser('Student').isLogin == simpleUser('Student1').isLogin)
 class NewUser {
   name
   isAdmin
-  constructor(name:string) {
+  constructor(name: string) {
     // во время создания нового объекта при помощи оператора new, в this присваивается пустой объект
     // this = {};  (неявно)
     this.name = name
@@ -3400,7 +3400,7 @@ class NewUser {
 //   isAdmin: false
 // }
 
-console.log({ name: 'noJack1', admin: true, isLogin() {return false} })
+console.log({ name: 'noJack1', admin: true, isLogin() { return false } })
 console.log((new User('Jack')))
 console.log((new User('Jack')).constructor.name)
 console.log(new NewUser('Pirat'))
@@ -3415,7 +3415,7 @@ console.log(Object.keys(new NewUser('Pirat')))
 // Используя специальное свойство new.target внутри функции, мы можем проверить, вызвана ли функция при помощи оператора new или без него.
 
 // В случае обычного вызова функции new.target будет undefined.Если же она была вызвана при помощи new, new.target будет равен самой функции.
-const User1 = (function (this:any, name:string) {
+const User1 = (function (this: any, name: string) {
   console.log(new.target)
   if (!new.target) { // в случае, если вы вызвали меня без оператора new
     return new User1(name) // ...я добавлю new за вас
@@ -3440,7 +3440,7 @@ console.log(john.name) // John
 // Функции-конструкторы следует вызывать только с помощью new. Такой вызов подразумевает создание пустого this в начале и возврат заполненного в конце.
 // Мы можем использовать конструкторы для создания множества похожих объектов.
 
-console.log(new Date()) 
+console.log(new Date())
 
 // Геттеры (получатели) и сеттеры (устанавливатели) - методы объекта, ведущие себя как свойства
 
@@ -3454,12 +3454,12 @@ const car = {
   get fuel() {
     return this._fuel
   },
-  setFuel(val:number) {
-    this._fuel+=val
+  setFuel(val: number) {
+    this._fuel += val
   },
   // сеттер всегда что-то устанавливает
-  set refuel(val:number) {
-    this._fuel+=val
+  set refuel(val: number) {
+    this._fuel += val
   },
   get refuel() {
     return this._fuel
@@ -3478,7 +3478,7 @@ const student = {
   get fullname() {
     return `${this.name} ${this.surname}`
   },
-  set fullname(fio:string) {
+  set fullname(fio: string) {
     ;[this.name, this.surname] = fio.split(' ')
   },
   toString() {
@@ -3557,30 +3557,30 @@ console.log(Object.getOwnPropertyNames(NewUser.prototype)); // constructor, sayH
 // и добавить его на страницу с помощью document.write().
 
 class HtmlElement {
-  tag:string
-  paired:boolean
-  text:string
-  attrs:string[] = []
-  styles:string[] = []
+  tag: string
+  paired: boolean
+  text: string
+  attrs: string[] = []
+  styles: string[] = []
   htmlElements: HtmlElement[] = []
-  constructor(tag:string, paired:boolean, text:string) {
+  constructor(tag: string, paired: boolean, text: string) {
     this.tag = tag
     this.paired = paired
     this.text = text
   }
-  setAttr(name:string, value:string) {
+  setAttr(name: string, value: string) {
     this.attrs.push(`${name}="${value}"`)
   }
-  setStyle(name:string, value:string) {
+  setStyle(name: string, value: string) {
     this.styles.push(`${name}:${value}`)
   }
-  append(element:HtmlElement) {
+  append(element: HtmlElement) {
     this.htmlElements.push(element)
   }
-  prepend(element:HtmlElement) {
+  prepend(element: HtmlElement) {
     this.htmlElements.unshift(element)
   }
-  getHtml():string {
+  getHtml(): string {
     if (this.styles.length) {
       this.setAttr('style', this.styles.join(';'))
     }
@@ -3648,7 +3648,7 @@ if (iframe) iframe.srcdoc = '<!DOCTYPE><html><body>' + wrapper.getHtml() + scrip
 
 // Unix time, он же timestamp, он же метка времени
 console.log('Кол-во миллисекунд, прошедшее с 01.01.1970 00:00 (Unix time)', Date.now())
-console.log('Текуее время',new Date())
+console.log('Текуее время', new Date())
 console.log('Создание времени из метки', new Date(Date.now()))
 console.log('Создание времени из строки', new Date('2023-10-16'))
 console.log('Создание времени из строки', new Date('2023-10-16T19:47:00'))
@@ -3755,7 +3755,7 @@ console.log(admin3)
     eats: false,
   }
 
-  const Rabbit = (function(this:any, name:string) {
+  const Rabbit = (function (this: any, name: string) {
     this.name = name
   }) as any
 
@@ -3770,7 +3770,7 @@ console.log(admin3)
   console.log(rabbit)
   console.log(new rabbit.constructor('Yellow Rabbit'))
 
-  
+
   Rabbit.prototype = superAnimal
   let rabbit2 = new Rabbit("Black Rabbit") //  rabbit.__proto__ == superAnimal
   console.log(rabbit2)
@@ -3823,7 +3823,7 @@ console.log(admin3)
 
   obj.__proto__ = Array.prototype
   obj.push(`I'm like Array`)
-  console.log(obj) 
+  console.log(obj)
   console.log(obj.join(',')) // Hello,world!
 }
 
@@ -3890,3 +3890,124 @@ console.log(admin3)
   // obj.hasOwnProperty(key): возвращает true, если у obj есть собственное (не унаследованное) свойство с именем key.
   // Все методы, которые возвращают свойства объектов (такие как Object.keys и другие), возвращают «собственные» свойства. Если мы хотим получить и унаследованные, можно воспользоваться циклом for..in.
 }
+
+{
+  // !Наслкдование классов
+
+  class Animal {
+    name
+    speed
+    constructor(name: string) {
+      this.speed = 0
+      this.name = name
+    }
+    run(speed: number) {
+      this.speed = speed
+      console.log(`${this.name} бежит со скоростью ${this.speed}.`)
+    }
+    stop() {
+      this.speed = 0
+      console.log(`${this.name} стоит неподвижно.`)
+    }
+  }
+
+  let animal = new Animal("Мой питомец")
+
+  // У классов есть ключевое слово "super" для таких случаев.
+
+  // super.method(...) вызывает родительский метод.
+  // super(...) для вызова родительского конструктора(работает только внутри нашего конструктора).
+  // У стрелочных функций нет super и this
+  class Rabbit extends Animal {
+    // неявно генерируется для классов-потомков, у которых нет своего конструктора
+    // constructor(...args) {
+    //   super(...args);
+    // }
+    earLength
+    constructor(name:string, earLength:number) {
+      super(name)
+      this.earLength = earLength
+    }
+
+    hide() {
+      console.log(`${this.name} прячется!`)
+    }
+    stop() {
+      super.stop() // вызываем родительский метод stop
+      this.hide() // и затем hide
+    }
+    stopAfterDelay(seconds:number) {
+      setTimeout(() => this.stop(), seconds*1000); // вызывает родительский stop после 1 секунды
+    }
+  }
+
+  let rabbit = new Rabbit("Белый кролик",10)
+
+  console.log(rabbit)
+  console.log(rabbit.name)
+  console.log(rabbit.speed)
+  rabbit.run(5) // Белый кролик бежит со скоростью 5.
+  rabbit.stopAfterDelay(3) // Белый кролик прячется!
+  console.log(rabbit.speed)
+
+//   Методы, а не свойства-функции
+// Свойство [[HomeObject]] определено для методов как классов, так и обычных объектов. Но для объектов методы должны быть объявлены именно как method(), а не "method: function()".
+
+}
+
+const timerDiv = document.querySelector('#timer p') as HTMLParagraphElement
+
+class Clock {
+  template
+  timer = 0
+  constructor({ template }: any) {
+    this.template = template
+  }
+  render() {
+    const date = new Date()
+    const hours = date.getHours()
+    const h = hours < 10 ? '0' + hours : hours
+
+    const mins = date.getMinutes()
+    const m = mins < 10 ? '0' + mins : mins
+
+    const secs = date.getSeconds()
+    const s = secs < 10 ? '0' + secs : secs
+
+    let output = this.template
+      .replace('h', h)
+      .replace('m', m)
+      .replace('s', s)
+
+    timerDiv.textContent = output
+  }
+
+  stop() {
+    clearInterval(this.timer)
+  }
+
+  start() {
+    this.render()
+    this.timer = setInterval(() => this.render(), 1000)
+  }
+
+}
+
+class ExtendedClock extends Clock {
+  precision
+  constructor(template: any, precision=1000) {
+    super(template)
+    this.precision = precision
+  }
+  start() {
+    this.render()
+    this.timer = setInterval(() => this.render(), this.precision)
+  }
+}
+
+// Создайте новый класс ExtendedClock, который будет наследоваться от Clock и добавьте параметр precision – количество миллисекунд между «тиками». Установите значение в 1000(1 секунда) по умолчанию
+
+let clock = new ExtendedClock({ template: 'h:m:s' })
+const timerButtons = document.querySelectorAll('#timer button') as NodeListOf<HTMLButtonElement>
+timerButtons[0].addEventListener('click', () => clock.start())
+timerButtons[1].addEventListener('click', () => clock.stop())
