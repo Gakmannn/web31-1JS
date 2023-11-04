@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css">
     <title>Vite + TS</title>
+    <style>
+      .input {
+        border-radius: 8px;
+        border: 1px solid #646cff;
+        padding: 0.6em 1.2em;
+        font-size: 1em;
+        font-weight: 500;
+        font-family: inherit;
+        text-align: center;
+        height: 44.8px;
+        box-sizing: border-box;
+      }
+    </style>
   </head>
   <body>
     <a id="href" href="https://disk.yandex.ru/d/KwdXQropyuL3Iw" target="_blank">Материалы, ДЗ и практика</a>
@@ -18,6 +31,23 @@
       <li>В терминале написать 'npm i' и нажать enter</li>
       <li>В терминале написать 'npm run dev', нажать enter, перейти по ссылке</li>
     </ol>
+
+    <div class="input" type="password"></div>
+
+    <div class="digits">
+      <button data-val="1">1</button>
+      <button data-val="2">2</button>
+      <button data-val="3">3</button>
+      <button data-val="4">4</button>
+      <button data-val="5">5</button>
+      <button data-val="6">6</button>
+      <button data-val="7">7</button>
+      <button data-val="8">8</button>
+      <button data-val="9">9</button>
+      <button data-val="0">0</button>
+      <button data-action="backspase">&lt;-</button>
+    </div>
+
     <div id="timer">
       <p style="font-size: 24px; padding-left: 40px;"></p>
       <button>start</button>
