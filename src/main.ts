@@ -3602,7 +3602,7 @@ innerDiv.setStyle('width', '300px')
 innerDiv.setStyle('margin', '10px')
 const h3 = new HtmlElement('h3', true, 'What is Lorem Ipsum?')
 const img = new HtmlElement('img', false, '')
-img.setAttr('src', 'https://img.goodfon.com/original/1280x1024/7/9a/cvety-cvetok-buket-priroda.jpg')
+img.setAttr('src', 'cvety-cvetok-buket-priroda.jpg')
 img.setAttr('alt', 'Lorem Ipsum')
 img.setStyle('width', '100%')
 const p = new HtmlElement('p', true, 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias harum fuga magni quasi ex pariatur reprehenderit laudantium esse. Veritatis maiores qui fugiat nostrum, quo nihil sit recusandae aspernatur incidunt dolore.')
@@ -4250,3 +4250,54 @@ digitsDiv.addEventListener('click', (e)=>{
   console.log(PowerArray.isArray([1,1]))
   Date.now()
 }
+
+
+// Давайте обобщим, какие методы для проверки типа мы знаем:
+
+// ?работает для	возвращает
+// !typeof	примитивов	строка
+// !{}.toString	примитивов, встроенных объектов, объектов с Symbol.toStringTag	строка
+// !instanceof	объектов	true/false
+// Как мы можем видеть, технически {}.toString «более продвинут», чем typeof.
+
+// А оператор instanceof – отличный выбор, когда мы работаем с иерархией классов и хотим делать проверки с учётом наследования.
+
+const tempTimerDiv = document.querySelector('#timer') as Element
+// tempTimerDiv.value у класса Element такого свойства нет
+console.log('Node', tempTimerDiv instanceof Node)
+console.log('EventTarget', tempTimerDiv instanceof EventTarget)
+console.log('HTMLElement', tempTimerDiv instanceof HTMLElement)
+console.log('HTMLDivElement', tempTimerDiv instanceof HTMLDivElement)
+const HTMLtempTimerDiv = tempTimerDiv as HTMLInputElement
+HTMLtempTimerDiv.value // у класса HTMLInputElement есть
+HTMLtempTimerDiv.checked
+console.log('HTMLElement', HTMLtempTimerDiv instanceof HTMLElement)
+console.log('HTMLDivElement', HTMLtempTimerDiv instanceof HTMLDivElement)
+
+// Примесь – общий термин в объектно - ориентированном программировании: класс, который содержит в себе методы для других классов.
+
+// Некоторые другие языки допускают множественное наследование.JavaScript не поддерживает множественное наследование, но с помощью примесей мы можем реализовать нечто похожее, скопировав методы в прототип.
+
+// Мы можем использовать примеси для расширения функциональности классов, например, для обработки событий, как мы сделали это выше.
+
+// С примесями могут возникнуть конфликты, если они перезаписывают существующие методы класса.Стоит помнить об этом и быть внимательнее при выборе имён для методов примеси, чтобы их избежать.
+
+const mixin = {
+  myName() {
+    // @ts-ignore
+    console.log(this.tagName)
+  }
+}
+
+Object.assign(Element.prototype, mixin)
+
+const tempInput = document.querySelector('#name') as HTMLInputElement
+
+// @ts-ignore
+tempTimerDiv.myName()
+// @ts-ignore
+HTMLtempTimerDiv.myName()
+// @ts-ignore
+tempInput.myName()
+console.log(tempInput.tagName)
+
