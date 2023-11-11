@@ -4249,6 +4249,27 @@ digitsDiv.addEventListener('click', (e)=>{
   console.log(filteredArr.isEmpty()) // false
   console.log(PowerArray.isArray([1,1]))
   Date.now()
+
+  const arrayMixin = {
+    isEmpty():boolean {
+      // @ts-ignore
+      return this.length === 0
+    }
+  }
+  Object.assign(Array.prototype, arrayMixin)
+  
+  // type ExtArr = Array<any> & { isEmpty: ()=>boolean }
+
+  // const newArr = [1, 2, 5] as ExtArr
+  // newArr.isEmpty()
+  // const filtred = newArr.filter(el => el > 6) as ExtArr
+  // filtred.isEmpty()
+  const arr1:any[] = [] 
+  // @ts-ignore
+  console.log('arr1.isEmpty()',arr1.isEmpty())
+  arr1.push(1)
+  // @ts-ignore
+  console.log('arr1.isEmpty()', arr1.isEmpty())
 }
 
 
@@ -4273,6 +4294,9 @@ HTMLtempTimerDiv.value // у класса HTMLInputElement есть
 HTMLtempTimerDiv.checked
 console.log('HTMLElement', HTMLtempTimerDiv instanceof HTMLElement)
 console.log('HTMLDivElement', HTMLtempTimerDiv instanceof HTMLDivElement)
+console.log('HTMLInputElement', HTMLtempTimerDiv instanceof HTMLInputElement)
+console.log('{}.toString.call(HTMLDivElement)', {}.toString.call(HTMLDivElement))
+
 
 // Примесь – общий термин в объектно - ориентированном программировании: класс, который содержит в себе методы для других классов.
 
@@ -4301,3 +4325,16 @@ HTMLtempTimerDiv.myName()
 tempInput.myName()
 console.log(tempInput.tagName)
 
+const renderDiv = document.getElementById('render') as HTMLDivElement
+// document.body.innerHTML += 'Ещё текст из js'
+// renderDiv.innerHTML += '<b>Ещё текст из js</b>'
+
+// renderDiv.innerHTML = '' // Самый простой способ очистить содержимое элемента
+renderDiv.insertAdjacentHTML('afterend', '<i>После блока div</i>')
+
+renderDiv.insertAdjacentHTML('beforeend', '<hr>')
+renderDiv.insertAdjacentHTML('beforeend', '<b>В конце блока div</b>')
+
+renderDiv.insertAdjacentHTML('beforebegin', '<i>До блока div</i>')
+
+renderDiv.insertAdjacentHTML('afterbegin', '<b>В начале блока div</b>')
