@@ -4330,11 +4330,45 @@ const renderDiv = document.getElementById('render') as HTMLDivElement
 // renderDiv.innerHTML += '<b>Ещё текст из js</b>'
 
 // renderDiv.innerHTML = '' // Самый простой способ очистить содержимое элемента
-renderDiv.insertAdjacentHTML('afterend', '<i>После блока div</i>')
 
-renderDiv.insertAdjacentHTML('beforeend', '<hr>')
-renderDiv.insertAdjacentHTML('beforeend', '<b>В конце блока div</b>')
+// renderDiv.insertAdjacentHTML('afterend', '<i>После блока div</i>')
 
-renderDiv.insertAdjacentHTML('beforebegin', '<i>До блока div</i>')
+// renderDiv.insertAdjacentHTML('beforeend', '<hr>')
+// renderDiv.insertAdjacentHTML('beforeend', '<b>В конце блока div</b>')
 
-renderDiv.insertAdjacentHTML('afterbegin', '<b>В начале блока div</b>')
+// renderDiv.insertAdjacentHTML('beforebegin', '<i>До блока div</i>')
+
+// renderDiv.insertAdjacentHTML('afterbegin', '<b>В начале блока div</b>')
+
+// Реализовать класс PrintMaсhine, которой состоит из:
+// ■ размера шрифта;
+// ■ цвета шрифта;
+// ■ семейства шрифта;
+// ■ метода print(), который принимает текст и печатает его
+// соответствующим шрифтом с помощью document.write().
+// Создать объект такого класса и продемонстрировать работу
+// метода.
+
+class PrintMaсhine {
+  size
+  color
+  font
+  constructor(size:number,color:string, font:string) {
+    this.size = size
+    this.color = color
+    this.font = font
+  }
+  print(text:string) {
+    renderDiv.insertAdjacentHTML('beforeend', 
+      `<p style="color:${this.color};font-size:${this.size}px; font-family: ${this.font}">${text}</p>`)
+  }
+}
+
+const redMachine = new PrintMaсhine(10, 'red', 'Arial')
+redMachine.print('sdfgfsd fsdfs dfsdf sdf')
+const purpleMachine = new PrintMaсhine(12, 'purple', 'Tahoma')
+purpleMachine.print('sdfgfsd fsdfs dfsdf sdf')
+
+const textArr = ['Lorem ipsum dolor sit, amet consectetur adipisicing elit.', 'Delectus ex sequi reiciendis obcaecati accusamus repellendus animi expedita nihil similique deserunt.','Tempora cumque consequatur libero deleniti eaque, doloribus voluptatum dicta alias?']
+
+textArr.forEach(el=>purpleMachine.print(el))
