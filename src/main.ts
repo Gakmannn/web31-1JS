@@ -4372,3 +4372,117 @@ purpleMachine.print('sdfgfsd fsdfs dfsdf sdf')
 const textArr = ['Lorem ipsum dolor sit, amet consectetur adipisicing elit.', 'Delectus ex sequi reiciendis obcaecati accusamus repellendus animi expedita nihil similique deserunt.','Tempora cumque consequatur libero deleniti eaque, doloribus voluptatum dicta alias?']
 
 textArr.forEach(el=>purpleMachine.print(el))
+
+
+//   Задание 3
+//   Реализовать класс Employee, описывающий работника, и со-
+//   здать массив работников банка.
+//   Реализовать класс EmpTable для генерации html кода таблицы
+//   со списком работников банка. Массив работников необходимо
+//   передавать через конструктор, а получать html код с помощью
+//   метода getHtml().
+//   Создать объект класса EmpTable и вывести на экран результат
+//   работы метода getHtml().
+
+class Employee{
+  static id = localStorage.staticId || 1
+  id
+  name
+  salary
+  constructor(name: string, salary: number){
+    this.id = Employee.id++
+    this.name = name
+    this.salary = salary
+    localStorage.staticId = Employee.id
+  }
+}
+
+const empArr = localStorage.empArr ? JSON.parse(localStorage.empArr) : [
+  new Employee('Санек',40_000,),
+  new Employee('Леха',40_000,),
+  new Employee('Никитос',60_000,),
+  new Employee('Андрюха',40_000,),
+  new Employee('Ванечка',50_000,),
+]
+
+let addEmploye = document.querySelector('.addEmploye') as HTMLButtonElement
+let buttonState = 'add'
+let empId = document.querySelector('.id') as HTMLInputElement
+let empName = document.querySelector('.name') as HTMLInputElement
+let empSalary = document.querySelector('.salary') as HTMLInputElement
+let table = document.querySelector('.table') as HTMLDivElement
+
+addEmploye.addEventListener('click', ()=>{
+  if (empName.value && empSalary.value) {
+    if (buttonState == 'add') {
+      empTable.addEmployee(new Employee(empName.value, parseInt(empSalary.value)))
+    } else {
+      empTable.editEmployee(+empId.value, empName.value, parseInt(empSalary.value))
+    }
+    empId.value = ''
+    empName.value = ''
+    empSalary.value = ''
+    empTable.render()
+    addEmploye.textContent = 'Добавить'
+    buttonState = 'add'
+  }
+})
+
+table.addEventListener('click', (e)=>{
+  const target = e.target as HTMLElement
+  if (target.dataset.action == 'delete') {
+    if (target.dataset.id) empTable.removeEmployee(+target.dataset.id)
+    empTable.render()
+  }
+  if (target.dataset.action == 'edit') {
+    addEmploye.textContent = 'Сохранить'
+    buttonState = 'edit'
+    if (target.dataset.id) {
+      const el = empTable.getEmployeeData(+target.dataset.id)
+      empId.value = el?.id.toString() || ''
+      empName.value = el?.name || ''
+      empSalary.value = el?.salary.toString() || ''
+    }
+  }
+})
+
+class EmployeeTable {
+  table
+  constructor(table:Employee[]) {
+    this.table = table
+  }
+  addEmployee(el:Employee) {
+    this.table.push(el)
+  }
+  editEmployee(id:number, name:string, salary:number) {
+    const i = this.table.findIndex(emp => emp.id == id)
+    this.table[i].name = name
+    this.table[i].salary = salary
+  }
+  removeEmployee(id:number) {
+    const i = this.table.findIndex(el => el.id == id)
+    this.table.splice(i,1)
+  }
+  getEmployeeData(id:number) {
+    return this.table.find(el => el.id == id)
+  }
+  getHtml() {
+    let tableHtml = `<table><thead><tr><th>ID</th><th>Name</th><th>Salary</th><th>action</th></tr></thead><tbody>`
+    this.table.forEach(el=>{
+      tableHtml += `<tr><td>${el.id}</td><td>${el.name}</td><td>${el.salary}</td><td>
+      <button data-action="edit" data-id="${el.id}">✎</button>
+      <button data-action="delete" data-id="${el.id}">☠</button>
+      </td></tr>`
+    })
+    tableHtml += `</tbody></table>`
+    return tableHtml
+  }
+  render() {
+    table.innerHTML = this.getHtml()   
+    localStorage.empArr = JSON.stringify(this.table) 
+  }
+}
+
+const empTable = new EmployeeTable(empArr)
+empTable.render()
+
