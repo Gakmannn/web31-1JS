@@ -4467,12 +4467,28 @@ class EmployeeTable {
     return this.table.find(el => el.id == id)
   }
   getHtml() {
-    let tableHtml = `<table><thead><tr><th>ID</th><th>Name</th><th>Salary</th><th>action</th></tr></thead><tbody>`
-    this.table.forEach(el=>{
-      tableHtml += `<tr><td>${el.id}</td><td>${el.name}</td><td>${el.salary}</td><td>
-      <button data-action="edit" data-id="${el.id}">✎</button>
-      <button data-action="delete" data-id="${el.id}">☠</button>
-      </td></tr>`
+    let tableHtml = `
+      <table>
+        <thead>
+          <tr>
+            <th>№</th>
+            <th>Name</th>
+            <th>Salary</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+      <tbody>`
+    this.table.forEach((el,i)=>{
+      tableHtml += `
+      <tr>
+        <td>${i+1}</td>
+        <td>${el.name}</td>
+        <td>${el.salary}</td>
+        <td>
+          <button data-action="edit" data-id="${el.id}">✎</button>
+          <button data-action="delete" data-id="${el.id}">☠</button>
+        </td>
+      </tr>`
     })
     tableHtml += `</tbody></table>`
     return tableHtml
@@ -4486,3 +4502,119 @@ class EmployeeTable {
 const empTable = new EmployeeTable(empArr)
 empTable.render()
 
+// JSON – это формат данных, который имеет собственный независимый стандарт и библиотеки для большинства языков программирования.
+// JSON поддерживает простые объекты, массивы, строки, числа, логические значения и null.
+// JavaScript предоставляет методы JSON.stringify для сериализации в JSON и JSON.parse для чтения из JSON.
+// Оба метода поддерживают функции преобразования для интеллектуального чтения / записи.
+// Если объект имеет метод toJSON, то он вызывается через JSON.stringify.
+
+{
+  // ?Метод Object.getOwnPropertyDescriptor позволяет получить полную информацию о свойстве.
+  let user = {
+    name: "John",
+  } as any
+
+  let descriptor = Object.getOwnPropertyDescriptor(user, 'name');
+
+  console.log(JSON.stringify(descriptor, null, 2));
+  /* дескриптор свойства:
+  {
+    "value": "John",
+    "writable": true,
+    "enumerable": true,
+    "configurable": true
+  }
+  */
+
+  // ?Чтобы изменить флаги, мы можем использовать метод Object.defineProperty.
+  // !Если свойство существует, defineProperty обновит его флаги.В противном случае метод создаёт новое свойство с указанным значением и флагами; если какой - либо флаг не указан явно, ему присваивается значение false.
+
+  Object.defineProperty(user, "age", {
+    value: "22",
+    configurable: true
+  })
+
+  // !Обратите внимание: configurable: false не даст изменить флаги свойства, а также не даст его удалить.При этом можно изменить значение свойства, если флаг writable равен true
+
+  descriptor = Object.getOwnPropertyDescriptor(user, 'age');
+
+  console.log(JSON.stringify(descriptor, null, 2));
+  /*
+  {
+    "value": "22",
+    "writable": false,
+    "enumerable": false,
+    "configurable": false
+  }
+   */
+
+  try {
+    user.age = 23
+    delete user.age
+  } catch(e) {
+    console.log(e)
+  }
+
+  Object.defineProperty(user, "age", {
+    value: "22",
+    writable: true
+  })
+
+  user.age = 23
+
+  console.log(Object.keys(user))
+  
+  Object.defineProperty(user, "age", {
+    value: user.age,
+    writable: true,
+    enumerable:true
+  })
+
+  console.log(Object.keys(user))
+
+  // ?Существует метод Object.defineProperties(obj, descriptors), который позволяет определять множество свойств сразу.
+
+  // Его синтаксис:
+
+  // Object.defineProperties(obj, {
+  //   prop1: descriptor1,
+  //   prop2: descriptor2
+  //   ...
+  // });
+  
+  Object.defineProperties(user, {
+    name: { value: "John", writable: false },
+    surname: { value: "Smith", writable: false },
+    // ...
+  })
+
+  // Object.getOwnPropertyDescriptors
+  // Чтобы получить все дескрипторы свойств сразу, можно воспользоваться методом Object.getOwnPropertyDescriptors(obj).
+
+  // !Вместе с Object.defineProperties этот метод можно использовать для клонирования объекта вместе с его флагами:
+
+  let clone = Object.defineProperties({}, Object.getOwnPropertyDescriptors(user))
+
+// Глобальное запечатывание объекта
+// Дескрипторы свойств работают на уровне конкретных свойств.
+
+// Но ещё есть методы, которые ограничивают доступ ко всему объекту:
+
+// ?    Object.preventExtensions(obj)
+// Запрещает добавлять новые свойства в объект.
+// ?    Object.seal(obj)
+// Запрещает добавлять / удалять свойства.Устанавливает configurable: false для всех существующих свойств.
+// ?    Object.freeze(obj)
+// Запрещает добавлять / удалять / изменять свойства.Устанавливает configurable: false, writable: false для всех существующих свойств.
+
+// А также есть методы для их проверки:
+// ?    Object.isExtensible(obj)
+// Возвращает false, если добавление свойств запрещено, иначе true.
+// ?    Object.isSealed(obj)
+// Возвращает true, если добавление / удаление свойств запрещено и для всех существующих свойств установлено configurable: false.
+// ?    Object.isFrozen(obj)
+// Возвращает true, если добавление / удаление / изменение свойств запрещено, и для всех текущих свойств установлено configurable: false, writable: false.
+// На практике эти методы используются редко.
+}
+
+// ionic
