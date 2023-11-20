@@ -28,6 +28,7 @@
   <body>
     <a id="href" href="https://disk.yandex.ru/d/KwdXQropyuL3Iw" target="_blank">Материалы, ДЗ и практика</a>
     <a href="https://disk.yandex.ru/d/52LeM6eF1NeKig" target="_blank">Видео</a>
+    <a href="https://disk.yandex.ru/d/LADtnZajP19xeQ">Ещё видео</a>
     <ol>
       <li>Скачать Node.js с сайта. Версия 18. Усьтановить</li>
       <li>Перезапустить vs code</li>
@@ -106,6 +107,49 @@
       </div>
     </div>
 
+    <style>
+      #svet {
+        display: flex;
+        gap: 20px;
+      }
+      .round {
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        background-color: grey;
+        overflow: hidden;
+      }
+      .inner {
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+      }
+      .red {
+        background-color: red;
+      }
+      .yellow {
+        background-color: yellow;
+      }
+      .green {
+        background-color: green;
+      }
+      .light {
+        opacity: 1;
+      }
+    </style>
+
+    <div id="svet">
+      <div class="round">
+        <div class="inner red light" data-val="1"></div>
+      </div>
+      <div class="round">
+        <div class="inner yellow" data-val="2"></div>
+      </div>
+      <div class="round">
+        <div class="inner green" data-val="0"></div>
+      </div>
+    </div>
+
     <div class="table"></div>
     
     <input style="display: none;" type="text" class="id" disabled>
@@ -121,6 +165,14 @@
       "use strict";
       // Здесь можно писать обычный JS
       document.write('Текст написан в JS')
+      let active = 0
+      const rounds = document.querySelectorAll('.inner')
+      setInterval(()=>{
+        const current = rounds[active]
+        current.classList.remove('light')
+        active = current.dataset.val
+        rounds[active].classList.add('light')
+      },2000)
     </script>
   </body>
 </html>
