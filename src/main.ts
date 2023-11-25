@@ -4626,4 +4626,36 @@ empTable.render()
 
 // ionic
 
+// Получив DOM-узел, мы можем перейти к его ближайшим соседям используя навигационные ссылки.
 
+// Есть два основных набора ссылок:
+
+// Для всех узлов: parentNode, childNodes, firstChild, lastChild, previousSibling, nextSibling.
+// Только для узлов-элементов: parentElement, children, firstElementChild, lastElementChild, previousElementSibling, nextElementSibling.
+// Некоторые виды DOM-элементов, например таблицы, предоставляют дополнительные ссылки и коллекции для доступа к своему содержимому.
+
+// Работает, но не ясно почему
+// console.log(svet)
+// console.log(window.svet)
+// Лучше использовать document.getElementById
+// Метод getElementById можно вызвать только для объекта document. Он осуществляет поиск по id по всему документу
+
+// Есть 6 основных методов поиска элементов в DOM:
+
+// Метод	                  Ищет по...	Ищет внутри элемента ? Возвращает живую коллекцию ?
+// querySelector	          CSS-selector	        ✔	                      -
+// querySelectorAll	        CSS-selector	        ✔	                      -
+// getElementById	              id                -                        -
+// getElementsByName	         name               -	                       ✔
+// getElementsByTagName	     tag or '*'	          ✔	                       ✔
+// getElementsByClassName	    class	              ✔	                       ✔
+
+// Безусловно, наиболее часто используемыми в настоящее время являются методы querySelector и querySelectorAll, но и методы getElement(s)By * могут быть полезны в отдельных случаях, а также встречаются в старом коде.
+
+// Кроме того:
+
+// ?Есть метод elem.matches(css), который проверяет, удовлетворяет ли элемент CSS - селектору.
+// ?Метод elem.closest(css) ищет ближайшего по иерархии предка, соответствующему данному CSS - селектору.Сам элемент также включён в поиск.
+// И, напоследок, давайте упомянем ещё один метод, который проверяет наличие отношений между предком и потомком:
+
+// ?elemA.contains(elemB) вернёт true, если elemB находится внутри elemA(elemB потомок elemA) или когда elemA == elemB.
