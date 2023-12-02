@@ -4744,3 +4744,68 @@ setInterval(() => elem.hidden = !elem.hidden, 1000)
 
 // ?Нужен нестандартный атрибут.Но если он начинается с data -, тогда нужно использовать dataset.
 // ?Мы хотим получить именно то значение, которое написано в HTML.Значение DOM - свойства может быть другим, например, свойство href – всегда полный URL, а нам может понадобиться получить «оригинальное» значение.
+
+// !Стили и классы
+// !Свойство style оперирует только значением атрибута "style", без учёта CSS-каскада
+
+// Для управления классами существуют два DOM - свойства:
+
+// className – строковое значение, удобно для управления всем набором классов.
+//   classList – объект с методами add / remove / toggle / contains, удобно для управления отдельными классами.
+// Чтобы изменить стили:
+
+// Свойство style является объектом со стилями в формате camelCase.Чтение и запись в него работают так же, как изменение соответствующих свойств в атрибуте "style".Чтобы узнать, как добавить в него important и делать некоторые другие редкие вещи – смотрите документацию.
+
+// Свойство style.cssText соответствует всему атрибуту "style", полной строке стилей.
+
+// Для чтения окончательных стилей(с учётом всех классов, после применения CSS и вычисления окончательных значений) используется:
+
+// Метод getComputedStyle(elem, [pseudo]) возвращает объект, похожий по формату на style.Только для чтения.
+
+// У элементов есть следующие геометрические свойства(метрики):
+
+// offsetParent – ближайший CSS - позиционированный родитель или ближайший td, th, table, body.
+// offsetLeft / offsetTop – позиция в пикселях верхнего левого угла относительно offsetParent.
+// offsetWidth / offsetHeight – «внешняя» ширина / высота элемента, включая рамки.
+// clientLeft / clientTop – расстояние от верхнего левого внешнего угла до внутренного.Для операционных систем с ориентацией слева - направо эти свойства равны ширинам левой / верхней рамки.Если язык ОС таков, что ориентация справа налево, так что вертикальная полоса прокрутки находится не справа, а слева, то clientLeft включает в своё значение её ширину.
+
+// clientWidth / clientHeight – ширина / высота содержимого вместе с внутренними отступами padding, но без полосы прокрутки.
+// scrollWidth / scrollHeight – ширины / высота содержимого, аналогично clientWidth / Height, но учитывают прокрученную, невидимую область элемента.
+// scrollLeft / scrollTop – ширина / высота прокрученной сверху части элемента, считается от верхнего левого угла.
+// Все свойства доступны только для чтения, кроме scrollLeft / scrollTop, изменение которых заставляет браузер прокручивать элемент.
+
+const block = document.querySelector('.block') as HTMLDivElement
+
+block.addEventListener('click', (e)=>{
+  const target = e.target as HTMLDivElement
+  if (!isDrug && target.classList.contains('absolute')) return
+  if (!isDrug) target.classList.toggle('absolute')
+})
+
+let isDrug = false
+
+block.addEventListener('mousedown', ()=>{
+  isDrug = true  
+})
+
+block.addEventListener('mouseup', ()=>{
+  isDrug = false
+})
+
+document.addEventListener('mousemove', (e)=>{
+  if (isDrug) {
+    block.style.top = window.scrollY + e.clientY + 'px'
+    block.style.left = e.clientX + 'px'
+  }
+})
+
+// Ждём, пока бразер загрузит изображение, а затем читаем высоту/ширину
+window.addEventListener('load',()=>{
+  const imgEl = document.querySelector('img') as HTMLImageElement
+  if (imgEl) {
+    console.log(imgEl.offsetHeight)
+    console.log(imgEl.offsetWidth)
+  }
+})
+
+
