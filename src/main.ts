@@ -4799,13 +4799,76 @@ document.addEventListener('mousemove', (e)=>{
   }
 })
 
-// Ждём, пока бразер загрузит изображение, а затем читаем высоту/ширину
-window.addEventListener('load',()=>{
+const getSize = () => {
   const imgEl = document.querySelector('img') as HTMLImageElement
   if (imgEl) {
     console.log(imgEl.offsetHeight)
     console.log(imgEl.offsetWidth)
   }
-})
+}
+
+// Ждём, пока бразер загрузит изображение, а затем читаем высоту/ширину
+window.addEventListener('load', getSize)
+// window.removeEventListener('load', getSize)
+
+// !Размеры и прокрутка окна
+
+// Размеры:
+// Ширина / высота видимой части документа(ширина / высота области содержимого): document.documentElement.clientWidth / Height
+// Ширина / высота всего документа со всей прокручиваемой областью страницы:
+
+let scrollHeight = Math.max(
+  document.body.scrollHeight, document.documentElement.scrollHeight,
+  document.body.offsetHeight, document.documentElement.offsetHeight,
+  document.body.clientHeight, document.documentElement.clientHeight
+)
+
+// Прокрутка:
+// Прокрутку окна можно получить так: window.scrollX, window.scrollY
+
+// Изменить текущую прокрутку:
+
+// window.scrollTo(pageX, pageY) – абсолютные координаты,
+// window.scrollBy(x, y) – прокрутка относительно текущего места,
+// elem.scrollIntoView(top) – прокрутить страницу так, чтобы сделать elem видимым(выровнять относительно верхней / нижней части окна).
+
+// Пример, как сделать скролл к элементу с запасом в Xpx
+// const scrollDiv = document.getElementById("myDiv").offsetTop
+// window.scrollTo({ top: scrollDiv - 70, behavior: 'smooth' })
+
+// !Координаты
+
+// Любая точка на странице имеет координаты:
+
+// Относительно окна браузера – elem.getBoundingClientRect().
+// Относительно документа – elem.getBoundingClientRect() плюс текущая прокрутка страницы.
+// Координаты в контексте окна подходят для использования с position:fixed, а координаты относительно документа – для использования с position:absolute.
+
+// Каждая из систем координат имеет свои преимущества и недостатки. Иногда будет лучше применить одну, а иногда – другую, как это и происходит с позиционированием в CSS, где мы выбираем между absolute и fixed.
+
+// События
+
+// document.addEventListener('click', (e)=>{console.log(e)})
+// document.addEventListener('mousemove', (e)=>{console.log(e)})
+// document.addEventListener('keydown', (e)=>{console.log(e)})
+
+// Есть три способа назначения обработчиков событий:
+
+// Атрибут HTML: onclick = "...".
+// DOM - свойство: elem.onclick = function.
+// Специальные методы: elem.addEventListener(event, handler[, phase]) для добавления, removeEventListener для удаления.
+
+// ?options
+// Дополнительный объект со свойствами:
+// once: если true, тогда обработчик будет автоматически удалён после выполнения.
+// capture: фаза, на которой должен сработать обработчик, подробнее об этом будет рассказано в главе Всплытие и погружение.Так исторически сложилось, что options может быть false / true, это то же самое, что { capture: false / true }.
+// passive: если true, то указывает, что обработчик никогда не вызовет preventDefault(), подробнее об этом будет рассказано в главе Действия браузера по умолчанию.
 
 
+// HTML - атрибуты используются редко потому, что JavaScript в HTML - теге выглядит немного странно.К тому же много кода там не напишешь.
+
+// DOM - свойства вполне можно использовать, но мы не можем назначить больше одного обработчика на один тип события.Во многих случаях с этим ограничением можно мириться.
+
+// Последний способ самый гибкий, однако нужно писать больше всего кода.Есть несколько типов событий, которые работают только через него, например, DOMContentLoaded.Также addEventListener поддерживает объекты в качестве обработчиков событий.В этом случае вызывается метод объекта handleEvent.
+
+// Не важно, как вы назначаете обработчик – он получает объект события первым аргументом.Этот объект содержит подробности о том, что произошло.
