@@ -45,6 +45,8 @@
       <li>В терминале написать 'npm run dev', нажать enter, перейти по ссылке</li>
     </ol>
 
+    <button> <b>sfsfsdf</b> fsdfsdf <i>sdfdsfsdf</i> </button>
+
     <div class="block"></div>
 
     <div class="input" type="password"></div>
@@ -166,6 +168,18 @@
     <input type="text" class="salary" placeholder="Введите зарплату">
     <button class="addEmploye">Добавить</button>
 
+    <style>
+      [data-action=save] {
+        background-color: #646cff;
+      }
+    </style>
+
+    <div id="menu" style="margin: 30px;">
+      <button data-action="save">Сохранить</button>
+      <button data-action="load">Загрузить</button>
+      <button data-action="search">Поиск</button>
+    </div>
+    
     <script type="module" src="/src/main.ts">
       // Не сработает если указана ссылка на файл
       alert('hello')
@@ -183,6 +197,17 @@
         active = current.dataset.val
         rounds[active].classList.add('light')
       },2000)
+
+      menu.onclick = (e) => {
+        actions[e.target.dataset.action]()
+      }
+      const actions = {
+        save() { console.log('save') },
+        load() { console.log('load') },
+        search() { console.log('search') },
+      }
+
+
     </script>
   </body>
 </html>
