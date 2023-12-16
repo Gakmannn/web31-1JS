@@ -4991,3 +4991,64 @@ document.addEventListener('click', (e)=>{
 // Либо как явный и грубый хак, чтобы заставить работать сторонние библиотеки, в которых не предусмотрены другие средства взаимодействия.
 // Либо для автоматического тестирования, чтобы скриптом «нажать на кнопку» и посмотреть, произошло ли нужное действие.
 // Пользовательские события со своими именами часто создают для улучшения архитектуры, чтобы сообщить о том, что происходит внутри наших меню, слайдеров, каруселей и т.д.
+
+const imgArr = [
+  '1.jpg',
+  '2.jpg',
+  '3.jpg',
+  '4.jpg',
+  '5.jpg',
+  '6.jpg',
+  '7.jpg',
+  '8.JPG',
+  '9.jpeg',
+]
+
+const renderSlider = (arr:string[]) => {
+  let htmlString = `<div id="slider_div" class="slider_div">
+      <div class="arrow fs">←</div>
+      <div class="arrow sc">→</div>`
+  for (let i=0; i<arr.length; i+=3) {
+    if (i==0) {
+      htmlString += `<div class="three_imgs bim" style="margin-left: 90px;" data-type="active">`
+    } else {
+      htmlString += `<div class="three_imgs">`
+    }
+    let to = (i + 2 < arr.length) ? i+2 : arr.length-1
+    for (let a = i; a<=to; a++) {
+      htmlString += `<img src="${arr[a]}" alt="" class="slider_img">`
+    }
+    htmlString += `</div>`
+  }
+  htmlString += `</div>`
+  document.body.insertAdjacentHTML('beforeend', htmlString)
+}
+
+renderSlider(imgArr)
+
+let marginLeft = document.querySelector('.bim') as HTMLDivElement
+let sliderDiv = document.querySelector('.slider_div') as HTMLDivElement
+let currentIndex = 0
+const maxIndex = 2
+sliderDiv.addEventListener('click', (event) => {
+  let target = event.target as HTMLElement
+  if (target.classList.contains('fs')) {
+    if (currentIndex==0) {
+      currentIndex = maxIndex
+      marginLeft.style.marginLeft = 2*-800 + 90 +'px'
+    } else {
+      marginLeft.style.marginLeft = parseInt(marginLeft.style.marginLeft) + 800 +'px'
+      currentIndex--
+    }
+  }
+  if (target.classList.contains('sc')) {
+    if (currentIndex == maxIndex) {
+      currentIndex = 0
+      marginLeft.style.marginLeft = 90 + 'px'
+
+    } else {
+      marginLeft.style.marginLeft = parseInt(marginLeft.style.marginLeft) + -800 + 'px'
+      currentIndex++
+    }
+  }
+})
