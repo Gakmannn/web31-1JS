@@ -5000,7 +5000,7 @@ const imgArr = [
   '5.jpg',
   '6.jpg',
   '7.jpg',
-  '8.JPG',
+  // '8.JPG',
   '9.jpeg',
 ]
 
@@ -5052,3 +5052,71 @@ sliderDiv.addEventListener('click', (event) => {
     }
   }
 })
+
+
+// События мыши имеют следующие свойства:
+
+// Кнопка: button.
+
+// Клавиши-модификаторы (true если нажаты): altKey, ctrlKey, shiftKey и metaKey (Mac).
+
+// Если вы планируете обработать Ctrl, то не забудьте, что пользователи Mac обычно используют Cmd, поэтому лучше проверить if (e.metaKey || e.ctrlKey).
+// Координаты относительно окна: clientX/clientY.
+
+// Координаты относительно документа: pageX/pageY.
+
+// Действие по умолчанию события mousedown – начало выделения, если в интерфейсе оно скорее мешает, его можно отменить. Но лучше делать это через CSS
+
+
+let ul = document.querySelector('#ul') as HTMLUListElement
+let lis = ul.querySelectorAll('li')
+let lastElement:HTMLLIElement
+
+ul.addEventListener('click', (event) => {
+  let target = event.target as HTMLLIElement
+  let LI = target.closest('li')
+  if ((event.metaKey || event.ctrlKey) && LI) {
+    LI.classList.toggle('active')
+  } else if (event.shiftKey && LI) {
+    let firstLi = 0
+    let lastLi = 0
+    lis.forEach( (el, i) => {
+      firstLi = (LI == el) ? i : firstLi
+      lastLi = (lastElement == el) ? i : lastLi
+    })
+    for (let i = Math.min(firstLi, lastLi); i <= Math.max(firstLi, lastLi); i++) {
+      lis[i].classList.add('active')
+    }
+  } else if (LI) {
+    lis.forEach( el => el.classList.remove('active'))
+    LI.classList.add('active')
+    lastElement = LI
+  }
+})
+
+// Мы рассмотрели события mouseover, mouseout, mousemove, mouseenter и mouseleave.
+
+// Особенности, на которые стоит обратить внимание:
+
+// При быстром движении мыши события не будут возникать на промежуточных элементах.
+// События mouseover / out и mouseenter / leave имеют дополнительное свойство: relatedTarget.Оно дополняет свойство target и содержит ссылку на элемент, с / на который мы переходим.
+// События mouseover / out возникают, даже когда происходит переход с родительского элемента на потомка.С точки зрения браузера, курсор мыши может быть только над одним элементом в любой момент времени – над самым глубоко вложенным.
+
+// События mouseenter / leave в этом отличаются.Они генерируются, когда курсор переходит на элемент в целом или уходит с него.Также они не всплывают.
+
+// Мы рассмотрели основной алгоритм Drag’n’Drop.
+
+// Ключевые идеи:
+
+// Поток событий: ball.mousedown → document.mousemove → ball.mouseup (не забудьте отменить браузерный ondragstart).
+// В начале перетаскивания: запоминаем начальное смещение указателя относительно элемента: shiftX/shiftY – и сохраняем его при перетаскивании.
+// Выявляем потенциальные цели переноса под указателем с помощью document.elementFromPoint.
+// На этой основе можно сделать многое.
+
+// На mouseup – по-разному завершать перенос: изменять данные, перемещать элементы.
+// Можно подсвечивать элементы, пока мышь «пролетает» над ними.
+// Можно ограничить перетаскивание определённой областью или направлением.
+// Можно использовать делегирование событий для mousedown/up. Один обработчик событий на большой зоне, который проверяет event.target, может управлять Drag’n’Drop для сотен элементов.
+// И так далее.
+// Существуют фреймворки, которые строят архитектуру поверх этого алгоритма, создавая такие классы, как DragZone, Droppable, Draggable. Большинство из них делают вещи, аналогичные описанным выше. Вы можете и сами создать вашу собственную реализацию переноса, как видите, это достаточно просто, возможно, проще, чем адаптация чего-то готового.
+

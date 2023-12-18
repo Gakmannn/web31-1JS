@@ -7,6 +7,79 @@
     <link rel="stylesheet" href="style.css">
     <title>Vite + TS</title>
     <style>
+      .active {
+        background-color: #2e98ff;
+      }
+  
+      .slider_div {
+        display: flex;
+        width: 800px;
+        height: 300px;
+        overflow: hidden;
+        margin: 70px auto 150px;
+        background-color: darkgrey;
+        border-radius: 15px;
+        border: 2px solid black;
+        align-items: center;
+        position: relative;
+        gap: 180px;
+        -webkit-box-shadow: -22px 18px 11px 11px rgba(34, 60, 80, 0.37);
+        -moz-box-shadow: -22px 18px 11px 11px rgba(34, 60, 80, 0.37);
+        box-shadow: -22px 18px 11px 11px rgba(34, 60, 80, 0.37)
+      }
+
+      .three_imgs {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        height: 300px;
+        width: 620px;
+        justify-content: center;
+      }
+
+      .slider_img {
+        width: 200px;
+        height: 150px;
+        display: block;
+      }
+
+      .bim {
+        transition: 1s;
+      }
+      
+      .arrow {
+        font-size: 50px;
+        font-weight: 800;
+        background-color: #cbcbcc;
+        position: absolute;
+        border-radius: 20px;
+        height: 50px;
+        padding-bottom: 20px;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      #ul {
+        user-select: none;
+        display: flex;
+        gap: 5px;
+        list-style: none;
+      }
+      #ul li {
+        width: 100px;
+        height: 100px;
+        border: #646cff 1px solid;
+        border-radius: 10px;
+        padding: 5px;
+      }
+      /* Arrows   */
+      .sc {
+        right: 20px;
+      }
+
+      .fs {
+        left: 20px;
+      }
       .input {
         border-radius: 8px;
         border: 1px solid #646cff;
@@ -181,67 +254,17 @@
       <button data-action="s1">Поиск1</button>
     </div>
 
-    <style>
-      .slider_div {
-        display: flex;
-        width: 800px;
-        height: 300px;
-        overflow: hidden;
-        margin: 70px auto 150px;
-        background-color: darkgrey;
-        border-radius: 15px;
-        border: 2px solid black;
-        align-items: center;
-        position: relative;
-        gap: 180px;
-        -webkit-box-shadow: -22px 18px 11px 11px rgba(34, 60, 80, 0.37);
-        -moz-box-shadow: -22px 18px 11px 11px rgba(34, 60, 80, 0.37);
-        box-shadow: -22px 18px 11px 11px rgba(34, 60, 80, 0.37)
-      }
-
-      .three_imgs {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        height: 300px;
-        width: 620px;
-        justify-content: center;
-      }
-
-      .slider_img {
-        width: 200px;
-        height: 150px;
-        display: block;
-      }
-
-      .bim {
-        transition: 1s;
-      }
-      
-      .arrow {
-        font-size: 50px;
-        font-weight: 800;
-        background-color: #cbcbcc;
-        position: absolute;
-        border-radius: 20px;
-        height: 50px;
-        padding-bottom: 20px;
-        cursor: pointer;
-        user-select: none;
-      }
-
-      /* Arrows   */
-      .sc {
-        right: 20px;
-      }
-
-      .fs {
-        left: 20px;
-      }
-      
-    </style>
-
-   
+    <p>
+      Кликни на элемент списка, чтобы выделить его.
+    </p>
+    
+    <ul id="ul">
+      <li>Кристофер <b>Робин</b></li>
+      <li>Винни Пух</li>
+      <li>Тигра</li>
+      <li>Кенга</li>
+      <li>Кролик. Просто Кролик.</li>
+    </ul>
     
     <script type="module" src="/src/main.ts">
       // Не сработает если указана ссылка на файл
