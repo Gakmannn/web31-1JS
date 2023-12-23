@@ -3924,7 +3924,7 @@ console.log(admin3)
     //   super(...args);
     // }
     earLength
-    constructor(name:string, earLength:number) {
+    constructor(name: string, earLength: number) {
       super(name)
       this.earLength = earLength
     }
@@ -3936,12 +3936,12 @@ console.log(admin3)
       super.stop() // вызываем родительский метод stop
       this.hide() // и затем hide
     }
-    stopAfterDelay(seconds:number) {
-      setTimeout(() => this.stop(), seconds*1000); // вызывает родительский stop после 1 секунды
+    stopAfterDelay(seconds: number) {
+      setTimeout(() => this.stop(), seconds * 1000); // вызывает родительский stop после 1 секунды
     }
   }
 
-  let rabbit = new Rabbit("Белый кролик",10)
+  let rabbit = new Rabbit("Белый кролик", 10)
 
   console.log(rabbit)
   console.log(rabbit.name)
@@ -3950,8 +3950,8 @@ console.log(admin3)
   rabbit.stopAfterDelay(3) // Белый кролик прячется!
   console.log(rabbit.speed)
 
-//   Методы, а не свойства-функции
-// Свойство [[HomeObject]] определено для методов как классов, так и обычных объектов. Но для объектов методы должны быть объявлены именно как method(), а не "method: function()".
+  //   Методы, а не свойства-функции
+  // Свойство [[HomeObject]] определено для методов как классов, так и обычных объектов. Но для объектов методы должны быть объявлены именно как method(), а не "method: function()".
 
 }
 
@@ -3995,7 +3995,7 @@ class Clock {
 
 class ExtendedClock extends Clock {
   precision
-  constructor(template: any, precision=1000) {
+  constructor(template: any, precision = 1000) {
     super(template)
     this.precision = precision
   }
@@ -4017,7 +4017,7 @@ timerButtons[1].addEventListener('click', () => clock.stop())
     static race = 'human'
     static population = 0
     constructor() {
-      User.population ++
+      User.population++
     }
     static staticMethod() {
       console.log(this === User)
@@ -4027,7 +4027,7 @@ timerButtons[1].addEventListener('click', () => clock.stop())
   User.staticMethod = function () {
     console.log(this === User)
   }
-  
+
   const humans = [
     new User,
     (new User),
@@ -4044,7 +4044,7 @@ timerButtons[1].addEventListener('click', () => clock.stop())
     static publisher = "Илья Кантор"
   }
 
-  console.log( Article.publisher ) // Илья Кантор
+  console.log(Article.publisher) // Илья Кантор
   // Это то же самое, что и прямое присваивание Article:
   Article.publisher = "Илья Кантор"
 
@@ -4056,9 +4056,9 @@ class Bank {
   static uid = 10
   static cash = 100000
   static clints = {} as Record<string, Bank>
-  constructor(cash:number) {
+  constructor(cash: number) {
     this.id = Bank.uid++
-    if (cash>0) {
+    if (cash > 0) {
       this.cash = cash
     } else {
       this.cash = -cash
@@ -4091,14 +4091,14 @@ console.log(Bank.cash)
   })
   console.log(arr)
   console.log([1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024])
-  console.log([1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024].map(el=>el.toString(2)))
+  console.log([1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024].map(el => el.toString(2)))
   const arr2 = [0, 1, 2, 3, 4, 5, 6, 7, 8]
   arr2.sort((a, b) => {
     let A = a.toString(2).match(/1/g)?.length || 0
     let B = b.toString(2).match(/1/g)?.length || 0
     return A == B ? a - b : A - B
   })
-  console.log(arr2.map(el=>el.toString(2)))
+  console.log(arr2.map(el => el.toString(2)))
   console.log(['0', '1', '10', '100', '1000', '11', '101', '110', '111'])
   console.log([0, 1, 2, 4, 8, 3, 5, 6, 7])
   // [0, 1, 2, 3, 4, 5, 6, 7, 8]
@@ -4171,18 +4171,18 @@ class ExtendedDate extends Date {
   }
   isLeap() {
     const year = this.getFullYear()
-    return year%4==0 && (year%100!=0 || year%400==0)
+    return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)
   }
   nextDate() {
-    return new ExtendedDate(this.setDate(this.getDate()+1))
+    return new ExtendedDate(this.setDate(this.getDate() + 1))
   }
 }
 
 console.log(new Date('10-02-2023'))
 console.log(new ExtendedDate('10-02-2023'))
 console.log(ExtendedDate.now())
-console.log(new ExtendedDate(Date.now()-24*3600*1000).getRussianDate())
-console.log(new ExtendedDate(Date.now()-24*3600*1000).isFuture())
+console.log(new ExtendedDate(Date.now() - 24 * 3600 * 1000).getRussianDate())
+console.log(new ExtendedDate(Date.now() - 24 * 3600 * 1000).isFuture())
 console.log(new ExtendedDate().isFuture())
 console.log(new ExtendedDate(Date.now() + 24 * 3600 * 1000).isFuture())
 console.log(new ExtendedDate().isLeap())
@@ -4193,17 +4193,17 @@ console.log(new ExtendedDate().nextDate().nextDate().nextDate())
 
 console.log(closureSum(3)(5))
 console.log(a)
-console.log((null+'a').split('ll').join('tell'))
+console.log((null + 'a').split('ll').join('tell'))
 
 const digitsDiv = document.querySelector('.digits') as HTMLDivElement
 const inputDiv = document.querySelector('div.input') as HTMLDivElement
 
 let pass = ''
-digitsDiv.addEventListener('click', (e)=>{
+digitsDiv.addEventListener('click', (e) => {
   const target = e.target as HTMLElement
-  if (target.tagName=='BUTTON') {
+  if (target.tagName == 'BUTTON') {
     if (target.dataset.val) pass += target.dataset.val
-    if (target.dataset.action) pass = pass.slice(0, pass.length-1)
+    if (target.dataset.action) pass = pass.slice(0, pass.length - 1)
     inputDiv.textContent = '*'.repeat(pass.length)
     console.log(pass)
   }
@@ -4232,7 +4232,7 @@ digitsDiv.addEventListener('click', (e)=>{
 
 {
   class PowerArray extends Array {
-    constructor(...args:any[]) {
+    constructor(...args: any[]) {
       super(...args)
     }
     isEmpty() {
@@ -4247,26 +4247,26 @@ digitsDiv.addEventListener('click', (e)=>{
   let filteredArr = arr.filter(item => item >= 10) as PowerArray
   console.log(filteredArr) // 10, 50
   console.log(filteredArr.isEmpty()) // false
-  console.log(PowerArray.isArray([1,1]))
+  console.log(PowerArray.isArray([1, 1]))
   Date.now()
 
   const arrayMixin = {
-    isEmpty():boolean {
+    isEmpty(): boolean {
       // @ts-ignore
       return this.length === 0
     }
   }
   Object.assign(Array.prototype, arrayMixin)
-  
+
   // type ExtArr = Array<any> & { isEmpty: ()=>boolean }
 
   // const newArr = [1, 2, 5] as ExtArr
   // newArr.isEmpty()
   // const filtred = newArr.filter(el => el > 6) as ExtArr
   // filtred.isEmpty()
-  const arr1:any[] = [] 
+  const arr1: any[] = []
   // @ts-ignore
-  console.log('arr1.isEmpty()',arr1.isEmpty())
+  console.log('arr1.isEmpty()', arr1.isEmpty())
   arr1.push(1)
   // @ts-ignore
   console.log('arr1.isEmpty()', arr1.isEmpty())
@@ -4353,13 +4353,13 @@ class PrintMaсhine {
   size
   color
   font
-  constructor(size:number,color:string, font:string) {
+  constructor(size: number, color: string, font: string) {
     this.size = size
     this.color = color
     this.font = font
   }
-  print(text:string) {
-    renderDiv.insertAdjacentHTML('beforeend', 
+  print(text: string) {
+    renderDiv.insertAdjacentHTML('beforeend',
       `<p style="color:${this.color};font-size:${this.size}px; font-family: ${this.font}">${text}</p>`)
   }
 }
@@ -4369,9 +4369,9 @@ redMachine.print('sdfgfsd fsdfs dfsdf sdf')
 const purpleMachine = new PrintMaсhine(12, 'purple', 'Tahoma')
 purpleMachine.print('sdfgfsd fsdfs dfsdf sdf')
 
-const textArr = ['Lorem ipsum dolor sit, amet consectetur adipisicing elit.', 'Delectus ex sequi reiciendis obcaecati accusamus repellendus animi expedita nihil similique deserunt.','Tempora cumque consequatur libero deleniti eaque, doloribus voluptatum dicta alias?']
+const textArr = ['Lorem ipsum dolor sit, amet consectetur adipisicing elit.', 'Delectus ex sequi reiciendis obcaecati accusamus repellendus animi expedita nihil similique deserunt.', 'Tempora cumque consequatur libero deleniti eaque, doloribus voluptatum dicta alias?']
 
-textArr.forEach(el=>purpleMachine.print(el))
+textArr.forEach(el => purpleMachine.print(el))
 
 
 //   Задание 3
@@ -4384,12 +4384,12 @@ textArr.forEach(el=>purpleMachine.print(el))
 //   Создать объект класса EmpTable и вывести на экран результат
 //   работы метода getHtml().
 
-class Employee{
+class Employee {
   static id = localStorage.staticId || 1
   id
   name
   salary
-  constructor(name: string, salary: number){
+  constructor(name: string, salary: number) {
     this.id = Employee.id++
     this.name = name
     this.salary = salary
@@ -4398,11 +4398,11 @@ class Employee{
 }
 
 const empArr = localStorage.empArr ? JSON.parse(localStorage.empArr) : [
-  new Employee('Санек',40_000,),
-  new Employee('Леха',40_000,),
-  new Employee('Никитос',60_000,),
-  new Employee('Андрюха',40_000,),
-  new Employee('Ванечка',50_000,),
+  new Employee('Санек', 40_000,),
+  new Employee('Леха', 40_000,),
+  new Employee('Никитос', 60_000,),
+  new Employee('Андрюха', 40_000,),
+  new Employee('Ванечка', 50_000,),
 ]
 
 let addEmploye = document.querySelector('.addEmploye') as HTMLButtonElement
@@ -4412,7 +4412,7 @@ let empName = document.querySelector('.name') as HTMLInputElement
 let empSalary = document.querySelector('.salary') as HTMLInputElement
 let table = document.querySelector('.table') as HTMLDivElement
 
-addEmploye.addEventListener('click', ()=>{
+addEmploye.addEventListener('click', () => {
   if (empName.value && empSalary.value) {
     if (buttonState == 'add') {
       empTable.addEmployee(new Employee(empName.value, parseInt(empSalary.value)))
@@ -4428,7 +4428,7 @@ addEmploye.addEventListener('click', ()=>{
   }
 })
 
-table.addEventListener('click', (e)=>{
+table.addEventListener('click', (e) => {
   const target = e.target as HTMLElement
   if (target.dataset.action == 'delete') {
     if (target.dataset.id) empTable.removeEmployee(+target.dataset.id)
@@ -4448,22 +4448,22 @@ table.addEventListener('click', (e)=>{
 
 class EmployeeTable {
   table
-  constructor(table:Employee[]) {
+  constructor(table: Employee[]) {
     this.table = table
   }
-  addEmployee(el:Employee) {
+  addEmployee(el: Employee) {
     this.table.push(el)
   }
-  editEmployee(id:number, name:string, salary:number) {
+  editEmployee(id: number, name: string, salary: number) {
     const i = this.table.findIndex(emp => emp.id == id)
     this.table[i].name = name
     this.table[i].salary = salary
   }
-  removeEmployee(id:number) {
+  removeEmployee(id: number) {
     const i = this.table.findIndex(el => el.id == id)
-    this.table.splice(i,1)
+    this.table.splice(i, 1)
   }
-  getEmployeeData(id:number) {
+  getEmployeeData(id: number) {
     return this.table.find(el => el.id == id)
   }
   getHtml() {
@@ -4478,10 +4478,10 @@ class EmployeeTable {
           </tr>
         </thead>
       <tbody>`
-    this.table.forEach((el,i)=>{
+    this.table.forEach((el, i) => {
       tableHtml += `
       <tr>
-        <td>${i+1}</td>
+        <td>${i + 1}</td>
         <td>${el.name}</td>
         <td>${el.salary}</td>
         <td>
@@ -4494,8 +4494,8 @@ class EmployeeTable {
     return tableHtml
   }
   render() {
-    table.innerHTML = this.getHtml()   
-    localStorage.empArr = JSON.stringify(this.table) 
+    table.innerHTML = this.getHtml()
+    localStorage.empArr = JSON.stringify(this.table)
   }
 }
 
@@ -4551,7 +4551,7 @@ empTable.render()
   try {
     user.age = 23
     delete user.age
-  } catch(e) {
+  } catch (e) {
     console.log(e)
   }
 
@@ -4563,11 +4563,11 @@ empTable.render()
   user.age = 23
 
   console.log(Object.keys(user))
-  
+
   Object.defineProperty(user, "age", {
     value: user.age,
     writable: true,
-    enumerable:true
+    enumerable: true
   })
 
   console.log(Object.keys(user))
@@ -4581,7 +4581,7 @@ empTable.render()
   //   prop2: descriptor2
   //   ...
   // });
-  
+
   Object.defineProperties(user, {
     name: { value: "John", writable: false },
     surname: { value: "Smith", writable: false },
@@ -4595,26 +4595,26 @@ empTable.render()
 
   let clone = Object.defineProperties({}, Object.getOwnPropertyDescriptors(user))
 
-// Глобальное запечатывание объекта
-// Дескрипторы свойств работают на уровне конкретных свойств.
+  // Глобальное запечатывание объекта
+  // Дескрипторы свойств работают на уровне конкретных свойств.
 
-// Но ещё есть методы, которые ограничивают доступ ко всему объекту:
+  // Но ещё есть методы, которые ограничивают доступ ко всему объекту:
 
-// ?    Object.preventExtensions(obj)
-// Запрещает добавлять новые свойства в объект.
-// ?    Object.seal(obj)
-// Запрещает добавлять / удалять свойства.Устанавливает configurable: false для всех существующих свойств.
-// ?    Object.freeze(obj)
-// Запрещает добавлять / удалять / изменять свойства.Устанавливает configurable: false, writable: false для всех существующих свойств.
+  // ?    Object.preventExtensions(obj)
+  // Запрещает добавлять новые свойства в объект.
+  // ?    Object.seal(obj)
+  // Запрещает добавлять / удалять свойства.Устанавливает configurable: false для всех существующих свойств.
+  // ?    Object.freeze(obj)
+  // Запрещает добавлять / удалять / изменять свойства.Устанавливает configurable: false, writable: false для всех существующих свойств.
 
-// А также есть методы для их проверки:
-// ?    Object.isExtensible(obj)
-// Возвращает false, если добавление свойств запрещено, иначе true.
-// ?    Object.isSealed(obj)
-// Возвращает true, если добавление / удаление свойств запрещено и для всех существующих свойств установлено configurable: false.
-// ?    Object.isFrozen(obj)
-// Возвращает true, если добавление / удаление / изменение свойств запрещено, и для всех текущих свойств установлено configurable: false, writable: false.
-// На практике эти методы используются редко.
+  // А также есть методы для их проверки:
+  // ?    Object.isExtensible(obj)
+  // Возвращает false, если добавление свойств запрещено, иначе true.
+  // ?    Object.isSealed(obj)
+  // Возвращает true, если добавление / удаление свойств запрещено и для всех существующих свойств установлено configurable: false.
+  // ?    Object.isFrozen(obj)
+  // Возвращает true, если добавление / удаление / изменение свойств запрещено, и для всех текущих свойств установлено configurable: false, writable: false.
+  // На практике эти методы используются редко.
 }
 
 // HTML/XML документы представлены в браузере в виде DOM-дерева.
@@ -4776,7 +4776,7 @@ setInterval(() => elem.hidden = !elem.hidden, 1000)
 
 const block = document.querySelector('.block') as HTMLDivElement
 
-block.addEventListener('click', (e)=>{
+block.addEventListener('click', (e) => {
   const target = e.target as HTMLDivElement
   if (!isDrug && target.classList.contains('absolute')) return
   if (!isDrug) target.classList.toggle('absolute')
@@ -4784,15 +4784,15 @@ block.addEventListener('click', (e)=>{
 
 let isDrug = false
 
-block.addEventListener('mousedown', ()=>{
-  isDrug = true  
+block.addEventListener('mousedown', () => {
+  isDrug = true
 })
 
-block.addEventListener('mouseup', ()=>{
+block.addEventListener('mouseup', () => {
   isDrug = false
 })
 
-document.addEventListener('mousemove', (e)=>{
+document.addEventListener('mousemove', (e) => {
   if (isDrug) {
     block.style.top = window.scrollY + e.clientY + 'px'
     block.style.left = e.clientX + 'px'
@@ -4874,14 +4874,14 @@ let scrollHeight = Math.max(
 // Не важно, как вы назначаете обработчик – он получает объект события первым аргументом.Этот объект содержит подробности о том, что произошло.
 
 const firstButton = document.querySelector('button') as HTMLButtonElement
-firstButton.addEventListener('click', function(e) {
+firstButton.addEventListener('click', function (e) {
   console.log(this)
   console.log(e.target)
   // @ts-ignore
   e.myData = 'Нажата самая важная кнопка'
   console.log(e)
-}, {capture:true})
-document.addEventListener('click', (e)=>{
+}, { capture: true })
+document.addEventListener('click', (e) => {
   // @ts-ignore
   if (e.myData) {
     console.log(e)
@@ -5004,18 +5004,18 @@ const imgArr = [
   '9.jpeg',
 ]
 
-const renderSlider = (arr:string[]) => {
+const renderSlider = (arr: string[]) => {
   let htmlString = `<div id="slider_div" class="slider_div">
       <div class="arrow fs">←</div>
       <div class="arrow sc">→</div>`
-  for (let i=0; i<arr.length; i+=3) {
-    if (i==0) {
+  for (let i = 0; i < arr.length; i += 3) {
+    if (i == 0) {
       htmlString += `<div class="three_imgs bim" style="margin-left: 90px;" data-type="active">`
     } else {
       htmlString += `<div class="three_imgs">`
     }
-    let to = (i + 2 < arr.length) ? i+2 : arr.length-1
-    for (let a = i; a<=to; a++) {
+    let to = (i + 2 < arr.length) ? i + 2 : arr.length - 1
+    for (let a = i; a <= to; a++) {
       htmlString += `<img src="${arr[a]}" alt="" class="slider_img">`
     }
     htmlString += `</div>`
@@ -5033,11 +5033,11 @@ const maxIndex = 2
 sliderDiv.addEventListener('click', (event) => {
   let target = event.target as HTMLElement
   if (target.classList.contains('fs')) {
-    if (currentIndex==0) {
+    if (currentIndex == 0) {
       currentIndex = maxIndex
-      marginLeft.style.marginLeft = 2*-800 + 90 +'px'
+      marginLeft.style.marginLeft = 2 * -800 + 90 + 'px'
     } else {
-      marginLeft.style.marginLeft = parseInt(marginLeft.style.marginLeft) + 800 +'px'
+      marginLeft.style.marginLeft = parseInt(marginLeft.style.marginLeft) + 800 + 'px'
       currentIndex--
     }
   }
@@ -5070,7 +5070,7 @@ sliderDiv.addEventListener('click', (event) => {
 
 let ul = document.querySelector('#ul') as HTMLUListElement
 let lis = ul.querySelectorAll('li')
-let lastElement:HTMLLIElement
+let lastElement: HTMLLIElement
 
 ul.addEventListener('click', (event) => {
   let target = event.target as HTMLLIElement
@@ -5080,7 +5080,7 @@ ul.addEventListener('click', (event) => {
   } else if (event.shiftKey && LI) {
     let firstLi = 0
     let lastLi = 0
-    lis.forEach( (el, i) => {
+    lis.forEach((el, i) => {
       firstLi = (LI == el) ? i : firstLi
       lastLi = (lastElement == el) ? i : lastLi
     })
@@ -5088,7 +5088,7 @@ ul.addEventListener('click', (event) => {
       lis[i].classList.add('active')
     }
   } else if (LI) {
-    lis.forEach( el => el.classList.remove('active'))
+    lis.forEach(el => el.classList.remove('active'))
     LI.classList.add('active')
     lastElement = LI
   }
@@ -5120,3 +5120,66 @@ ul.addEventListener('click', (event) => {
 // И так далее.
 // Существуют фреймворки, которые строят архитектуру поверх этого алгоритма, создавая такие классы, как DragZone, Droppable, Draggable. Большинство из них делают вещи, аналогичные описанным выше. Вы можете и сами создать вашу собственную реализацию переноса, как видите, это достаточно просто, возможно, проще, чем адаптация чего-то готового.
 
+let blockList = document.querySelector('.block_list') as HTMLDivElement
+blockList.addEventListener('click', (event) => {
+  let target = event.target as HTMLElement
+  if (target.classList.contains('circle_toggle')) {
+    let infoList = target.closest('.info_list') as HTMLElement
+    let hiddenBlock = infoList.querySelector('.hidden_info') as HTMLDivElement
+    target.classList.toggle('toggle_active')
+    hiddenBlock.dataset.hidden = hiddenBlock.dataset.hidden=='0' ? '1' : '0'
+    if (hiddenBlock.dataset.hidden == '0') {
+      const rect = hiddenBlock.children[0].getBoundingClientRect()
+      hiddenBlock.style.height = rect.height + 'px'
+      hiddenBlock.style.color = 'white'
+      hiddenBlock.style.transition = 'height 1s, color 1s 0.5s'  
+    } else {
+      hiddenBlock.style.height = '0'
+      hiddenBlock.style.color = 'transparent'
+      hiddenBlock.style.transition = 'height 1s 0.5s, color 1s'
+    }
+  }
+})
+
+let timer:number
+let tooltip = document.createElement('div')
+tooltip.className = 'tooltip'
+tooltip.style.opacity = '0'
+
+let tooltipElement = document.querySelector('.toggle') as HTMLDivElement
+tooltipElement.addEventListener('mouseover', (event) => {
+  let rTarget = event.relatedTarget as HTMLElement
+  if (rTarget && rTarget.className.includes('toggle')) return
+  let target = event.target as HTMLElement
+  const selector = target.closest('.toggle') as HTMLElement | null
+  if (selector?.dataset.tooltip) {
+    timer = setTimeout(()=>{
+      console.log('start')
+      tooltip.textContent = selector.dataset.tooltip as string
+      document.body.append(tooltip)
+      const rect = selector.getBoundingClientRect()
+      const tRect = tooltip.getBoundingClientRect()
+      tooltip.style.left = rect.left - (Math.max(rect.width, tRect.width)-Math.min(rect.width, tRect.width))/2 + 'px'
+      if (rect.top<50) {
+        tooltip.style.top = rect.bottom + window.scrollY + 10 + 'px'
+        tooltip.className = 'tooltip bottom'
+      } else {
+        tooltip.style.top = rect.top + window.scrollY - 40 + 'px'
+        tooltip.className = 'tooltip top'
+      }
+      tooltip.style.opacity = '1'
+    }, 500)
+  }
+})
+tooltipElement.addEventListener('mouseout', (event) => {
+  let target = event.relatedTarget as HTMLElement
+  if (target) {
+    const selector = target.closest('.toggle') as HTMLElement | null
+    if (selector) return
+    console.log('end')
+    clearTimeout(timer)
+    tooltip.style.opacity = '0'
+    setTimeout(() => {
+    tooltip.remove()}, 500)
+  }
+})

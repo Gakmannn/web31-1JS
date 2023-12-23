@@ -1,300 +1,499 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css">
-    <title>Vite + TS</title>
-    <style>
-      .active {
-        background-color: #2e98ff;
-      }
-  
-      .slider_div {
-        display: flex;
-        width: 800px;
-        height: 300px;
-        overflow: hidden;
-        margin: 70px auto 150px;
-        background-color: darkgrey;
-        border-radius: 15px;
-        border: 2px solid black;
-        align-items: center;
-        position: relative;
-        gap: 180px;
-        -webkit-box-shadow: -22px 18px 11px 11px rgba(34, 60, 80, 0.37);
-        -moz-box-shadow: -22px 18px 11px 11px rgba(34, 60, 80, 0.37);
-        box-shadow: -22px 18px 11px 11px rgba(34, 60, 80, 0.37)
-      }
 
-      .three_imgs {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        height: 300px;
-        width: 620px;
-        justify-content: center;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <title>Vite + TS</title>
+  <style>
+    .active {
+      background-color: #2e98ff;
+    }
 
-      .slider_img {
-        width: 200px;
-        height: 150px;
-        display: block;
-      }
+    .slider_div {
+      display: flex;
+      width: 800px;
+      height: 300px;
+      overflow: hidden;
+      margin: 70px auto 150px;
+      background-color: darkgrey;
+      border-radius: 15px;
+      border: 2px solid black;
+      align-items: center;
+      position: relative;
+      gap: 180px;
+      -webkit-box-shadow: -22px 18px 11px 11px rgba(34, 60, 80, 0.37);
+      -moz-box-shadow: -22px 18px 11px 11px rgba(34, 60, 80, 0.37);
+      box-shadow: -22px 18px 11px 11px rgba(34, 60, 80, 0.37)
+    }
 
-      .bim {
-        transition: 1s;
-      }
-      
-      .arrow {
-        font-size: 50px;
-        font-weight: 800;
-        background-color: #cbcbcc;
-        position: absolute;
-        border-radius: 20px;
-        height: 50px;
-        padding-bottom: 20px;
-        cursor: pointer;
-        user-select: none;
-      }
+    .three_imgs {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      height: 300px;
+      width: 620px;
+      justify-content: center;
+    }
 
-      #ul {
-        user-select: none;
-        display: flex;
-        gap: 5px;
-        list-style: none;
-      }
-      #ul li {
-        width: 100px;
-        height: 100px;
-        border: #646cff 1px solid;
-        border-radius: 10px;
-        padding: 5px;
-      }
-      /* Arrows   */
-      .sc {
-        right: 20px;
-      }
+    .slider_img {
+      width: 200px;
+      height: 150px;
+      display: block;
+    }
 
-      .fs {
-        left: 20px;
-      }
-      .input {
-        border-radius: 8px;
-        border: 1px solid #646cff;
-        padding: 0.6em 1.2em;
-        font-size: 1em;
-        font-weight: 500;
-        font-family: inherit;
-        text-align: center;
-        height: 44.8px;
-        box-sizing: border-box;
-      }
-      #controls button:active {
-        background-color: #646cff;
-        transition: 0.25s;
-        box-shadow: inset #cbcbcc 0px 0px 12px;
-      }
-      .absolute {
-        position: absolute;
-      }
-      .block {
-        width: 50px; height: 50px; background: #646cff;
-      }
-    </style>
-  </head>
-  <body>
-    <a id="href" href="https://disk.yandex.ru/d/KwdXQropyuL3Iw" target="_blank">Материалы, ДЗ и практика</a>
-    <a href="https://disk.yandex.ru/d/52LeM6eF1NeKig" target="_blank">Видео</a>
-    <a href="https://disk.yandex.ru/d/LADtnZajP19xeQ">Ещё видео</a>
-    <a href="https://wp-kama.ru/id_5875/30-css-selektorov.html">Селекторы</a>
-    <ol>
-      <li>Скачать Node.js с сайта. Версия 18. Усьтановить</li>
-      <li>Перезапустить vs code</li>
-      <li>В vs code Файл->Новое окно->Клонирование репозитория git->выбрать репозиторий с JS->отрыть</li>
-      <li>В vs code открыть терминал (ctrl+~)</li>
-      <li>В терминале написать 'npm i' и нажать enter</li>
-      <li>В терминале написать 'npm run dev', нажать enter, перейти по ссылке</li>
-    </ol>
+    .bim {
+      transition: 1s;
+    }
 
-    <button> <b>sfsfsdf</b> fsdfsdf <i>sdfdsfsdf</i> </button>
+    .arrow {
+      font-size: 50px;
+      font-weight: 800;
+      background-color: #cbcbcc;
+      position: absolute;
+      border-radius: 20px;
+      height: 50px;
+      padding-bottom: 20px;
+      cursor: pointer;
+      user-select: none;
+    }
 
-    <div class="block"></div>
+    #ul {
+      user-select: none;
+      display: flex;
+      gap: 5px;
+      list-style: none;
+    }
 
-    <div class="input" type="password"></div>
+    #ul li {
+      width: 100px;
+      height: 100px;
+      border: #646cff 1px solid;
+      border-radius: 10px;
+      padding: 5px;
+    }
 
-    <div class="digits">
-      <button data-val="1">1</button>
-      <button data-val="2">2</button>
-      <button data-val="3">3</button>
-      <button data-val="4">4</button>
-      <button data-val="5">5</button>
-      <button data-val="6">6</button>
-      <button data-val="7">7</button>
-      <button data-val="8">8</button>
-      <button data-val="9">9</button>
-      <button data-val="0">0</button>
-      <button data-action="backspase">&lt;-</button>
+    /* Arrows   */
+    .sc {
+      right: 20px;
+    }
+
+    .fs {
+      left: 20px;
+    }
+
+    .input {
+      border-radius: 8px;
+      border: 1px solid #646cff;
+      padding: 0.6em 1.2em;
+      font-size: 1em;
+      font-weight: 500;
+      font-family: inherit;
+      text-align: center;
+      height: 44.8px;
+      box-sizing: border-box;
+    }
+
+    #controls button:active {
+      background-color: #646cff;
+      transition: 0.25s;
+      box-shadow: inset #cbcbcc 0px 0px 12px;
+    }
+
+    .absolute {
+      position: absolute;
+    }
+
+    .block {
+      width: 50px;
+      height: 50px;
+      background: #646cff;
+    }
+  </style>
+</head>
+
+<body>
+  <a id="href" href="https://disk.yandex.ru/d/KwdXQropyuL3Iw" target="_blank">Материалы, ДЗ и практика</a>
+  <a href="https://disk.yandex.ru/d/52LeM6eF1NeKig" target="_blank">Видео</a>
+  <a href="https://disk.yandex.ru/d/LADtnZajP19xeQ">Ещё видео</a>
+  <a href="https://wp-kama.ru/id_5875/30-css-selektorov.html">Селекторы</a>
+  <ol>
+    <li>Скачать Node.js с сайта. Версия 18. Усьтановить</li>
+    <li>Перезапустить vs code</li>
+    <li>В vs code Файл->Новое окно->Клонирование репозитория git->выбрать репозиторий с JS->отрыть</li>
+    <li>В vs code открыть терминал (ctrl+~)</li>
+    <li>В терминале написать 'npm i' и нажать enter</li>
+    <li>В терминале написать 'npm run dev', нажать enter, перейти по ссылке</li>
+  </ol>
+
+  <button> <b>sfsfsdf</b> fsdfsdf <i>sdfdsfsdf</i> </button>
+
+  <div class="block"></div>
+
+  <div class="input" type="password"></div>
+
+  <div class="digits">
+    <button data-val="1">1</button>
+    <button data-val="2">2</button>
+    <button data-val="3">3</button>
+    <button data-val="4">4</button>
+    <button data-val="5">5</button>
+    <button data-val="6">6</button>
+    <button data-val="7">7</button>
+    <button data-val="8">8</button>
+    <button data-val="9">9</button>
+    <button data-val="0">0</button>
+    <button data-action="backspase">&lt;-</button>
+  </div>
+
+  <div id="render">
+    <p style="color:BLUE;font-size:24px; font-family: Verdana">T<span>E</span>XT</p>
+  </div>
+
+
+
+  <div id="timer">
+    <p style="font-size: 24px; padding-left: 40px;"></p>
+    <button>start</button>
+    <button>stop</button>
+  </div>
+  <div id="counters"></div>
+
+  <iframe style="width: 100%; height: 500px; border: none;" allowfullscreen></iframe>
+
+  <div id="app"></div>
+
+  <input id="name" type="text" placeholder="Наименование">
+  <input id="quantity" type="number" placeholder="Количество">
+  <button id="add">Добавить</button>
+  <div id="purshases"></div>
+
+  <div style="display: grid; grid-template-columns: 2fr 1fr; height: 500px;">
+    <div id="canvas" style="position: relative;">
+      <div id="rect" style="background-color: blueviolet; position: absolute;"></div>
     </div>
-
-    <div id="render">
-      <p style="color:BLUE;font-size:24px; font-family: Verdana">T<span>E</span>XT</p>
-    </div>
-
-    
-
-    <div id="timer">
-      <p style="font-size: 24px; padding-left: 40px;"></p>
-      <button>start</button>
-      <button>stop</button>
-    </div>
-    <div id="counters"></div>
-
-    <iframe style="width: 100%; height: 500px; border: none;" allowfullscreen></iframe>
-
-    <div id="app"></div>
-
-    <input id="name" type="text" placeholder="Наименование">
-    <input id="quantity" type="number" placeholder="Количество">
-    <button id="add">Добавить</button>
-    <div id="purshases"></div>
-
-    <div style="display: grid; grid-template-columns: 2fr 1fr; height: 500px;">
-      <div id="canvas" style="position: relative;">
-        <div id="rect" style="background-color: blueviolet; position: absolute;"></div>
+    <div id="controls">
+      <div>
+        <button id="moveLeftTop"><span style="display:block; transform: rotate(-45deg);">▲</span></button>
+        <button id="moveTop">▲</button>
+        <button id="moveRightTop"><span style="display:block; transform: rotate(45deg);">▲</span></button>
       </div>
-      <div id="controls">
-        <div>
-          <button id="moveLeftTop"><span style="display:block; transform: rotate(-45deg);">▲</span></button>
-          <button id="moveTop">▲</button>
-          <button id="moveRightTop"><span style="display:block; transform: rotate(45deg);">▲</span></button>
-        </div>
-        <div>
-          <button id="moveLeft"><span style="display:block; transform: rotate(-90deg);">▲</span></button>
-          <span style="display:inline-block;width: 54px;"></span>
-          <button id="moveRight"><span style="display:block; transform: rotate(90deg);">▲</span></button>
-        </div>
-        <div>
-          <button id="moveLeftBottom"><span style="display:block; transform: rotate(-135deg);">▲</span></button>
-          <button id="moveBottom">▼</button>
-          <button id="moveRightBottom"><span style="display:block; transform: rotate(135deg);">▲</span></button>
-        </div>
-        <div>
-          <button id="squeezeX">&gt;=&lt;</button>
-          <button id="expandX">&lt;=&gt;</button>
-        </div>
-        <div>
-          <button id="squeezeY"><span style="display:block; transform: rotate(90deg);">&gt;=&lt;</span></button>
-          <button id="expandY"><span style="display:block; transform: rotate(90deg);">&lt;=&gt;</span></button>
-        </div>
+      <div>
+        <button id="moveLeft"><span style="display:block; transform: rotate(-90deg);">▲</span></button>
+        <span style="display:inline-block;width: 54px;"></span>
+        <button id="moveRight"><span style="display:block; transform: rotate(90deg);">▲</span></button>
       </div>
-    </div>
-
-    <style>
-      #svet {
-        display: flex;
-        gap: 20px;
-      }
-      .round {
-        border-radius: 50%;
-        width: 70px;
-        height: 70px;
-        background-color: grey;
-        overflow: hidden;
-      }
-      .inner {
-        height: 100%;
-        width: 100%;
-        opacity: 0;
-      }
-      .red {
-        background-color: red;
-      }
-      .yellow {
-        background-color: yellow;
-      }
-      .green {
-        background-color: green;
-      }
-      .light {
-        opacity: 1;
-      }
-    </style>
-
-    <div id="svet">
-      <div class="round">
-        <div class="inner red light" data-val="1"></div>
+      <div>
+        <button id="moveLeftBottom"><span style="display:block; transform: rotate(-135deg);">▲</span></button>
+        <button id="moveBottom">▼</button>
+        <button id="moveRightBottom"><span style="display:block; transform: rotate(135deg);">▲</span></button>
       </div>
-      <div class="round">
-        <div class="inner yellow" data-val="2"></div>
+      <div>
+        <button id="squeezeX">&gt;=&lt;</button>
+        <button id="expandX">&lt;=&gt;</button>
       </div>
-      <div class="round">
-        <div class="inner green" data-val="0"></div>
+      <div>
+        <button id="squeezeY"><span style="display:block; transform: rotate(90deg);">&gt;=&lt;</span></button>
+        <button id="expandY"><span style="display:block; transform: rotate(90deg);">&lt;=&gt;</span></button>
       </div>
     </div>
+  </div>
 
-    <div class="table"></div>
-    
-    <input style="display: none;" type="text" class="id" disabled>
-    <input type="text" class="name" placeholder="Введите имя нового работника">
-    <input type="text" class="salary" placeholder="Введите зарплату">
-    <button class="addEmploye">Добавить</button>
+  <style>
+    #svet {
+      display: flex;
+      gap: 20px;
+    }
 
-    <style>
-      [data-action=save] {
-        background-color: #646cff;
-      }
-    </style>
+    .round {
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      background-color: grey;
+      overflow: hidden;
+    }
 
-    <div id="menu" style="margin: 30px;">
-      <button data-action="save">Сохранить</button>
-      <button data-action="load">Загрузить</button>
-      <button data-action="search">Поиск</button>
-      <button data-action="s1">Поиск1</button>
+    .inner {
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+    }
+
+    .red {
+      background-color: red;
+    }
+
+    .yellow {
+      background-color: yellow;
+    }
+
+    .green {
+      background-color: green;
+    }
+
+    .light {
+      opacity: 1;
+    }
+  </style>
+
+  <div id="svet">
+    <div class="round">
+      <div class="inner red light" data-val="1"></div>
+    </div>
+    <div class="round">
+      <div class="inner yellow" data-val="2"></div>
+    </div>
+    <div class="round">
+      <div class="inner green" data-val="0"></div>
+    </div>
+  </div>
+
+  <div class="table"></div>
+
+  <input style="display: none;" type="text" class="id" disabled>
+  <input type="text" class="name" placeholder="Введите имя нового работника">
+  <input type="text" class="salary" placeholder="Введите зарплату">
+  <button class="addEmploye">Добавить</button>
+
+  <style>
+    [data-action=save] {
+      background-color: #646cff;
+    }
+  </style>
+
+  <div id="menu" style="margin: 30px;">
+    <button data-action="save">Сохранить</button>
+    <button data-action="load">Загрузить</button>
+    <button data-action="search">Поиск</button>
+    <button data-action="s1">Поиск1</button>
+  </div>
+
+  <p>
+    Кликни на элемент списка, чтобы выделить его.
+  </p>
+
+  <ul id="ul">
+    <li>Кристофер <b>Робин</b></li>
+    <li>Винни Пух</li>
+    <li>Тигра</li>
+    <li>Кенга</li>
+    <li>Кролик. Просто Кролик.</li>
+  </ul>
+
+  <style>
+    .block_list {
+      margin: 100px auto 0px auto;
+      width: fit-content;
+    }
+
+    .info_list {
+      width: 600px;
+      background-color: #000000;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding-left: 10px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .inside_block {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .web {
+      font-size: 30px;
+      font-weight: 800;
+      color: white;
+    }
+
+    .toggle {
+      width: 80px;
+      height: 40px;
+      border: 1px solid darkred;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      margin-right: 50px;
+      transition: all 0.7ss;
+    }
+
+    .circle_toggle {
+      width: 25px;
+      height: 25px;
+      background-color: white;
+      border-radius: 50%;
+      margin-left: 10px;
+      transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    }
+
+    .hidden_info {
+      /* display: none; */
+      /* transition: color 0.5s, height 1s 0.5s; */
+      overflow: hidden;
+    }
+
+    .toggle_active {
+      margin-left: 45px;
+    }
+
+    .back_change {
+      background-color: #363a3c;
+    }
+    .inf_list {
+      margin: 0;
+    }
+    .tooltip {
+      position: absolute;
+      background: white;
+      border: 1px solid black;
+      padding: 5PX;
+      border-radius: 10px;
+      font-size: 12px;
+      transition: opacity 1s;
+    }
+    .top::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: white transparent transparent transparent;
+    }
+    .bottom::after {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent white transparent;
+    }
+  </style>
+
+  <div class="block_list">
+    <div class="info_list">
+      <div class="inside_block">
+        <h3 class="web">WEB-Сайты</h3>
+        <div class="toggle" data-tooltip="Это переключатель">
+          <div class="circle_toggle"></div>
+        </div>
+      </div>
+      <div style="height: 0; color: transparent; transition: height 1s, color 1s 0.5s;" class="hidden_info" >
+        <p class="inf_list">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt doloribus temporibus quaerat
+          aperiam
+          neque dolorum odio impedit sequi praesentium soluta, quisquam beatae nisi ad deleniti illum esse dolorem
+          culpa!
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium recusandae voluptatem blanditiis
+          explicabo
+          modi, neque accusamus repellat excepturi harum similique? Ea numquam obcaecati laudantium magni rem nam nihil
+          perferendis iste.
+        </p>
+      </div>
     </div>
 
-    <p>
-      Кликни на элемент списка, чтобы выделить его.
-    </p>
-    
-    <ul id="ul">
-      <li>Кристофер <b>Робин</b></li>
-      <li>Винни Пух</li>
-      <li>Тигра</li>
-      <li>Кенга</li>
-      <li>Кролик. Просто Кролик.</li>
-    </ul>
-    
-    <script type="module" src="/src/main.ts">
-      // Не сработает если указана ссылка на файл
-      alert('hello')
-    </script>
-    <script>
-      "use strict";
-      // Здесь можно писать обычный JS
-      document.write('Текст написан в JS')
-      let active = 0
-      console.log(svet)
-      const rounds = document.querySelectorAll('.inner')
-      setInterval(()=>{
-        const current = rounds[active]
-        current.classList.remove('light')
-        active = current.dataset.val
-        rounds[active].classList.add('light')
-      },2000)
+    <div class="info_list">
+      <div class="inside_block">
+        <h3 class="web">Логотипы</h3>
+        <div class="toggle">
+          <div class="circle_toggle"></div>
+        </div>
+      </div>
+      <div style="height: 0; color: transparent; transition: height 1s, color 1s 0.5s;"  class="hidden_info" >
+        <p class="inf_list">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt doloribus temporibus quaerat
+          aperiam
+          neque dolorum odio impedit sequi praesentium soluta, quisquam beatae nisi ad deleniti illum esse dolorem
+          culpa!
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium recusandae voluptatem blanditiis
+          explicabo
+          modi, neque accusamus repellat excepturi harum similique? Ea numquam obcaecati laudantium magni rem nam nihil
+          perferendis iste.
+        </p>
+      </div>
+    </div>
 
-      menu.onclick = (e) => {
-        actions[e.target.dataset.action]()
-      }
-      const actions = {
-        save() { console.log('save') },
-        load() { console.log('load') },
-        search() { console.log('search') },
-        s1() { console.log('s1') },
-      }
+    <div class="info_list">
+      <div class="inside_block">
+        <h3 class="web">Выгода</h3>
+        <div class="toggle">
+          <div class="circle_toggle"></div>
+        </div>
+      </div>
+      <div style="height: 0; color: transparent; transition: height 1s, color 1s 0.5s;"  class="hidden_info">
+        <p class="inf_list">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt doloribus temporibus quaerat
+          aperiam
+          neque dolorum odio impedit sequi praesentium soluta, quisquam beatae nisi ad deleniti illum esse dolorem
+          culpa!
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium recusandae voluptatem blanditiis
+          explicabo
+          modi, neque accusamus repellat excepturi harum similique? Ea numquam obcaecati laudantium magni rem nam nihil
+          perferendis iste.
+        </p>
+      </div>
+    </div>
+
+    <div class="info_list">
+      <div class="inside_block">
+        <h3 class="web">Почему мы</h3>
+        <div class="toggle">
+          <div class="circle_toggle"></div>
+        </div>
+      </div>
+      <div style="height: 0; color: transparent; transition: height 1s, color 1s 0.5s;"  class="hidden_info">
+        <p class="inf_list">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt doloribus temporibus quaerat
+          aperiam
+          neque dolorum odio impedit sequi praesentium soluta, quisquam beatae nisi ad deleniti illum esse dolorem
+          culpa!
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium recusandae voluptatem blanditiis
+          explicabo
+          modi, neque accusamus repellat excepturi harum similique? Ea numquam obcaecati laudantium magni rem nam nihil
+          perferendis iste.
+        </p>
+      </div>
+    </div>
+  </div>
 
 
-    </script>
-  </body>
+  <script type="module" src="/src/main.ts">
+    // Не сработает если указана ссылка на файл
+    alert('hello')
+  </script>
+  <script>
+    "use strict";
+    // Здесь можно писать обычный JS
+    document.write('Текст написан в JS')
+    let active = 0
+    console.log(svet)
+    const rounds = document.querySelectorAll('.inner')
+    setInterval(() => {
+      const current = rounds[active]
+      current.classList.remove('light')
+      active = current.dataset.val
+      rounds[active].classList.add('light')
+    }, 2000)
+
+    menu.onclick = (e) => {
+      actions[e.target.dataset.action]()
+    }
+    const actions = {
+      save() { console.log('save') },
+      load() { console.log('load') },
+      search() { console.log('search') },
+      s1() { console.log('s1') },
+    }
+
+
+  </script>
+</body>
+
 </html>
