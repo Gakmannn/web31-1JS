@@ -111,6 +111,30 @@
       height: 50px;
       background: #646cff;
     }
+
+    .news {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 10px 20px 10px;
+      border-top: solid 2px #c4df9b;
+      position: relative;
+      /* transition: background-color 0.5s; */
+    }
+
+    #news {
+      transition: 1s;
+    }
+
+    .close {
+      position: absolute;
+      font-size: 120%;
+      top: 29px;
+      color: darkred;
+      right: 20px;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
   </style>
 </head>
 
@@ -119,6 +143,7 @@
   <a href="https://disk.yandex.ru/d/52LeM6eF1NeKig" target="_blank">Видео</a>
   <a href="https://disk.yandex.ru/d/LADtnZajP19xeQ">Ещё видео</a>
   <a href="https://wp-kama.ru/id_5875/30-css-selektorov.html">Селекторы</a>
+  <a href="https://doka.guide/js/intersection-observer">Intersection Observer</a>
   <ol>
     <li>Скачать Node.js с сайта. Версия 18. Усьтановить</li>
     <li>Перезапустить vs code</li>
@@ -282,6 +307,42 @@
     <li>Кролик. Просто Кролик.</li>
   </ul>
 
+
+  <div id="news">
+    <div class="news">
+      <h3>
+        Лошадь
+      </h3>
+      <p>
+        Домашняя лошадь - животное семейства непарнокопытных, одомашненный и единственный сохранившийся подвид дикой
+        лошади, вымершей в дикой природе, за исключением небольшой популяции лошади Пржевальского.
+      </p>
+      <div class="close">[x]</div>
+    </div>
+    <div class="news">
+      <h3>
+        Осёл
+      </h3>
+      <p>
+        Домашний осёл или ишак — одомашненный подвид дикого осла, сыгравший важную историческую роль в развитии
+        хозяйства и культуры человека. Все одомашненные ослы относятся к африканским ослам.
+      </p>
+      <div class="close">[x]</div>
+    </div>
+    <div class="news">
+      <h3>
+        Кошка
+      </h3>
+      <p>
+        Кошка, или домашняя кошка (лат. Félis silvéstris cátus), — домашнее животное, одно из наиболее популярных
+        (наряду с собакой) "животных-компаньонов". С точки зрения научной систематики, домашняя кошка — млекопитающее
+        семейства кошачьих отряда хищных. Ранее домашнюю кошку нередко рассматривали как отдельный биологический вид.
+      </p>
+      <div class="close">[x]</div>
+    </div>
+  </div>
+
+
   <style>
     .block_list {
       margin: 100px auto 0px auto;
@@ -343,9 +404,11 @@
     .back_change {
       background-color: #363a3c;
     }
+
     .inf_list {
       margin: 0;
     }
+
     .tooltip {
       position: absolute;
       background: white;
@@ -355,6 +418,7 @@
       font-size: 12px;
       transition: opacity 1s;
     }
+
     .top::after {
       content: "";
       position: absolute;
@@ -365,6 +429,7 @@
       border-style: solid;
       border-color: white transparent transparent transparent;
     }
+
     .bottom::after {
       content: "";
       position: absolute;
@@ -385,7 +450,7 @@
           <div class="circle_toggle"></div>
         </div>
       </div>
-      <div style="height: 0; color: transparent; transition: height 1s, color 1s 0.5s;" class="hidden_info" >
+      <div style="height: 0; color: transparent; transition: height 1s, color 1s 0.5s;" class="hidden_info">
         <p class="inf_list">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt doloribus temporibus quaerat
           aperiam
@@ -406,7 +471,7 @@
           <div class="circle_toggle"></div>
         </div>
       </div>
-      <div style="height: 0; color: transparent; transition: height 1s, color 1s 0.5s;"  class="hidden_info" >
+      <div style="height: 0; color: transparent; transition: height 1s, color 1s 0.5s;" class="hidden_info">
         <p class="inf_list">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt doloribus temporibus quaerat
           aperiam
@@ -427,7 +492,7 @@
           <div class="circle_toggle"></div>
         </div>
       </div>
-      <div style="height: 0; color: transparent; transition: height 1s, color 1s 0.5s;"  class="hidden_info">
+      <div style="height: 0; color: transparent; transition: height 1s, color 1s 0.5s;" class="hidden_info">
         <p class="inf_list">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt doloribus temporibus quaerat
           aperiam
@@ -448,7 +513,7 @@
           <div class="circle_toggle"></div>
         </div>
       </div>
-      <div style="height: 0; color: transparent; transition: height 1s, color 1s 0.5s;"  class="hidden_info">
+      <div style="height: 0; color: transparent; transition: height 1s, color 1s 0.5s;" class="hidden_info">
         <p class="inf_list">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente deserunt doloribus temporibus quaerat
           aperiam
@@ -462,6 +527,7 @@
       </div>
     </div>
   </div>
+
 
 
   <script type="module" src="/src/main.ts">

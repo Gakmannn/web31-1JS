@@ -5183,3 +5183,91 @@ tooltipElement.addEventListener('mouseout', (event) => {
     tooltip.remove()}, 500)
   }
 })
+
+// Нажатие клавиши всегда генерирует клавиатурное событие, будь то буквенно-цифровая клавиша или специальная типа Shift или Ctrl и т.д. Единственным исключением является клавиша Fn, которая присутствует на клавиатуре некоторых ноутбуков. События на клавиатуре для неё нет, потому что она обычно работает на уровне более низком, чем даже ОС.
+
+// События клавиатуры:
+
+// keydown – при нажатии на клавишу (если клавиша остаётся нажатой, происходит автоповтор),
+// keyup – при отпускании клавиши.
+// Главные свойства для работы с клавиатурными событиями:
+
+// code – «код клавиши» ("KeyA", "ArrowLeft" и так далее), особый код, привязанный к физическому расположению клавиши на клавиатуре.
+// key – символ ("A", "a" и так далее), для не буквенно-цифровых групп клавиш (таких как Esc) обычно имеет то же значение, что и code.
+// В прошлом события клавиатуры иногда использовались для отслеживания ввода данных пользователем в полях формы. Это ненадёжно, потому как ввод данных не обязательно может осуществляться с помощью клавиатуры. Существуют события input и change специально для обработки ввода (рассмотренные позже в главе События: change, input, cut, copy, paste). Они срабатывают в результате любого ввода, включая Копировать/Вставить мышью и распознавание речи.
+
+// События клавиатуры же должны использоваться только по назначению – для клавиатуры. Например, чтобы реагировать на горячие или специальные клавиши.
+
+// Отследить одновременное нажатие
+// важность: 5
+// Создайте функцию runOnKeys(func, code1, code2, ...code_n), которая запускает func при одновременном нажатии клавиш с кодами code1, code2, …, code_n.
+
+// Например, код ниже выведет alert при одновременном нажатии клавиш "Q" и "W" (в любом регистре, в любой раскладке)
+
+const keyPressed = {} as any
+
+const runOnKeys = (fn: Function, ...codes: string[]) => {
+  const isAllPressed = codes.map(el => keyPressed[el])
+  if (isAllPressed.every(el => el == true)) {
+    fn()
+    // codes.forEach(el => {
+    //   keyPressed[el] = false
+    // })
+  }
+}
+
+document.addEventListener('keydown', (e) => {
+  keyPressed[e.code] = true
+  runOnKeys(() => { console.log('boom') }, 'KeyQ', 'KeyP')
+  runOnKeys(() => { console.log('BaBoom') }, 'KeyQ', 'KeyP')
+})
+document.addEventListener('keyup', (e) => {
+  keyPressed[e.code] = false
+})
+
+// События указателя позволяют одновременно обрабатывать действия с помощью мыши, касания и пера, в едином фрагменте кода.
+
+// События указателя расширяют события мыши. Мы можем заменить mouse на pointer в названиях событий и код продолжит работать для мыши, при этом получив лучшую поддержку других типов устройств.
+
+// При обработке переносов и сложных касаний, которые браузер может попытаться обработать сам, не забывайте отменять действие браузера и ставить touch-action: none в CSS для элементов, с которыми мы взаимодействуем.
+
+// Дополнительные возможности событий указателя:
+
+// Поддержка мультитач с помощью pointerId и isPrimary.
+// Особые свойства для определённых устройств, такие как pressure, width/height и другие.
+// Захват указателя: мы можем перенаправить все события указателя на определённый элемент до наступления события pointerup/pointercancel.
+// На данный момент события указателя поддерживаются в основных браузерах, поэтому мы можем безопасно переходить на них, особенно если нет необходимости в поддержке IE10 и Safari 12. И даже для этих браузеров есть полифилы, которые добавляют эту поддержку.
+
+// !https://doka.guide/js/intersection-observer
+
+const newsBlock = document.querySelector('#news')
+
+const observerOptions = {
+  // root: ,
+  rootMargin: '15px 0px',
+  threshold: [0, 0.5, 0.95],
+}
+
+const callback = (entries: IntersectionObserverEntry[]) => {
+  entries.forEach((el) => {
+    console.log(el.intersectionRatio)
+    if (el.isIntersecting) {
+      const target = el.target as HTMLDivElement
+      if (el.intersectionRatio >= 0 && el.intersectionRatio < 0.45) {
+        target.style.backgroundColor = '#edf5e1'
+      }
+
+      if (el.intersectionRatio >= 0.45 && el.intersectionRatio < 0.75) {
+        target.style.backgroundColor = '#1da9e1'
+      }
+
+      if (el.intersectionRatio > 0.90) {
+        target.style.backgroundColor = '#ed55e1'
+      }
+    }
+  })
+}
+
+const observer = new IntersectionObserver(callback, observerOptions)
+
+observer.observe((newsBlock as HTMLDivElement))
